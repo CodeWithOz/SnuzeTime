@@ -1,0 +1,19 @@
+@font-face {
+  font-family: 'Digital7';
+  src: url('../fonts/Digital-7MonoItalic.eot?#iefix')
+      format('embedded-opentype'),
+    url('../fonts/Digital-7MonoItalic.svg#Digital-7MonoItalic') format('svg'),
+    url('../fonts/Digital-7MonoItalic.ttf') format('truetype'),
+    url('../fonts/Digital-7MonoItalic.woff') format('woff'),
+    url('../fonts/Digital-7MonoItalic.woff2') format('woff2');
+}
+
+.clock-container .border {
+  border: 3px solid red;
+  display: inline-block;
+  padding: 0.2em;
+}
+
+.clock-container .time {
+  font-family: 'Digital7', Arial, sans-serif;
+}
