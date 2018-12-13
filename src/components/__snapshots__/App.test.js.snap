@@ -2,6 +2,8 @@
 
 exports[`App should render correctly 1`] = `
 <div>
-  App
+  <Clock
+    currentTime="02:49 AM"
+  />
 </div>
 `;
