@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Clock component exists 1`] = `
+exports[`Clock component renders correctly 1`] = `
 <div>
   06:14 AM
 </div>
