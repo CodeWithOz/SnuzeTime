@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
+import Navbar from './Navbar';
 import Clock from './Clock';
 
 class App extends Component {
   render() {
     return (
-      <div>
+      <section>
+        <Navbar title="SnuzeTime" />
         <Clock currentTime="02:49 AM" />
-      </div>
+      </section>
     );
   }
 }
