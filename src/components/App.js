@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
+import Clock from './Clock';
 
 class App extends Component {
   render() {
-    return <div>App</div>;
+    return (
+      <div>
+        <Clock currentTime="02:49 AM" />
+      </div>
+    );
   }
 }
 
