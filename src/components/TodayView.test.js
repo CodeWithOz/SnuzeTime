@@ -24,9 +24,9 @@ describe('TodayView', () => {
 
   test('displays supplied text instead of default text', () => {
     const suppliedTexts = {
-      sleep: `...haven't gone to bed.`,
-      wake: `...woke up at 05:45 AM.`,
-      getUp: `...got up at 5:50 AM.`
+      sleep: `11:45 PM`,
+      wake: `05:45 AM`,
+      getUp: `5:50 AM`
     };
 
     const todayViewHTML = TestRenderer.create(
