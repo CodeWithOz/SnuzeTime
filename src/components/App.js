@@ -6,13 +6,22 @@ import TodayView from './TodayView';
 import moment from 'moment';
 import 'moment-timer';
 
+function getCurrentTime(withSeconds = true) {
+  return moment().format(`hh:mm${withSeconds ? ':ss' : ''} A`);
+}
+
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       // TODO: improve the initial loading experience
-      currentTime: '00:00:00 AM'
+      // currently, the time is always initialized at midnight
+      currentTime: '00:00:00 AM',
+      currentHour: 0,
+      wakeTime: '',
+      getUpTime: '',
+      sleepTime: ''
     };
 
     this.startTimer();
@@ -21,9 +30,22 @@ class App extends Component {
   startTimer = () => {
     new moment.duration(1000).timer({ start: true, loop: true }, () => {
       this.setState({
-        currentTime: moment().format('hh:mm:ss A')
+        currentTime: getCurrentTime(),
+        currentHour: Number(moment().format('HH'))
       });
     });
+  };
+
+  saveSleepTime = () => {
+    this.setState({ sleepTime: getCurrentTime(false) });
+  };
+
+  saveWakeTime = () => {
+    this.setState({ wakeTime: getCurrentTime(false) });
+  };
+
+  saveGetUpTime = () => {
+    this.setState({ getUpTime: getCurrentTime(false) });
   };
 
   render() {
@@ -32,13 +54,17 @@ class App extends Component {
         <Navbar title="SnuzeTime" />
         <Clock currentTime={this.state.currentTime} />
         <ButtonDisplay
-          hour={10}
-          saveSleepTime={e => console.log(e)}
-          saveWakeTime={e => console.log(e)}
-          saveGetUpTime={e => console.log(e)}
+          hour={this.state.currentHour}
+          saveSleepTime={this.saveSleepTime}
+          saveWakeTime={this.saveWakeTime}
+          saveGetUpTime={this.saveGetUpTime}
         />
         <hr />
-        <TodayView sleepTime="" wakeTime="" getUpTime="" />
+        <TodayView
+          sleepTime={this.state.sleepTime}
+          wakeTime={this.state.wakeTime}
+          getUpTime={this.state.getUpTime}
+        />
       </section>
     );
   }
