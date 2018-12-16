@@ -23,7 +23,9 @@ class App extends Component {
       getUpTime: '',
       sleepTime: ''
     };
+  }
 
+  componentDidMount() {
     this.startTimer();
   }
 
