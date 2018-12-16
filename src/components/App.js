@@ -14,6 +14,10 @@ function getCurrentDate() {
   return moment().format('YYYY M D');
 }
 
+function parseDate(date) {
+  return date.match(/^(\d{4}) (\d{1,2}) (\d{1,2})$/);
+}
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -33,6 +37,27 @@ class App extends Component {
   componentDidMount() {
     // TODO: hydrate state from local storage
     this.startTimer();
+  }
+
+  getTodaysTimes(date, store) {
+    const [, year, month, day] = parseDate(date);
+    if (
+      store.has(year) &&
+      store.get(year).has(month) &&
+      store
+        .get(year)
+        .get(month)
+        .has(day)
+    ) {
+      const { sleepTime, wakeTime, getUpTime } = store
+        .get(year)
+        .get(month)
+        .get(day);
+      return { sleepTime, wakeTime, getUpTime };
+    }
+
+    // date is not on record
+    return { sleepTime: '', wakeTime: '', getUpTime: '' };
   }
 
   startTimer = () => {
