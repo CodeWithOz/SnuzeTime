@@ -10,6 +10,10 @@ function getCurrentTime(withSeconds = true) {
   return moment().format(`hh:mm${withSeconds ? ':ss' : ''} A`);
 }
 
+function getCurrentDate() {
+  return moment().format('YYYY M D');
+}
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -19,6 +23,7 @@ class App extends Component {
       // currently, the time is always initialized at midnight
       currentTime: '00:00:00 AM',
       currentHour: 0,
+      currentDate: getCurrentDate(),
       wakeTime: '',
       getUpTime: '',
       sleepTime: ''
@@ -26,6 +31,7 @@ class App extends Component {
   }
 
   componentDidMount() {
+    // TODO: hydrate state from local storage
     this.startTimer();
   }
 
@@ -33,7 +39,8 @@ class App extends Component {
     new moment.duration(1000).timer({ start: true, loop: true }, () => {
       this.setState({
         currentTime: getCurrentTime(),
-        currentHour: Number(moment().format('HH'))
+        currentHour: Number(moment().format('HH')),
+        currentDate: getCurrentDate()
       });
     });
   };
