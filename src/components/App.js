@@ -18,6 +18,22 @@ function parseDate(date) {
   return date.match(/^(\d{4}) (\d{1,2}) (\d{1,2})$/);
 }
 
+// 2 functions to convert back and forth between Map object and JSON string
+// see https://stackoverflow.com/a/49399615/7987987
+function replacer(key, value) {
+  if (value.__proto__ == Map.prototype) {
+    return {
+      _type: 'map',
+      map: [...value]
+    };
+  } else return value;
+}
+
+function reviver(key, value) {
+  if (value._type == 'map') return new Map(value.map);
+  else return value;
+}
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -35,8 +51,22 @@ class App extends Component {
   }
 
   componentDidMount() {
-    // TODO: hydrate state from local storage
+    this.getTimesFromLocalStorage();
     this.startTimer();
+  }
+
+  getTimesFromLocalStorage() {
+    // see https://hackernoon.com/how-to-take-advantage-of-local-storage-in-your-react-projects-a895f2b2d3f2
+
+    // exit if neither localStorage API nor dates key is available
+    if (!window.localStorage || !localStorage.dates) return;
+
+    const datesStore = JSON.parse(localStorage.dates, reviver);
+    const { sleepTime, wakeTime, getUpTime } = this.getTodaysTimes(
+      this.state.currentDate,
+      datesStore
+    );
+    this.setState({ sleepTime, wakeTime, getUpTime });
   }
 
   getTodaysTimes(date, store) {
