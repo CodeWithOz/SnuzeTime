@@ -15,14 +15,6 @@ beforeEach(() => {
   mockStore = new Map([['2018', mock2018]]);
 });
 
-describe('Converting from Map to string and back', () => {
-  test('produces an identical Map', () => {
-    const storeAsString = dateStore.mapToString(mockStore);
-    const revivedMap = dateStore.stringToMap(storeAsString);
-    expect(mockStore).toEqual(revivedMap);
-  });
-});
-
 describe('Finding data in the Map', () => {
   test('returns the correct info', () => {
     const { sleepTime, wakeTime, getUpTime } = dateStore.find(
@@ -162,7 +154,7 @@ describe('Updating the Map', () => {
       };
     });
 
-    test(`overwrites the previous data`, () => {
+    test('overwrites the previous data', () => {
       dateStore.add(dateWithData, newTimes, mockStore);
       const { sleepTime, wakeTime, getUpTime } = dateStore.find(
         dateWithData,
@@ -173,5 +165,23 @@ describe('Updating the Map', () => {
       expect(wakeTime).toEqual(newTimes.wakeTime);
       expect(getUpTime).toEqual(newTimes.getUpTime);
     });
+  });
+});
+
+describe('Converting from Map to string and back', () => {
+  test('produces an identical Map', () => {
+    let storeAsString = dateStore.mapToString(mockStore);
+    let revivedMap = dateStore.stringToMap(storeAsString);
+    expect(mockStore).toEqual(revivedMap);
+
+    // ensure that it handles changed data
+    dateStore.add(
+      '2018 12 3',
+      { sleepTime: '09:00 PM', wakeTime: '05:45 AM', getUpTime: '06:10 AM' },
+      mockStore
+    );
+    storeAsString = dateStore.mapToString(mockStore);
+    revivedMap = dateStore.stringToMap(storeAsString);
+    expect(mockStore).toEqual(revivedMap);
   });
 });
