@@ -34,5 +34,9 @@
     "snapshotSerializers": [
       "enzyme-to-json/serializer"
     ]
-  }
+  },
+  "setupFiles": [
+    "./src/setupTests.js",
+    "./src/__mocks__/localStorageMock.js"
+  ]
 }
