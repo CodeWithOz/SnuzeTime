@@ -73,9 +73,21 @@ function add(date, times, store) {
   }
 }
 
+function addStoreToLocalStorage(store) {
+  const storeAsString = mapToString(store);
+  localStorage.setItem('dates', storeAsString);
+}
+
+function getStoreFromLocalStorage() {
+  const storeAsString = localStorage.getItem('dates');
+  return stringToMap(storeAsString);
+}
+
 export default {
   mapToString,
   stringToMap,
   find,
-  add
+  add,
+  addStoreToLocalStorage,
+  getStoreFromLocalStorage
 };

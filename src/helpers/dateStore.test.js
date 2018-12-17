@@ -185,3 +185,33 @@ describe('Converting from Map to string and back', () => {
     expect(mockStore).toEqual(revivedMap);
   });
 });
+
+describe('Adding to localStorage', () => {
+  describe('from a Map store', () => {
+    test('adds the converted string to the dates property', () => {
+      // nothing has been added yet
+      expect(localStorage.getItem('dates')).toBeNull();
+
+      dateStore.addStoreToLocalStorage(mockStore);
+
+      // convert store to string to check against localStorage value
+      const storeAsString = dateStore.mapToString(mockStore);
+      expect(localStorage.getItem('dates')).toEqual(storeAsString);
+
+      // remove the dates property
+      localStorage.removeItem('dates');
+    });
+  });
+});
+
+describe('Getting a map from localStorage', () => {
+  // honestly I'm not sure what to test here
+  // I will test if the added Map matches the returned one
+  // but this feels pointless because it doesn't check any
+  // interaction with localStorage
+  test('returns the original map store', () => {
+    dateStore.addStoreToLocalStorage(mockStore);
+    const revivedMap = dateStore.getStoreFromLocalStorage();
+    expect(revivedMap).toEqual(mockStore);
+  });
+});
