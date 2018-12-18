@@ -5,6 +5,7 @@ import ButtonDisplay from './ButtonDisplay';
 import TodayView from './TodayView';
 import moment from 'moment';
 import 'moment-timer';
+import dateStore from '../helpers/dateStore';
 
 function getCurrentTime(withSeconds = true) {
   return moment().format(`hh:mm${withSeconds ? ':ss' : ''} A`);
@@ -12,26 +13,6 @@ function getCurrentTime(withSeconds = true) {
 
 function getCurrentDate() {
   return moment().format('YYYY M D');
-}
-
-function parseDate(date) {
-  return date.match(/^(\d{4}) (\d{1,2}) (\d{1,2})$/);
-}
-
-// 2 functions to convert back and forth between Map object and JSON string
-// see https://stackoverflow.com/a/49399615/7987987
-function replacer(key, value) {
-  if (value.__proto__ == Map.prototype) {
-    return {
-      _type: 'map',
-      map: [...value]
-    };
-  } else return value;
-}
-
-function reviver(key, value) {
-  if (value._type == 'map') return new Map(value.map);
-  else return value;
 }
 
 class App extends Component {
@@ -51,43 +32,46 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.getTimesFromLocalStorage();
+    this.fillStateFromLocalStorage();
+
+    // save state to localStorage when user leaves/refreshes page
+    window.addEventListener('beforeunload', this.saveStateToLocalStorage);
+
     this.startTimer();
   }
 
-  getTimesFromLocalStorage() {
-    // see https://hackernoon.com/how-to-take-advantage-of-local-storage-in-your-react-projects-a895f2b2d3f2
-
-    // exit if neither localStorage API nor dates key is available
-    if (!window.localStorage || !localStorage.dates) return;
-
-    const datesStore = JSON.parse(localStorage.dates, reviver);
-    const { sleepTime, wakeTime, getUpTime } = this.getTodaysTimes(
-      this.state.currentDate,
-      datesStore
+  fillStateFromLocalStorage() {
+    const { sleepTime, wakeTime, getUpTime } = this.getTimesFromLocalStorage(
+      this.state.currentDate
     );
     this.setState({ sleepTime, wakeTime, getUpTime });
   }
 
-  getTodaysTimes(date, store) {
-    const [, year, month, day] = parseDate(date);
-    if (
-      store.has(year) &&
-      store.get(year).has(month) &&
-      store
-        .get(year)
-        .get(month)
-        .has(day)
-    ) {
-      const { sleepTime, wakeTime, getUpTime } = store
-        .get(year)
-        .get(month)
-        .get(day);
-      return { sleepTime, wakeTime, getUpTime };
-    }
+  getTimesFromLocalStorage(date) {
+    // see https://hackernoon.com/how-to-take-advantage-of-local-storage-in-your-react-projects-a895f2b2d3f2
 
-    // date is not on record
-    return { sleepTime: '', wakeTime: '', getUpTime: '' };
+    return dateStore.getTimesFromLocalStorage(date);
+  }
+
+  saveStateToLocalStorage() {
+    const { sleepTime, wakeTime, getUpTime } = this.state;
+    this.saveTimesToLocalStorage(this.state.currentDate, {
+      sleepTime,
+      wakeTime,
+      getUpTime
+    });
+  }
+
+  saveTimesToLocalStorage(date, times) {
+    dateStore.addTimesToLocalStorage(date, times);
+  }
+
+  componentWillUnmount() {
+    // prevent event listener from running after component is unmounted
+    window.removeEventListener('beforeunload', this.saveStateToLocalStorage);
+
+    // save state to localStorage if component has a chance to unmount
+    this.saveStateToLocalStorage();
   }
 
   startTimer = () => {
