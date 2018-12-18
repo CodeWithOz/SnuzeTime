@@ -80,7 +80,7 @@ function addStoreToLocalStorage(store) {
 
 function getStoreFromLocalStorage() {
   const storeAsString = localStorage.getItem('dates');
-  return stringToMap(storeAsString);
+  return storeAsString === null ? new Map() : stringToMap(storeAsString);
 }
 
 export default {

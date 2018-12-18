@@ -15,6 +15,10 @@ beforeEach(() => {
   mockStore = new Map([['2018', mock2018]]);
 });
 
+afterEach(() => {
+  if (localStorage.getItem('dates') !== null) localStorage.removeItem('dates');
+});
+
 describe('Finding data in the Map', () => {
   test('returns the correct info', () => {
     const { sleepTime, wakeTime, getUpTime } = dateStore.find(
@@ -197,9 +201,6 @@ describe('Adding to localStorage', () => {
       // convert store to string to check against localStorage value
       const storeAsString = dateStore.mapToString(mockStore);
       expect(localStorage.getItem('dates')).toEqual(storeAsString);
-
-      // remove the dates property
-      localStorage.removeItem('dates');
     });
   });
 });
@@ -209,9 +210,22 @@ describe('Getting a map from localStorage', () => {
   // I will test if the added Map matches the returned one
   // but this feels pointless because it doesn't check any
   // interaction with localStorage
-  test('returns the original map store', () => {
-    dateStore.addStoreToLocalStorage(mockStore);
-    const revivedMap = dateStore.getStoreFromLocalStorage();
-    expect(revivedMap).toEqual(mockStore);
+  describe('if the dates property already exists', () => {
+    test('returns the original map store', () => {
+      dateStore.addStoreToLocalStorage(mockStore);
+      const revivedMap = dateStore.getStoreFromLocalStorage();
+      expect(revivedMap).toEqual(mockStore);
+    });
+  });
+
+  describe(`if the dates property doesn't exists`, () => {
+    test('returns an empty Map', () => {
+      // confirm that nothing currently exists
+      expect(localStorage.getItem('dates')).toBeNull();
+
+      const emptyMap = new Map();
+      const revivedMap = dateStore.getStoreFromLocalStorage();
+      expect(revivedMap).toEqual(emptyMap);
+    });
   });
 });
