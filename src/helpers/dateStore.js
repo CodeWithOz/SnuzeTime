@@ -74,11 +74,17 @@ function add(date, times, store) {
 }
 
 function addStoreToLocalStorage(store) {
+  // exit if localStorage is not available
+  if (!window.localStorage) return;
+
   const storeAsString = mapToString(store);
   localStorage.setItem('dates', storeAsString);
 }
 
 function getStoreFromLocalStorage() {
+  // return an empty Map if localStorage is not available
+  if (!window.localStorage) return new Map();
+
   const storeAsString = localStorage.getItem('dates');
   return storeAsString === null ? new Map() : stringToMap(storeAsString);
 }
