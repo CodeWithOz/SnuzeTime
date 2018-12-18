@@ -53,14 +53,14 @@ class App extends Component {
     return dateStore.getTimesFromLocalStorage(date);
   }
 
-  saveStateToLocalStorage() {
+  saveStateToLocalStorage = () => {
     const { sleepTime, wakeTime, getUpTime } = this.state;
     this.saveTimesToLocalStorage(this.state.currentDate, {
       sleepTime,
       wakeTime,
       getUpTime
     });
-  }
+  };
 
   saveTimesToLocalStorage(date, times) {
     dateStore.addTimesToLocalStorage(date, times);
