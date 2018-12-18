@@ -203,6 +203,26 @@ describe('Adding to localStorage', () => {
       expect(localStorage.getItem('dates')).toEqual(storeAsString);
     });
   });
+
+  describe('from times and a date', () => {
+    test('adds the times to records for the date', () => {
+      const newDate = '2018 12 3';
+      const newTimes = {
+        sleepTime: '09:00 PM',
+        wakeTime: '05:45 AM',
+        getUpTime: '06:10 AM'
+      };
+      dateStore.addTimesToLocalStorage(newDate, newTimes);
+      const revivedMap = dateStore.getStoreFromLocalStorage();
+      const { sleepTime, wakeTime, getUpTime } = dateStore.find(
+        newDate,
+        revivedMap
+      );
+      expect(sleepTime).toEqual(newTimes.sleepTime);
+      expect(wakeTime).toEqual(newTimes.wakeTime);
+      expect(getUpTime).toEqual(newTimes.getUpTime);
+    });
+  });
 });
 
 describe('Getting a map from localStorage', () => {
@@ -226,6 +246,69 @@ describe('Getting a map from localStorage', () => {
       const emptyMap = new Map();
       const revivedMap = dateStore.getStoreFromLocalStorage();
       expect(revivedMap).toEqual(emptyMap);
+    });
+  });
+});
+
+describe('Getting times from localStorage using a date', () => {
+  describe('if records exist for the date', () => {
+    test('returns the correct records', () => {
+      // add times for a date and test the output from that date
+      const newDate = '2018 12 4';
+      const newTimes = {
+        sleepTime: '09:10 PM',
+        wakeTime: '05:47 AM',
+        getUpTime: '06:13 AM'
+      };
+      dateStore.addTimesToLocalStorage(newDate, newTimes);
+
+      const {
+        sleepTime,
+        wakeTime,
+        getUpTime
+      } = dateStore.getTimesFromLocalStorage(newDate);
+      expect(sleepTime).toEqual(newTimes.sleepTime);
+      expect(wakeTime).toEqual(newTimes.wakeTime);
+      expect(getUpTime).toEqual(newTimes.getUpTime);
+    });
+  });
+
+  describe(`if records don't exist for the date`, () => {
+    test('returns empty strings', () => {
+      // add times for a date and test the output from a different date
+      const newDate = '2018 12 4';
+      const newTimes = {
+        sleepTime: '09:10 PM',
+        wakeTime: '05:47 AM',
+        getUpTime: '06:13 AM'
+      };
+      dateStore.addTimesToLocalStorage(newDate, newTimes);
+
+      const {
+        sleepTime,
+        wakeTime,
+        getUpTime
+      } = dateStore.getTimesFromLocalStorage(dateWithoutData);
+      expect(sleepTime).toEqual('');
+      expect(wakeTime).toEqual('');
+      expect(getUpTime).toEqual('');
+    });
+  });
+
+  describe(`if dates property doesn't exist at all`, () => {
+    test('returns empty strings', () => {
+      // confirm that dates property doesn't exist
+      expect(localStorage.getItem('dates')).toBeNull();
+
+      // then test the output from any date
+      const {
+        sleepTime,
+        wakeTime,
+        getUpTime
+      } = dateStore.getTimesFromLocalStorage(dateWithoutData);
+      expect(sleepTime).toEqual('');
+      expect(wakeTime).toEqual('');
+      expect(getUpTime).toEqual('');
     });
   });
 });

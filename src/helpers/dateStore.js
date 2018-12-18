@@ -83,11 +83,24 @@ function getStoreFromLocalStorage() {
   return storeAsString === null ? new Map() : stringToMap(storeAsString);
 }
 
+function addTimesToLocalStorage(date, times) {
+  const storeMap = getStoreFromLocalStorage();
+  add(date, times, storeMap);
+  addStoreToLocalStorage(storeMap);
+}
+
+function getTimesFromLocalStorage(date) {
+  const storeMap = getStoreFromLocalStorage();
+  return find(date, storeMap);
+}
+
 export default {
   mapToString,
   stringToMap,
   find,
   add,
   addStoreToLocalStorage,
-  getStoreFromLocalStorage
+  getStoreFromLocalStorage,
+  addTimesToLocalStorage,
+  getTimesFromLocalStorage
 };
