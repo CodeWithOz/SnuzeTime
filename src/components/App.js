@@ -21,10 +21,8 @@ class App extends Component {
     super(props);
 
     this.state = {
-      // TODO: improve the initial loading experience
-      // currently, the time is always initialized at midnight
       loaded: false,
-      currentTime: '00:00:00 AM',
+      currentTime: '',
       currentHour: 0,
       currentDate: getCurrentDate(),
       wakeTime: '',
@@ -34,13 +32,25 @@ class App extends Component {
   }
 
   componentDidMount() {
+    this.setCurrentTimeAndDate();
     this.fillStateFromLocalStorage();
 
     // save state to localStorage when user leaves/refreshes page
     window.addEventListener('beforeunload', this.saveStateToLocalStorage);
 
     this.startTimer();
+
+    // start showing the main content
+    this.setState({ loaded: true });
   }
+
+  setCurrentTimeAndDate = () => {
+    this.setState({
+      currentTime: getCurrentTime(),
+      currentHour: Number(moment().format('HH')),
+      currentDate: getCurrentDate()
+    });
+  };
 
   fillStateFromLocalStorage() {
     const { sleepTime, wakeTime, getUpTime } = this.getTimesFromLocalStorage(
@@ -77,13 +87,10 @@ class App extends Component {
   }
 
   startTimer = () => {
-    new moment.duration(1000).timer({ start: true, loop: true }, () => {
-      this.setState({
-        currentTime: getCurrentTime(),
-        currentHour: Number(moment().format('HH')),
-        currentDate: getCurrentDate()
-      });
-    });
+    new moment.duration(1000).timer(
+      { start: true, loop: true },
+      this.setCurrentTimeAndDate
+    );
   };
 
   saveSleepTime = () => {
