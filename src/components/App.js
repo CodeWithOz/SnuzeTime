@@ -6,6 +6,7 @@ import TodayView from './TodayView';
 import moment from 'moment';
 import 'moment-timer';
 import dateStore from '../helpers/dateStore';
+import { RotateSpinLoader } from 'react-css-loaders';
 
 function getCurrentTime(withSeconds = true) {
   return moment().format(`hh:mm${withSeconds ? ':ss' : ''} A`);
@@ -22,6 +23,7 @@ class App extends Component {
     this.state = {
       // TODO: improve the initial loading experience
       // currently, the time is always initialized at midnight
+      loaded: false,
       currentTime: '00:00:00 AM',
       currentHour: 0,
       currentDate: getCurrentDate(),
@@ -97,24 +99,28 @@ class App extends Component {
   };
 
   render() {
-    return (
-      <section>
-        <Navbar title="SnuzeTime" />
-        <Clock currentTime={this.state.currentTime} />
-        <ButtonDisplay
-          hour={this.state.currentHour}
-          saveSleepTime={this.saveSleepTime}
-          saveWakeTime={this.saveWakeTime}
-          saveGetUpTime={this.saveGetUpTime}
-        />
-        <hr />
-        <TodayView
-          sleepTime={this.state.sleepTime}
-          wakeTime={this.state.wakeTime}
-          getUpTime={this.state.getUpTime}
-        />
-      </section>
-    );
+    if (!this.state.loaded) {
+      return <RotateSpinLoader />;
+    } else {
+      return (
+        <section>
+          <Navbar title="SnuzeTime" />
+          <Clock currentTime={this.state.currentTime} />
+          <ButtonDisplay
+            hour={this.state.currentHour}
+            saveSleepTime={this.saveSleepTime}
+            saveWakeTime={this.saveWakeTime}
+            saveGetUpTime={this.saveGetUpTime}
+          />
+          <hr />
+          <TodayView
+            sleepTime={this.state.sleepTime}
+            wakeTime={this.state.wakeTime}
+            getUpTime={this.state.getUpTime}
+          />
+        </section>
+      );
+    }
   }
 }
 
