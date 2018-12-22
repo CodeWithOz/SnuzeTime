@@ -114,16 +114,15 @@ class App extends Component {
         ) : (
           <Box fill>
             <Navbar title="SnuzeTime" />
-            <Box direction="row" flex>
+            <Box flex>
+              <Clock currentTime={this.state.currentTime} />
               <Box flex align="center" justify="center">
-                <Clock currentTime={this.state.currentTime} />
                 <ButtonDisplay
                   hour={this.state.currentHour}
                   saveSleepTime={this.saveSleepTime}
                   saveWakeTime={this.saveWakeTime}
                   saveGetUpTime={this.saveGetUpTime}
                 />
-                <hr />
                 <TodayView
                   sleepTime={this.state.sleepTime}
                   wakeTime={this.state.wakeTime}

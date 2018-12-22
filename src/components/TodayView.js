@@ -1,4 +1,5 @@
 import React from 'react';
+import { Box } from 'grommet';
 
 const TodayView = props => {
   const sleepTime = props.sleepTime
@@ -12,12 +13,14 @@ const TodayView = props => {
     : `...haven't gotten out of bed.`;
 
   return (
-    <section>
-      Today, you...
-      <p>{wakeTime}</p>
-      <p>{getUpTime}</p>
-      <p>{sleepTime}</p>
-    </section>
+    <Box flex align="center" justify="center">
+      <section>
+        Today, you...
+        <p>{wakeTime}</p>
+        <p>{getUpTime}</p>
+        <p>{sleepTime}</p>
+      </section>
+    </Box>
   );
 };
 

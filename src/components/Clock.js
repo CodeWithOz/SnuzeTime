@@ -1,5 +1,6 @@
 import './Clock.css';
 import React from 'react';
+import { Box } from 'grommet';
 
 const Clock = props => {
   const [, time, meridiem] = props.currentTime.match(
@@ -7,11 +8,13 @@ const Clock = props => {
   );
 
   return (
-    <div className="clock-container">
-      <div className="border">
-        <span className="time">{time}</span> {meridiem}
+    <Box alignSelf="center" pad="medium">
+      <div className="clock-container">
+        <div className="border">
+          <span className="time">{time}</span> {meridiem}
+        </div>
       </div>
-    </div>
+    </Box>
   );
 };
 
