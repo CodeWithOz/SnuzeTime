@@ -1,10 +1,19 @@
 import React from 'react';
+import { Box, Heading } from 'grommet';
 
 const Navbar = props => {
   return (
-    <section style={{ fontFamily: 'Arial' }}>
-      <p>{props.title}</p>
-    </section>
+    <Box
+      tag="header"
+      direction="row"
+      align="center"
+      justify="center"
+      elevation="medium"
+    >
+      <Heading level="1" margin="none">
+        {props.title}
+      </Heading>
+    </Box>
   );
 };
 
