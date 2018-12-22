@@ -7,6 +7,7 @@ import moment from 'moment';
 import 'moment-timer';
 import dateStore from '../helpers/dateStore';
 import { RotateSpinLoader } from 'react-css-loaders';
+import { Box, Grommet } from 'grommet';
 
 function getCurrentTime(withSeconds = true) {
   return moment().format(`hh:mm${withSeconds ? ':ss' : ''} A`);
@@ -106,28 +107,34 @@ class App extends Component {
   };
 
   render() {
-    if (!this.state.loaded) {
-      return <RotateSpinLoader />;
-    } else {
-      return (
-        <section>
-          <Navbar title="SnuzeTime" />
-          <Clock currentTime={this.state.currentTime} />
-          <ButtonDisplay
-            hour={this.state.currentHour}
-            saveSleepTime={this.saveSleepTime}
-            saveWakeTime={this.saveWakeTime}
-            saveGetUpTime={this.saveGetUpTime}
-          />
-          <hr />
-          <TodayView
-            sleepTime={this.state.sleepTime}
-            wakeTime={this.state.wakeTime}
-            getUpTime={this.state.getUpTime}
-          />
-        </section>
-      );
-    }
+    return (
+      <Grommet full>
+        {!this.state.loaded ? (
+          <RotateSpinLoader />
+        ) : (
+          <Box fill>
+            <Navbar title="SnuzeTime" />
+            <Box direction="row" flex>
+              <Box flex align="center" justify="center">
+                <Clock currentTime={this.state.currentTime} />
+                <ButtonDisplay
+                  hour={this.state.currentHour}
+                  saveSleepTime={this.saveSleepTime}
+                  saveWakeTime={this.saveWakeTime}
+                  saveGetUpTime={this.saveGetUpTime}
+                />
+                <hr />
+                <TodayView
+                  sleepTime={this.state.sleepTime}
+                  wakeTime={this.state.wakeTime}
+                  getUpTime={this.state.getUpTime}
+                />
+              </Box>
+            </Box>
+          </Box>
+        )}
+      </Grommet>
+    );
   }
 }
 
