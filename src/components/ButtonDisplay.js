@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Button from './Button';
-import { Box } from 'grommet';
+import { Box, Paragraph } from 'grommet';
 
 const btnDisplayConfig = {
   sleep: {
@@ -50,21 +50,25 @@ class ButtonDisplay extends Component {
 
     return (
       <Box flex align="center" justify="center">
-        <section>
-          <p>I am...</p>
+        <Box fill flex align="center" justify="center">
+          <Paragraph textAlign="center">I am...</Paragraph>
           <Button
+            primary
+            style={{ height: '50px' }}
             text={btnDisplayConfig[bigBtn].text}
             onClick={this.props[btnDisplayConfig[bigBtn].callbackName]}
           />
-          <Button
-            text={btnDisplayConfig[smallLeftBtn].text}
-            onClick={this.props[btnDisplayConfig[smallLeftBtn].callbackName]}
-          />
-          <Button
-            text={btnDisplayConfig[smallRightBtn].text}
-            onClick={this.props[btnDisplayConfig[smallRightBtn].callbackName]}
-          />
-        </section>
+          <Box direction="row">
+            <Button
+              text={btnDisplayConfig[smallLeftBtn].text}
+              onClick={this.props[btnDisplayConfig[smallLeftBtn].callbackName]}
+            />
+            <Button
+              text={btnDisplayConfig[smallRightBtn].text}
+              onClick={this.props[btnDisplayConfig[smallRightBtn].callbackName]}
+            />
+          </Box>
+        </Box>
       </Box>
     );
   }
