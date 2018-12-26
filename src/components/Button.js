@@ -1,7 +1,15 @@
 import React from 'react';
+import { Button as GrommetButton } from 'grommet';
 
 const Button = props => {
-  return <button onClick={props.onClick}>{props.text}</button>;
+  return (
+    <GrommetButton
+      label={props.text}
+      onClick={props.onClick}
+      margin="xsmall"
+      {...props}
+    />
+  );
 };
 
 export default Button;
