@@ -8,7 +8,10 @@ const Clock = props => {
   );
 
   return (
-    <Box alignSelf="center" pad="medium">
+    <Box
+      alignSelf="center"
+      pad={{ bottom: 'medium', horizontal: 'medium', top: 'large' }}
+    >
       <div className="clock-container">
         <div className="border">
           <Text className="time" a11yTitle="time" size="large">
