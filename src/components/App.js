@@ -18,19 +18,15 @@ function getCurrentDate() {
 }
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      loaded: false,
-      currentTime: '',
-      currentHour: 0,
-      currentDate: getCurrentDate(),
-      wakeTime: '',
-      getUpTime: '',
-      sleepTime: ''
-    };
-  }
+  state = {
+    loaded: false,
+    currentTime: '',
+    currentHour: 0,
+    currentDate: getCurrentDate(),
+    wakeTime: '',
+    getUpTime: '',
+    sleepTime: ''
+  };
 
   componentDidMount() {
     this.setCurrentTimeAndDate();
