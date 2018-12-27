@@ -36,9 +36,6 @@ class App extends Component {
     window.addEventListener('beforeunload', this.saveStateToLocalStorage);
 
     this.startTimer();
-
-    // start showing the main content
-    this.setState({ loaded: true });
   }
 
   setCurrentTimeAndDate = () => {
@@ -84,10 +81,13 @@ class App extends Component {
   }
 
   startTimer = () => {
-    new moment.duration(1000).timer(
-      { start: true, loop: true },
-      this.setCurrentTimeAndDate
-    );
+    new moment.duration(1000).timer({ start: true, loop: true }, () => {
+      this.setCurrentTimeAndDate();
+      if (!this.state.loaded) {
+        // start showing the main content
+        this.setState({ loaded: true });
+      }
+    });
   };
 
   saveSleepTime = () => {
