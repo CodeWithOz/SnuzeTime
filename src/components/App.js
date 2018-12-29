@@ -8,6 +8,7 @@ import 'moment-timer';
 import dateStore from '../helpers/dateStore';
 import { RotateSpinLoader } from 'react-css-loaders';
 import { Box, Grommet } from 'grommet';
+import theme from '../helpers/theme';
 
 function getCurrentTime(withSeconds = true) {
   return moment().format(`hh:mm${withSeconds ? ':ss' : ''} A`);
@@ -15,6 +16,10 @@ function getCurrentTime(withSeconds = true) {
 
 function getCurrentDate() {
   return moment().format('YYYY M D');
+}
+
+function getCurrentHour() {
+  return Number(moment().format('HH'));
 }
 
 class App extends Component {
@@ -41,7 +46,7 @@ class App extends Component {
   setCurrentTimeAndDate = () => {
     this.setState({
       currentTime: getCurrentTime(),
-      currentHour: Number(moment().format('HH')),
+      currentHour: getCurrentHour(),
       currentDate: getCurrentDate()
     });
   };
@@ -102,13 +107,17 @@ class App extends Component {
     this.setState({ getUpTime: getCurrentTime(false) });
   };
 
+  getTheme() {
+    return theme.get({ currentHour: getCurrentHour() });
+  }
+
   render() {
     return (
-      <Grommet full>
+      <Grommet full theme={this.getTheme()}>
         {!this.state.loaded ? (
           <RotateSpinLoader />
         ) : (
-          <Box fill>
+          <Box fill background="bkgrnd">
             <Navbar title="SnuzeTime" />
             <Box flex>
               <Clock currentTime={this.state.currentTime} />
