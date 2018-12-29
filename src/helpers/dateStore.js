@@ -4,7 +4,7 @@ function mapToString(map) {
 
 function replacer(key, value) {
   // see https://stackoverflow.com/a/49399615/7987987
-  if (value.__proto__ == Map.prototype) {
+  if (value.__proto__ === Map.prototype) {
     return {
       _type: 'map',
       map: [...value]
@@ -18,7 +18,7 @@ function stringToMap(mapString) {
 
 function reviver(key, value) {
   // see https://stackoverflow.com/a/49399615/7987987
-  if (value._type == 'map') return new Map(value.map);
+  if (value._type === 'map') return new Map(value.map);
   else return value;
 }
 
