@@ -43,15 +43,20 @@ describe('From localStorage, App gets', () => {
   });
 });
 
-test('App can get a theme object for Grommet', () => {
-  expect(App.prototype.getTheme).toBeDefined();
-  const themeSpy = jest.spyOn(theme, 'get');
+test('App gets the correct background color', () => {
+  expect(App.prototype.getBackground).toBeDefined();
 
-  // verify that theme has not been called yet
-  expect(themeSpy).not.toHaveBeenCalled();
+  const dayBkrgnd = 'light-1';
+  const nightBkgrnd = 'dark-1';
+  expect(App.prototype.getBackground(10)).toEqual(dayBkrgnd);
+  expect(App.prototype.getBackground(22)).toEqual(nightBkgrnd);
+});
 
-  expect(App.prototype.getTheme().global.colors.bkgrnd).toBeDefined();
-  expect(themeSpy).toHaveBeenCalledTimes(1);
+test('App gets the correct spinner color', () => {
+  expect(App.prototype.getSpinnerColor).toBeDefined();
 
-  themeSpy.mockRestore();
+  const nightColor = '#F8F8F8';
+  const dayColor = '#333333';
+  expect(App.prototype.getSpinnerColor(10)).toEqual(dayColor);
+  expect(App.prototype.getSpinnerColor(22)).toEqual(nightColor);
 });

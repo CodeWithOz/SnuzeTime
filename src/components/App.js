@@ -7,7 +7,7 @@ import moment from 'moment';
 import 'moment-timer';
 import dateStore from '../helpers/dateStore';
 import { RotateSpinLoader } from 'react-css-loaders';
-import { Box, Grommet } from 'grommet';
+import { grommet, Box, Grommet } from 'grommet';
 import theme from '../helpers/theme';
 
 function getCurrentTime(withSeconds = true) {
@@ -26,7 +26,7 @@ class App extends Component {
   state = {
     loaded: false,
     currentTime: '',
-    currentHour: 0,
+    currentHour: getCurrentHour(),
     currentDate: getCurrentDate(),
     wakeTime: '',
     getUpTime: '',
@@ -107,36 +107,45 @@ class App extends Component {
     this.setState({ getUpTime: getCurrentTime(false) });
   };
 
-  getTheme() {
-    return theme.get({ currentHour: getCurrentHour() });
+  getBackground(currentHour) {
+    return currentHour >= 7 && currentHour < 19 ? 'light-1' : 'dark-1';
+  }
+
+  getSpinnerColor(currentHour) {
+    // returns the reverse of the main background to ensure contrast
+    return currentHour >= 7 && currentHour < 19 ? '#333333' : '#F8F8F8';
   }
 
   render() {
     return (
-      <Grommet full theme={this.getTheme()}>
-        {!this.state.loaded ? (
-          <RotateSpinLoader />
-        ) : (
-          <Box fill background="bkgrnd">
-            <Navbar title="SnuzeTime" />
-            <Box flex>
-              <Clock currentTime={this.state.currentTime} />
-              <Box flex align="center" justify="center">
-                <ButtonDisplay
-                  hour={this.state.currentHour}
-                  saveSleepTime={this.saveSleepTime}
-                  saveWakeTime={this.saveWakeTime}
-                  saveGetUpTime={this.saveGetUpTime}
-                />
-                <TodayView
-                  sleepTime={this.state.sleepTime}
-                  wakeTime={this.state.wakeTime}
-                  getUpTime={this.state.getUpTime}
-                />
+      <Grommet full theme={grommet}>
+        <Box fill background={this.getBackground(this.state.currentHour)}>
+          {!this.state.loaded ? (
+            <RotateSpinLoader
+              color={this.getSpinnerColor(this.state.currentHour)}
+            />
+          ) : (
+            <Box fill>
+              <Navbar title="SnuzeTime" />
+              <Box flex>
+                <Clock currentTime={this.state.currentTime} />
+                <Box flex align="center" justify="center">
+                  <ButtonDisplay
+                    hour={this.state.currentHour}
+                    saveSleepTime={this.saveSleepTime}
+                    saveWakeTime={this.saveWakeTime}
+                    saveGetUpTime={this.saveGetUpTime}
+                  />
+                  <TodayView
+                    sleepTime={this.state.sleepTime}
+                    wakeTime={this.state.wakeTime}
+                    getUpTime={this.state.getUpTime}
+                  />
+                </Box>
               </Box>
             </Box>
-          </Box>
-        )}
+          )}
+        </Box>
       </Grommet>
     );
   }
