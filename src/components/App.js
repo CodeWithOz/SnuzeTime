@@ -8,7 +8,6 @@ import 'moment-timer';
 import dateStore from '../helpers/dateStore';
 import { RotateSpinLoader } from 'react-css-loaders';
 import { grommet, Box, Grommet } from 'grommet';
-import theme from '../helpers/theme';
 
 function getCurrentTime(withSeconds = true) {
   return moment().format(`hh:mm${withSeconds ? ':ss' : ''} A`);

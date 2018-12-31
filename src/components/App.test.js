@@ -1,7 +1,6 @@
 import React from 'react';
 import App from './App';
 import TestRenderer from 'react-test-renderer';
-import theme from '../helpers/theme';
 
 describe('From localStorage, App gets', () => {
   const mockDay = {
