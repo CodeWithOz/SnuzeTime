@@ -35,10 +35,6 @@ class App extends Component {
   componentDidMount() {
     this.setCurrentTimeAndDate();
     this.fillStateFromLocalStorage();
-
-    // save state to localStorage when user leaves/refreshes page
-    window.addEventListener('beforeunload', this.saveStateToLocalStorage);
-
     this.startTimer();
   }
 
@@ -59,9 +55,38 @@ class App extends Component {
 
   getTimesFromLocalStorage(date) {
     // see https://hackernoon.com/how-to-take-advantage-of-local-storage-in-your-react-projects-a895f2b2d3f2
-
     return dateStore.getTimesFromLocalStorage(date);
   }
+
+  startTimer = () => {
+    new moment.duration(1000).timer({ start: true, loop: true }, () => {
+      this.setCurrentTimeAndDate();
+      if (!this.state.loaded) {
+        // start showing the main content
+        this.setState({ loaded: true });
+      }
+    });
+  };
+
+  // update state and localStorage with the newest snuze time
+  saveSnuzeTimes = (sleep = false, wake = false, getUp = false) => {
+    let particularTime;
+
+    if (sleep) {
+      particularTime = 'sleepTime';
+    } else if (wake) {
+      particularTime = 'wakeTime';
+    } else if (getUp) {
+      particularTime = 'getUpTime';
+    } else {
+      return;
+    }
+
+    this.setState(
+      { [particularTime]: getCurrentTime(false) },
+      this.saveStateToLocalStorage
+    );
+  };
 
   saveStateToLocalStorage = () => {
     const { sleepTime, wakeTime, getUpTime } = this.state;
@@ -76,34 +101,16 @@ class App extends Component {
     dateStore.addTimesToLocalStorage(date, times);
   }
 
-  componentWillUnmount() {
-    // prevent event listener from running after component is unmounted
-    window.removeEventListener('beforeunload', this.saveStateToLocalStorage);
-
-    // save state to localStorage if component has a chance to unmount
-    this.saveStateToLocalStorage();
-  }
-
-  startTimer = () => {
-    new moment.duration(1000).timer({ start: true, loop: true }, () => {
-      this.setCurrentTimeAndDate();
-      if (!this.state.loaded) {
-        // start showing the main content
-        this.setState({ loaded: true });
-      }
-    });
-  };
-
   saveSleepTime = () => {
-    this.setState({ sleepTime: getCurrentTime(false) });
+    this.saveSnuzeTimes(true);
   };
 
   saveWakeTime = () => {
-    this.setState({ wakeTime: getCurrentTime(false) });
+    this.saveSnuzeTimes(false, true);
   };
 
   saveGetUpTime = () => {
-    this.setState({ getUpTime: getCurrentTime(false) });
+    this.saveSnuzeTimes(false, false, true);
   };
 
   getBackground(currentHour) {
