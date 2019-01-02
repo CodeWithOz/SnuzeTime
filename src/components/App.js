@@ -39,11 +39,17 @@ class App extends Component {
   }
 
   setCurrentTimeAndDate = () => {
-    this.setState({
-      currentTime: getCurrentTime(),
-      currentHour: getCurrentHour(),
-      currentDate: getCurrentDate()
-    });
+    const newDate = getCurrentDate();
+    if (newDate !== this.state.currentDate) {
+      // it's a new day
+      this.fillStateFromLocalStorage();
+    } else {
+      this.setState({
+        currentTime: getCurrentTime(),
+        currentHour: getCurrentHour(),
+        currentDate: newDate
+      });
+    }
   };
 
   fillStateFromLocalStorage() {
