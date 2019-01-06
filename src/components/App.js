@@ -42,7 +42,16 @@ class App extends Component {
     const newDate = getCurrentDate();
     if (newDate !== this.state.currentDate) {
       // it's a new day
-      this.fillStateFromLocalStorage();
+      // refresh snuze times after updating the date
+      // necessary because fillStateFromLocalStorage uses state's current date
+      this.setState(
+        {
+          currentTime: getCurrentTime(),
+          currentHour: getCurrentHour(),
+          currentDate: newDate
+        },
+        this.fillStateFromLocalStorage
+      );
     } else {
       this.setState({
         currentTime: getCurrentTime(),
@@ -52,12 +61,12 @@ class App extends Component {
     }
   };
 
-  fillStateFromLocalStorage() {
+  fillStateFromLocalStorage = () => {
     const { sleepTime, wakeTime, getUpTime } = this.getTimesFromLocalStorage(
       this.state.currentDate
     );
     this.setState({ sleepTime, wakeTime, getUpTime });
-  }
+  };
 
   getTimesFromLocalStorage(date) {
     // see https://hackernoon.com/how-to-take-advantage-of-local-storage-in-your-react-projects-a895f2b2d3f2
