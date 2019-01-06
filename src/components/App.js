@@ -138,7 +138,7 @@ class App extends Component {
             />
           ) : (
             <Box fill>
-              <Navbar title="SnuzeTime 💤🌙" />
+              <Navbar title="SnuzeTime 💤🕙" />
               <Box flex>
                 <Clock currentTime={this.state.currentTime} />
                 <Box flex align="center" justify="center">
