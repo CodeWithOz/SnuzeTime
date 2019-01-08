@@ -1,6 +1,6 @@
 import React from 'react';
-import TodayView from './TodayView';
 import TestRenderer from 'react-test-renderer';
+import TodayView from './TodayView';
 
 describe('TodayView', () => {
   test('displays default text when empty strings are supplied', () => {

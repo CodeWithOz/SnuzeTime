@@ -1,6 +1,6 @@
 import React from 'react';
-import Button from './Button';
 import TestRenderer from 'react-test-renderer';
+import Button from './Button';
 
 test('clicking invokes the supplied click handler', () => {
   const mockClickHandler = jest.fn();
