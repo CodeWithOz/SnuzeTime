@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Paragraph } from 'grommet';
+import { Box, Heading } from 'grommet';
 import { RotateSpinLoader } from 'react-css-loaders';
 
 const splashScreenConfig = {
@@ -10,8 +10,12 @@ const splashScreenConfig = {
 const SplashScreen = ({ appName }) => {
   return (
     <Box fill background={splashScreenConfig.background}>
-      <Paragraph textAlign="center">{appName}</Paragraph>
-      <RotateSpinLoader color={splashScreenConfig.spinnerColor} />
+      <Box flex justify="center" alignSelf="center">
+        <Heading level="1" margin="none">
+          {appName}
+        </Heading>
+        <RotateSpinLoader size={3} color={splashScreenConfig.spinnerColor} />
+      </Box>
     </Box>
   );
 };
