@@ -7,6 +7,7 @@ import Navbar from './Navbar';
 import Clock from './Clock';
 import ButtonDisplay from './ButtonDisplay';
 import TodayView from './TodayView';
+import SplashScreen from './SplashScreen';
 import dateStore from '../helpers/dateStore';
 
 function getCurrentTime(withSeconds = true) {
@@ -20,6 +21,10 @@ function getCurrentDate() {
 function getCurrentHour() {
   return Number(moment().format('HH'));
 }
+
+const appConfig = {
+  appName: 'SnuzeTime 💤🕙'
+};
 
 class App extends Component {
   state = {
@@ -140,33 +145,29 @@ class App extends Component {
   render() {
     return (
       <Grommet full theme={grommet}>
-        <Box fill background={this.getBackground(this.state.currentHour)}>
-          {!this.state.loaded ? (
-            <RotateSpinLoader
-              color={this.getSpinnerColor(this.state.currentHour)}
-            />
-          ) : (
-            <Box fill>
-              <Navbar title="SnuzeTime 💤🕙" />
-              <Box flex>
-                <Clock currentTime={this.state.currentTime} />
-                <Box flex align="center" justify="center">
-                  <ButtonDisplay
-                    hour={this.state.currentHour}
-                    saveSleepTime={this.saveSleepTime}
-                    saveWakeTime={this.saveWakeTime}
-                    saveGetUpTime={this.saveGetUpTime}
-                  />
-                  <TodayView
-                    sleepTime={this.state.sleepTime}
-                    wakeTime={this.state.wakeTime}
-                    getUpTime={this.state.getUpTime}
-                  />
-                </Box>
+        {!this.state.loaded ? (
+          <SplashScreen appName={appConfig.appName} />
+        ) : (
+          <Box fill background={this.getBackground(this.state.currentHour)}>
+            <Navbar title={appConfig.appName} />
+            <Box flex>
+              <Clock currentTime={this.state.currentTime} />
+              <Box flex align="center" justify="center">
+                <ButtonDisplay
+                  hour={this.state.currentHour}
+                  saveSleepTime={this.saveSleepTime}
+                  saveWakeTime={this.saveWakeTime}
+                  saveGetUpTime={this.saveGetUpTime}
+                />
+                <TodayView
+                  sleepTime={this.state.sleepTime}
+                  wakeTime={this.state.wakeTime}
+                  getUpTime={this.state.getUpTime}
+                />
               </Box>
             </Box>
-          )}
-        </Box>
+          </Box>
+        )}
       </Grommet>
     );
   }
