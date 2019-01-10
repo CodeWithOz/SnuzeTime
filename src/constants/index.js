@@ -1,0 +1,5 @@
+const UPDATE_SNUZE_TIMES = 'UPDATE_SNUZE_TIMES';
+
+export default {
+  UPDATE_SNUZE_TIMES
+};
