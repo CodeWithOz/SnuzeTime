@@ -6,6 +6,12 @@ const INITIAL_STATE = {
     sleepTime: '',
     wakeTime: '',
     getUpTime: ''
+  },
+  currentTimes: {
+    withSeconds: '',
+    withoutSeconds: '',
+    hour: -1,
+    date: ''
   }
 };
 

@@ -16,3 +16,13 @@ test('INITIAL_STATE has the correct snuzeTimes values', () => {
   };
   expect(constants.INITIAL_STATE.snuzeTimes).toEqual(expectedTimes);
 });
+
+test('INITIAL_STATE has the correct currentTimes values', () => {
+  const expectedCurrentTimes = {
+    withSeconds: '',
+    withoutSeconds: '',
+    hour: -1,
+    date: ''
+  };
+  expect(constants.INITIAL_STATE.currentTimes).toEqual(expectedCurrentTimes);
+});

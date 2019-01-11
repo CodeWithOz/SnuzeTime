@@ -10,6 +10,16 @@ export const updateSnuzeTimesReducer = (
     : snuzeTimes;
 };
 
+export const updateCurrentTimesReducer = (
+  currentTimes = constants.INITIAL_STATE.currentTimes,
+  action
+) => {
+  return action.type === constants.UPDATE_CURRENT_TIMES
+    ? action.payload
+    : currentTimes;
+};
+
 export default combineReducers({
-  snuzeTimes: updateSnuzeTimesReducer
+  snuzeTimes: updateSnuzeTimesReducer,
+  currentTimes: updateCurrentTimesReducer
 });
