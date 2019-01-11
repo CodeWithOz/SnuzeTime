@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import 'moment-timer';
-import { RotateSpinLoader } from 'react-css-loaders';
 import { grommet, Box, Grommet } from 'grommet';
 import Navbar from './Navbar';
 import Clock from './Clock';
