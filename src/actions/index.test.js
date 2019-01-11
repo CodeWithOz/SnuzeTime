@@ -64,3 +64,24 @@ describe('updateSnuzeTimes action creator returns', () => {
     });
   });
 });
+
+describe('updateCurrentTimes action creator returns', () => {
+  const timesObj = {
+    withSeconds: 'test',
+    withoutSeconds: 'test2',
+    hour: -1,
+    date: 'test3'
+  };
+
+  test('the correct action format and type', () => {
+    const action = actionCreators.updateCurrentTimes(timesObj);
+    expect(action.type).toBeDefined();
+    expect(action.payload).toBeDefined();
+    expect(action.type).toEqual(constants.UPDATE_CURRENT_TIMES);
+  });
+
+  test('the correct payload', () => {
+    const { payload } = actionCreators.updateCurrentTimes(timesObj);
+    expect(payload).toEqual(timesObj);
+  });
+});

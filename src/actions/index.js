@@ -11,6 +11,14 @@ function updateSnuzeTimes(sleepTime, wakeTime, getUpTime) {
   };
 }
 
+function updateCurrentTimes(timesObj) {
+  return {
+    type: constants.UPDATE_CURRENT_TIMES,
+    payload: timesObj
+  };
+}
+
 export default {
-  updateSnuzeTimes
+  updateSnuzeTimes,
+  updateCurrentTimes
 };
