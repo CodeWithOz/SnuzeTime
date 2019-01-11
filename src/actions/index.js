@@ -25,8 +25,16 @@ function showMainApp(bool) {
   };
 }
 
+function showTodayView(bool) {
+  return {
+    type: constants.SHOW_TODAY_VIEW,
+    payload: bool
+  };
+}
+
 export default {
   updateSnuzeTimes,
   updateCurrentTimes,
-  showMainApp
+  showMainApp,
+  showTodayView
 };

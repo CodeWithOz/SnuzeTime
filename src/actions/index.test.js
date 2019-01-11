@@ -102,3 +102,20 @@ describe('showMainApp action creator returns', () => {
     expect(payload).toEqual(false);
   });
 });
+
+describe('showTodayView action creator returns', () => {
+  test('the correct action format and type', () => {
+    const action = actionCreators.showTodayView(true);
+    expect(action.type).toBeDefined();
+    expect(action.payload).toBeDefined();
+    expect(action.type).toEqual(constants.SHOW_TODAY_VIEW);
+  });
+
+  test('the correct payload', () => {
+    let { payload } = actionCreators.showTodayView(true);
+    expect(payload).toEqual(true);
+
+    ({ payload } = actionCreators.showTodayView(false));
+    expect(payload).toEqual(false);
+  });
+});

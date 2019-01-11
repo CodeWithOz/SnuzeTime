@@ -12,6 +12,10 @@ test('SHOW_MAIN_APP has the correct value', () => {
   expect(constants.SHOW_MAIN_APP).toEqual('SHOW_MAIN_APP');
 });
 
+test('SHOW_TODAY_VIEW has the correct value', () => {
+  expect(constants.SHOW_TODAY_VIEW).toEqual('SHOW_TODAY_VIEW');
+});
+
 test('INITIAL_STATE has the correct snuzeTimes values', () => {
   const expectedTimes = {
     sleepTime: '',
