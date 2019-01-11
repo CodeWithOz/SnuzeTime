@@ -1,16 +1,25 @@
 import React from 'react';
 import { Box, Paragraph, Text } from 'grommet';
+import { connect } from 'react-redux';
 
-const TodayView = props => {
+const todayViewConfig = {
+  messages: {
+    sleepTime: `...haven't gone to bed.`,
+    wakeTime: `...haven't woken up.`,
+    getUpTime: `...haven't gotten out of bed.`
+  }
+};
+
+export const TodayView = props => {
   const sleepTime = props.sleepTime
     ? `...slept at ${props.sleepTime}.`
-    : `...haven't gone to bed.`;
+    : todayViewConfig.messages.sleepTime;
   const wakeTime = props.wakeTime
     ? `...woke up at ${props.wakeTime}.`
-    : `...haven't woken up.`;
+    : todayViewConfig.messages.wakeTime;
   const getUpTime = props.getUpTime
     ? `...got out of bed at ${props.getUpTime}.`
-    : `...haven't gotten out of bed.`;
+    : todayViewConfig.messages.getUpTime;
 
   return (
     <Box flex align="center" justify="center">
@@ -30,4 +39,10 @@ const TodayView = props => {
   );
 };
 
-export default TodayView;
+const mapStateToProps = ({
+  snuzeTimes: { sleepTime, wakeTime, getUpTime }
+}) => {
+  return { sleepTime, wakeTime, getUpTime };
+};
+
+export default connect(mapStateToProps)(TodayView);

@@ -158,11 +158,7 @@ class App extends Component {
                   saveWakeTime={this.saveWakeTime}
                   saveGetUpTime={this.saveGetUpTime}
                 />
-                <TodayView
-                  sleepTime={this.state.sleepTime}
-                  wakeTime={this.state.wakeTime}
-                  getUpTime={this.state.getUpTime}
-                />
+                <TodayView />
               </Box>
             </Box>
           </Box>
