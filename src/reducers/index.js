@@ -28,8 +28,18 @@ export const showMainAppReducer = (
     : mainAppShown;
 };
 
+export const showTodayViewReducer = (
+  todayViewShown = constants.INITIAL_STATE.todayViewShown,
+  action
+) => {
+  return action.type === constants.SHOW_TODAY_VIEW
+    ? action.payload
+    : todayViewShown;
+};
+
 export default combineReducers({
   snuzeTimes: updateSnuzeTimesReducer,
   currentTimes: updateCurrentTimesReducer,
-  mainAppShown: showMainAppReducer
+  mainAppShown: showMainAppReducer,
+  todayViewShown: showTodayViewReducer
 });

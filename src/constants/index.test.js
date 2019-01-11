@@ -39,3 +39,8 @@ test('INITIAL_STATE has the correct mainAppShown value', () => {
   // main app is not shown by default
   expect(constants.INITIAL_STATE.mainAppShown).toEqual(false);
 });
+
+test('INITIAL_STATE has the correct todayViewShown value', () => {
+  // main app is not shown by default
+  expect(constants.INITIAL_STATE.todayViewShown).toEqual(false);
+});

@@ -15,7 +15,8 @@ const INITIAL_STATE = {
     hour: -1,
     date: ''
   },
-  mainAppShown: false
+  mainAppShown: false,
+  todayViewShown: false
 };
 
 export default {
