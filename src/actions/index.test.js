@@ -85,3 +85,20 @@ describe('updateCurrentTimes action creator returns', () => {
     expect(payload).toEqual(timesObj);
   });
 });
+
+describe('showMainApp action creator returns', () => {
+  test('the correct action format and type', () => {
+    const action = actionCreators.showMainApp(true);
+    expect(action.type).toBeDefined();
+    expect(action.payload).toBeDefined();
+    expect(action.type).toEqual(constants.SHOW_MAIN_APP);
+  });
+
+  test('the correct payload', () => {
+    let { payload } = actionCreators.showMainApp(true);
+    expect(payload).toEqual(true);
+
+    ({ payload } = actionCreators.showMainApp(false));
+    expect(payload).toEqual(false);
+  });
+});

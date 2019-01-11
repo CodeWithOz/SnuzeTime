@@ -18,7 +18,15 @@ function updateCurrentTimes(timesObj) {
   };
 }
 
+function showMainApp(bool) {
+  return {
+    type: constants.SHOW_MAIN_APP,
+    payload: bool
+  };
+}
+
 export default {
   updateSnuzeTimes,
-  updateCurrentTimes
+  updateCurrentTimes,
+  showMainApp
 };

@@ -8,6 +8,10 @@ test('UPDATE_CURRENT_TIMES has the correct value', () => {
   expect(constants.UPDATE_CURRENT_TIMES).toEqual('UPDATE_CURRENT_TIMES');
 });
 
+test('SHOW_MAIN_APP has the correct value', () => {
+  expect(constants.SHOW_MAIN_APP).toEqual('SHOW_MAIN_APP');
+});
+
 test('INITIAL_STATE has the correct snuzeTimes values', () => {
   const expectedTimes = {
     sleepTime: '',
