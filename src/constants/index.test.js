@@ -30,3 +30,8 @@ test('INITIAL_STATE has the correct currentTimes values', () => {
   };
   expect(constants.INITIAL_STATE.currentTimes).toEqual(expectedCurrentTimes);
 });
+
+test('INITIAL_STATE has the correct mainAppShown value', () => {
+  // main app is not shown by default
+  expect(constants.INITIAL_STATE.mainAppShown).toEqual(false);
+});

@@ -19,7 +19,17 @@ export const updateCurrentTimesReducer = (
     : currentTimes;
 };
 
+export const showMainAppReducer = (
+  mainAppShown = constants.INITIAL_STATE.mainAppShown,
+  action
+) => {
+  return action.type === constants.SHOW_MAIN_APP
+    ? action.payload
+    : mainAppShown;
+};
+
 export default combineReducers({
   snuzeTimes: updateSnuzeTimesReducer,
-  currentTimes: updateCurrentTimesReducer
+  currentTimes: updateCurrentTimesReducer,
+  mainAppShown: showMainAppReducer
 });

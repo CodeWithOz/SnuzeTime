@@ -13,7 +13,8 @@ const INITIAL_STATE = {
     withoutSeconds: '',
     hour: -1,
     date: ''
-  }
+  },
+  mainAppShown: false
 };
 
 export default {
