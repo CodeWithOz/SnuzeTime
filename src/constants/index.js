@@ -13,7 +13,7 @@ const INITIAL_STATE = {
     withSeconds: '',
     withoutSeconds: '',
     hour: -1,
-    date: ''
+    date: '0000 00 00'
   },
   mainAppShown: false,
   todayViewShown: false

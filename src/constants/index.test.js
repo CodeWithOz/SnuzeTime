@@ -30,7 +30,7 @@ test('INITIAL_STATE has the correct currentTimes values', () => {
     withSeconds: '',
     withoutSeconds: '',
     hour: -1,
-    date: ''
+    date: '0000 00 00'
   };
   expect(constants.INITIAL_STATE.currentTimes).toEqual(expectedCurrentTimes);
 });
