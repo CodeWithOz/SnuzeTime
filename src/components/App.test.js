@@ -1,4 +1,11 @@
+import React from 'react';
+import { shallow } from 'enzyme';
+import moment from 'moment';
+import 'moment-timer';
 import App from './App';
+
+// mock native timers
+jest.useFakeTimers();
 
 describe('From localStorage, App gets', () => {
   const mockDay = {
@@ -37,6 +44,49 @@ describe('From localStorage, App gets', () => {
     expect(sleepTime).toEqual('');
     expect(wakeTime).toEqual('');
     expect(getUpTime).toEqual('');
+  });
+});
+
+test('App sets a 1-second recurring timer', () => {
+  // clear previous calls to the mocked timers
+  setInterval.mockClear();
+  expect(setInterval).not.toHaveBeenCalled();
+
+  // initiate the component
+  shallow(<App />);
+
+  expect(setInterval).toHaveBeenCalledTimes(1);
+  expect(setInterval).toHaveBeenCalledWith(expect.any(Function), 1000);
+});
+
+describe('App gets the current', () => {
+  test('time as HH:MM AM/PM', () => {
+    const timeWithoutSeconds = App.prototype.getCurrentTime(false);
+
+    // moment returns nicely formatted time strings
+    const timeFromMoment = moment().format(`hh:mm A`);
+    expect(timeWithoutSeconds).toEqual(timeFromMoment);
+  });
+
+  test('time as HH:MM:SS AM/PM', () => {
+    const timeWithSeconds = App.prototype.getCurrentTime();
+
+    const timeFromMoment = moment().format(`hh:mm:ss A`);
+    expect(timeWithSeconds).toEqual(timeFromMoment);
+  });
+
+  test('hour in 24-hour format', () => {
+    const hour = App.prototype.getCurrentHour();
+
+    const timeFromMoment = Number(moment().format(`HH`));
+    expect(hour).toEqual(timeFromMoment);
+  });
+
+  test('date as YYYY M D', () => {
+    const date = App.prototype.getCurrentDate();
+
+    const timeFromMoment = moment().format(`YYYY M D`);
+    expect(date).toEqual(timeFromMoment);
   });
 });
 

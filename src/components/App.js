@@ -9,18 +9,6 @@ import TodayView from './TodayView';
 import SplashScreen from './SplashScreen';
 import dateStore from '../helpers/dateStore';
 
-function getCurrentTime(withSeconds = true) {
-  return moment().format(`hh:mm${withSeconds ? ':ss' : ''} A`);
-}
-
-function getCurrentDate() {
-  return moment().format('YYYY M D');
-}
-
-function getCurrentHour() {
-  return Number(moment().format('HH'));
-}
-
 const appConfig = {
   appName: 'SnuzeTime 💤🕙'
 };
@@ -29,8 +17,8 @@ class App extends Component {
   state = {
     loaded: false,
     currentTime: '',
-    currentHour: getCurrentHour(),
-    currentDate: getCurrentDate(),
+    currentHour: this.getCurrentHour(),
+    currentDate: this.getCurrentDate(),
     wakeTime: '',
     getUpTime: '',
     sleepTime: ''
@@ -43,27 +31,39 @@ class App extends Component {
   }
 
   setCurrentTimeAndDate = () => {
-    const newDate = getCurrentDate();
+    const newDate = this.getCurrentDate();
     if (newDate !== this.state.currentDate) {
       // it's a new day
       // refresh snuze times after updating the date
       // necessary because fillStateFromLocalStorage uses state's current date
       this.setState(
         {
-          currentTime: getCurrentTime(),
-          currentHour: getCurrentHour(),
+          currentTime: this.getCurrentTime(),
+          currentHour: this.getCurrentHour(),
           currentDate: newDate
         },
         this.fillStateFromLocalStorage
       );
     } else {
       this.setState({
-        currentTime: getCurrentTime(),
-        currentHour: getCurrentHour(),
+        currentTime: this.getCurrentTime(),
+        currentHour: this.getCurrentHour(),
         currentDate: newDate
       });
     }
   };
+
+  getCurrentDate() {
+    return moment().format('YYYY M D');
+  }
+
+  getCurrentTime(withSeconds = true) {
+    return moment().format(`hh:mm${withSeconds ? ':ss' : ''} A`);
+  }
+
+  getCurrentHour() {
+    return Number(moment().format('HH'));
+  }
 
   fillStateFromLocalStorage = () => {
     const { sleepTime, wakeTime, getUpTime } = this.getTimesFromLocalStorage(
@@ -102,7 +102,7 @@ class App extends Component {
     }
 
     this.setState(
-      { [particularTime]: getCurrentTime(false) },
+      { [particularTime]: this.getCurrentTime(false) },
       this.saveStateToLocalStorage
     );
   };
