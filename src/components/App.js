@@ -150,7 +150,7 @@ class App extends Component {
           <Box fill background={this.getBackground(this.state.currentHour)}>
             <Navbar title={appConfig.appName} />
             <Box flex>
-              <Clock currentTime={this.state.currentTime} />
+              <Clock />
               <Box flex align="center" justify="center">
                 <ButtonDisplay
                   hour={this.state.currentHour}

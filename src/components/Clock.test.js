@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'enzyme';
-import Clock from './Clock';
+import { Clock } from './Clock';
 
 test('Clock displays the supplied time', () => {
   const time = '09:09:23 PM';

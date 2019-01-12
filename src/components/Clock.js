@@ -1,8 +1,9 @@
 import './Clock.css';
 import React from 'react';
 import { Box, Text } from 'grommet';
+import { connect } from 'react-redux';
 
-const Clock = props => {
+export const Clock = props => {
   const [, time, meridiem] = props.currentTime.match(
     /(\d{2}:\d{2}:\d{2}) (AM|PM)/
   );
@@ -26,4 +27,8 @@ const Clock = props => {
   );
 };
 
-export default Clock;
+const mapStateToProps = ({ currentTimes: { withSeconds } }) => {
+  return { currentTime: withSeconds };
+};
+
+export default connect(mapStateToProps)(Clock);

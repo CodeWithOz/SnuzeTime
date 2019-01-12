@@ -27,7 +27,7 @@ test('INITIAL_STATE has the correct snuzeTimes values', () => {
 
 test('INITIAL_STATE has the correct currentTimes values', () => {
   const expectedCurrentTimes = {
-    withSeconds: '',
+    withSeconds: '99:99:99 PM',
     withoutSeconds: '',
     hour: -1,
     date: '0000 00 00'

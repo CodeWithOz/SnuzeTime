@@ -10,7 +10,7 @@ const INITIAL_STATE = {
     getUpTime: ''
   },
   currentTimes: {
-    withSeconds: '',
+    withSeconds: '99:99:99 PM',
     withoutSeconds: '',
     hour: -1,
     date: '0000 00 00'
