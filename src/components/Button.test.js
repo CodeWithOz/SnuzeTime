@@ -1,14 +1,20 @@
 import React from 'react';
-import TestRenderer from 'react-test-renderer';
+import { shallow, mount } from 'enzyme';
 import Button from './Button';
 
-test('clicking invokes the supplied click handler', () => {
+test('Clicking invokes the supplied click handler', () => {
   const mockClickHandler = jest.fn();
-  const buttonInstance = TestRenderer.create(
-    <Button text="Text" onClick={mockClickHandler} />
-  ).root;
+  const wrapper = shallow(<Button text="Text" onClick={mockClickHandler} />);
+
+  expect(mockClickHandler).toHaveBeenCalledTimes(0);
 
   // trigger click event on the button
-  buttonInstance.findByType('button').props.onClick();
+  wrapper.simulate('click');
   expect(mockClickHandler).toHaveBeenCalledTimes(1);
+});
+
+test('The supplied text is displayed', () => {
+  const text = 'test';
+  const wrapper = mount(<Button text={text} />);
+  expect(wrapper.text()).toContain(text);
 });
