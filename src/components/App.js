@@ -2,18 +2,21 @@ import React, { Component } from 'react';
 import moment from 'moment';
 import 'moment-timer';
 import { grommet, Box, Grommet } from 'grommet';
+import { connect } from 'react-redux';
 import Navbar from './Navbar';
 import Clock from './Clock';
 import ButtonDisplay from './ButtonDisplay';
 import TodayView from './TodayView';
 import SplashScreen from './SplashScreen';
 import dateStore from '../helpers/dateStore';
+import actionCreators from '../actions';
+import constants from '../constants';
 
 const appConfig = {
   appName: 'SnuzeTime 💤🕙'
 };
 
-class App extends Component {
+export class App extends Component {
   state = {
     loaded: false,
     currentTime: '',
@@ -25,17 +28,48 @@ class App extends Component {
   };
 
   componentDidMount() {
-    this.setCurrentTimeAndDate();
-    this.fillStateFromLocalStorage();
     this.startTimer();
   }
 
-  setCurrentTimeAndDate = () => {
+  startTimer() {
+    new moment.duration(1000).timer({ start: true, loop: true }, () => {
+      this.setCurrentTimeAndDate();
+      if (!this.state.loaded) {
+        // start showing the main content
+        this.setState({ loaded: true });
+      }
+    });
+  }
+
+  setCurrentTimeAndDate() {
+    const { withSeconds, withoutSeconds, hour, date } = this.props.currentTimes;
     const newDate = this.getCurrentDate();
-    if (newDate !== this.state.currentDate) {
+    if (newDate !== date) {
       // it's a new day
-      // refresh snuze times after updating the date
-      // necessary because fillStateFromLocalStorage uses state's current date
+      // trigger a refresh in TodayView component
+      this.props.showTodayView(false);
+    }
+
+    const newTimes = {
+      withSeconds: this.getCurrentTime(),
+      withoutSeconds: this.getCurrentTime(false),
+      hour: this.getCurrentHour(),
+      date: newDate
+    };
+    this.props.updateCurrentTimes(newTimes);
+
+    // show the main app if all currentTimes have been set
+    const { currentTimes: initialTimes } = constants.INITIAL_STATE;
+    if (
+      withSeconds !== initialTimes.withSeconds &&
+      withoutSeconds !== initialTimes.withoutSeconds &&
+      hour !== initialTimes.hour &&
+      date !== initialTimes.date
+    ) {
+      this.props.showMainApp(true);
+    }
+
+    if (newDate !== this.state.currentDate) {
       this.setState(
         {
           currentTime: this.getCurrentTime(),
@@ -51,7 +85,7 @@ class App extends Component {
         currentDate: newDate
       });
     }
-  };
+  }
 
   getCurrentDate() {
     return moment().format('YYYY M D');
@@ -76,16 +110,6 @@ class App extends Component {
     // see https://hackernoon.com/how-to-take-advantage-of-local-storage-in-your-react-projects-a895f2b2d3f2
     return dateStore.getTimesFromLocalStorage(date);
   }
-
-  startTimer = () => {
-    new moment.duration(1000).timer({ start: true, loop: true }, () => {
-      this.setCurrentTimeAndDate();
-      if (!this.state.loaded) {
-        // start showing the main content
-        this.setState({ loaded: true });
-      }
-    });
-  };
 
   // update state and localStorage with the newest snuze time
   saveSnuzeTimes = (sleep = false, wake = false, getUp = false) => {
@@ -168,4 +192,15 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = ({ currentTimes }) => {
+  return { currentTimes };
+};
+
+export default connect(
+  mapStateToProps,
+  {
+    showTodayView: actionCreators.showTodayView,
+    showMainApp: actionCreators.showMainApp,
+    updateCurrentTimes: actionCreators.updateCurrentTimes
+  }
+)(App);

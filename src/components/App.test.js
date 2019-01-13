@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import moment from 'moment';
 import 'moment-timer';
-import App from './App';
+import { App } from './App';
 
 // mock native timers
 jest.useFakeTimers();
