@@ -168,7 +168,7 @@ export class App extends Component {
   render() {
     return (
       <Grommet full theme={grommet}>
-        {!this.state.loaded ? (
+        {!this.props.mainAppShown ? (
           <SplashScreen appName={appConfig.appName} />
         ) : (
           <Box fill background={this.getBackground(this.state.currentHour)}>
@@ -192,8 +192,8 @@ export class App extends Component {
   }
 }
 
-const mapStateToProps = ({ currentTimes }) => {
-  return { currentTimes };
+const mapStateToProps = ({ currentTimes, mainAppShown }) => {
+  return { currentTimes, mainAppShown };
 };
 
 export default connect(
