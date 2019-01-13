@@ -16,5 +16,7 @@
 }
 
 .clock-container .time {
-  font-family: 'Digital7', Arial, sans-serif;
+  /* Custom font not used due to FOUT/FOIT issues */
+  /* Will use after I have satisfactorily dealt with the issues */
+  font-family: Arial, sans-serif;
 }
