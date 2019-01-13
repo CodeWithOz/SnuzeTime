@@ -75,11 +75,11 @@ test('it assigns the correct text and callback', () => {
   );
 
   expect(bigBtn.props.text).toEqual(at2.bigBtn.text);
-  expect(bigBtn.props.onClick).toBe(at2.bigBtn.callback);
+  expect(bigBtn.props.handleClick).toBe(at2.bigBtn.callback);
   expect(smallLeftBtn.props.text).toEqual(at2.smallLeftBtn.text);
-  expect(smallLeftBtn.props.onClick).toBe(at2.smallLeftBtn.callback);
+  expect(smallLeftBtn.props.handleClick).toBe(at2.smallLeftBtn.callback);
   expect(smallRightBtn.props.text).toEqual(at2.smallRightBtn.text);
-  expect(smallRightBtn.props.onClick).toBe(at2.smallRightBtn.callback);
+  expect(smallRightBtn.props.handleClick).toBe(at2.smallRightBtn.callback);
 
   // test for 10am to 6pm
   buttonDisplay.update(
@@ -97,11 +97,11 @@ test('it assigns the correct text and callback', () => {
   );
 
   expect(bigBtn.props.text).toEqual(at10.bigBtn.text);
-  expect(bigBtn.props.onClick).toBe(at10.bigBtn.callback);
+  expect(bigBtn.props.handleClick).toBe(at10.bigBtn.callback);
   expect(smallLeftBtn.props.text).toEqual(at10.smallLeftBtn.text);
-  expect(smallLeftBtn.props.onClick).toBe(at10.smallLeftBtn.callback);
+  expect(smallLeftBtn.props.handleClick).toBe(at10.smallLeftBtn.callback);
   expect(smallRightBtn.props.text).toEqual(at10.smallRightBtn.text);
-  expect(smallRightBtn.props.onClick).toBe(at10.smallRightBtn.callback);
+  expect(smallRightBtn.props.handleClick).toBe(at10.smallRightBtn.callback);
 
   // test for 6pm to 2am
   buttonDisplay.update(
@@ -119,9 +119,9 @@ test('it assigns the correct text and callback', () => {
   );
 
   expect(bigBtn.props.text).toEqual(at18.bigBtn.text);
-  expect(bigBtn.props.onClick).toBe(at18.bigBtn.callback);
+  expect(bigBtn.props.handleClick).toBe(at18.bigBtn.callback);
   expect(smallLeftBtn.props.text).toEqual(at18.smallLeftBtn.text);
-  expect(smallLeftBtn.props.onClick).toBe(at18.smallLeftBtn.callback);
+  expect(smallLeftBtn.props.handleClick).toBe(at18.smallLeftBtn.callback);
   expect(smallRightBtn.props.text).toEqual(at18.smallRightBtn.text);
-  expect(smallRightBtn.props.onClick).toBe(at18.smallRightBtn.callback);
+  expect(smallRightBtn.props.handleClick).toBe(at18.smallRightBtn.callback);
 });

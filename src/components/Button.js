@@ -5,7 +5,7 @@ const Button = props => {
   return (
     <GrommetButton
       label={props.text}
-      onClick={props.onClick}
+      onClick={props.handleClick}
       margin="xsmall"
       {...props}
     />

@@ -56,16 +56,20 @@ class ButtonDisplay extends Component {
             primary
             style={{ height: '50px' }}
             text={btnDisplayConfig[bigBtn].text}
-            onClick={this.props[btnDisplayConfig[bigBtn].callbackName]}
+            handleClick={this.props[btnDisplayConfig[bigBtn].callbackName]}
           />
           <Box direction="row">
             <Button
               text={btnDisplayConfig[smallLeftBtn].text}
-              onClick={this.props[btnDisplayConfig[smallLeftBtn].callbackName]}
+              handleClick={
+                this.props[btnDisplayConfig[smallLeftBtn].callbackName]
+              }
             />
             <Button
               text={btnDisplayConfig[smallRightBtn].text}
-              onClick={this.props[btnDisplayConfig[smallRightBtn].callbackName]}
+              handleClick={
+                this.props[btnDisplayConfig[smallRightBtn].callbackName]
+              }
             />
           </Box>
         </Box>
