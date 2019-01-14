@@ -71,11 +71,6 @@ export class App extends Component {
     return currentHour >= 7 && currentHour < 19 ? 'light-1' : 'dark-1';
   }
 
-  getSpinnerColor(currentHour) {
-    // returns the reverse of the main background to ensure contrast
-    return currentHour >= 7 && currentHour < 19 ? '#333333' : '#F8F8F8';
-  }
-
   render() {
     return (
       <Grommet full theme={grommet}>

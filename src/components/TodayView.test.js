@@ -98,3 +98,10 @@ describe('From localStorage, TodayView gets', () => {
     expect(getUpTime).toEqual('');
   });
 });
+
+test('TodayView gets the correct spinner color', () => {
+  const nightColor = '#F8F8F8';
+  const dayColor = '#333333';
+  expect(TodayView.prototype.getSpinnerColor(10)).toEqual(dayColor);
+  expect(TodayView.prototype.getSpinnerColor(22)).toEqual(nightColor);
+});

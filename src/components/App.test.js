@@ -58,12 +58,3 @@ test('App gets the correct background color', () => {
   expect(App.prototype.getBackground(10)).toEqual(dayBkrgnd);
   expect(App.prototype.getBackground(22)).toEqual(nightBkgrnd);
 });
-
-test('App gets the correct spinner color', () => {
-  expect(App.prototype.getSpinnerColor).toBeDefined();
-
-  const nightColor = '#F8F8F8';
-  const dayColor = '#333333';
-  expect(App.prototype.getSpinnerColor(10)).toEqual(dayColor);
-  expect(App.prototype.getSpinnerColor(22)).toEqual(nightColor);
-});

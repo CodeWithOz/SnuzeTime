@@ -25,6 +25,11 @@ export class TodayView extends Component {
     this.props.updateSnuzeTimes(sleepTime, wakeTime, getUpTime);
   }
 
+  getSpinnerColor(currentHour) {
+    // returns the reverse of the main background to ensure contrast
+    return currentHour >= 7 && currentHour < 19 ? '#333333' : '#F8F8F8';
+  }
+
   render() {
     const sleepTime = this.props.sleepTime
       ? `...slept at ${this.props.sleepTime}.`
