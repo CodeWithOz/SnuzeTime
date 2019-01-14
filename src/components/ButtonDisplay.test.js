@@ -1,127 +1,180 @@
 import React from 'react';
-import ButtonDisplay from './ButtonDisplay';
+import { mount } from 'enzyme';
+import { ButtonDisplay } from './ButtonDisplay';
 import Button from './Button';
-import TestRenderer from 'react-test-renderer';
+import dateStore from '../helpers/dateStore';
 
 test('it assigns the correct text and callback', () => {
-  // callbacks return simple text
-  // the goal is to check that it is the same callback, not the output of the callback
-  const callbacks = {
-    sleep: () => 'sleep',
-    getUp: () => 'getUp',
-    wake: () => 'wake'
-  };
+  const updateSnuzeTimesMock = jest.fn();
 
-  // the text and callbacks for each time period
+  // the text for each time period
   const at2 = {
     // 2am, waking up
     bigBtn: {
-      text: '...waking up',
-      callback: callbacks.wake
+      text: '...waking up'
     },
     smallLeftBtn: {
-      text: '...getting up',
-      callback: callbacks.getUp
+      text: '...getting up'
     },
     smallRightBtn: {
-      text: '...going to bed',
-      callback: callbacks.sleep
+      text: '...going to bed'
     }
   };
   const at10 = {
     // 10am, getting up
     bigBtn: {
-      text: '...getting up',
-      callback: callbacks.getUp
+      text: '...getting up'
     },
     smallLeftBtn: {
-      text: '...waking up',
-      callback: callbacks.wake
+      text: '...waking up'
     },
     smallRightBtn: {
-      text: '...going to bed',
-      callback: callbacks.sleep
+      text: '...going to bed'
     }
   };
   const at18 = {
     // 6pm, going to bed
     bigBtn: {
-      text: '...going to bed',
-      callback: callbacks.sleep
+      text: '...going to bed'
     },
     smallLeftBtn: {
-      text: '...waking up',
-      callback: callbacks.wake
+      text: '...waking up'
     },
     smallRightBtn: {
-      text: '...getting up',
-      callback: callbacks.getUp
+      text: '...getting up'
     }
   };
 
   // test for 2am to 10am
-  let buttonDisplay = TestRenderer.create(
+  let buttonDisplay = mount(
     <ButtonDisplay
       hour={2}
-      saveSleepTime={callbacks.sleep}
-      saveWakeTime={callbacks.wake}
-      saveGetUpTime={callbacks.getUp}
+      updateSnuzeTimes={updateSnuzeTimesMock}
+      currentTime="test"
+      snuzeTimes={{ sleepTime: '', wakeTime: '', getUpTime: '' }}
+      date="9999 9 9"
     />
   );
 
-  let btnDisplayInstance = buttonDisplay.root;
-  let [bigBtn, smallLeftBtn, smallRightBtn] = btnDisplayInstance.findAllByType(
-    Button
-  );
+  let buttons = buttonDisplay.find(Button);
+  let bigBtn = buttons.at(0);
+  let smallLeftBtn = buttons.at(1);
+  let smallRightBtn = buttons.at(2);
 
-  expect(bigBtn.props.text).toEqual(at2.bigBtn.text);
-  expect(bigBtn.props.handleClick).toBe(at2.bigBtn.callback);
-  expect(smallLeftBtn.props.text).toEqual(at2.smallLeftBtn.text);
-  expect(smallLeftBtn.props.handleClick).toBe(at2.smallLeftBtn.callback);
-  expect(smallRightBtn.props.text).toEqual(at2.smallRightBtn.text);
-  expect(smallRightBtn.props.handleClick).toBe(at2.smallRightBtn.callback);
+  expect(bigBtn.props().text).toEqual(at2.bigBtn.text);
+  expect(updateSnuzeTimesMock).not.toHaveBeenCalled();
+  bigBtn.find('button').simulate('click');
+  expect(updateSnuzeTimesMock).toHaveBeenCalledTimes(1);
+  updateSnuzeTimesMock.mockClear();
+
+  expect(smallLeftBtn.props().text).toEqual(at2.smallLeftBtn.text);
+  expect(updateSnuzeTimesMock).not.toHaveBeenCalled();
+  smallLeftBtn.find('button').simulate('click');
+  expect(updateSnuzeTimesMock).toHaveBeenCalledTimes(1);
+  updateSnuzeTimesMock.mockClear();
+
+  expect(smallRightBtn.props().text).toEqual(at2.smallRightBtn.text);
+  expect(updateSnuzeTimesMock).not.toHaveBeenCalled();
+  smallRightBtn.find('button').simulate('click');
+  expect(updateSnuzeTimesMock).toHaveBeenCalledTimes(1);
+  updateSnuzeTimesMock.mockClear();
 
   // test for 10am to 6pm
-  buttonDisplay.update(
+  buttonDisplay = mount(
     <ButtonDisplay
       hour={10}
-      saveSleepTime={callbacks.sleep}
-      saveWakeTime={callbacks.wake}
-      saveGetUpTime={callbacks.getUp}
+      updateSnuzeTimes={updateSnuzeTimesMock}
+      currentTime="test"
+      snuzeTimes={{ sleepTime: '', wakeTime: '', getUpTime: '' }}
+      date="9999 9 9"
     />
   );
 
-  btnDisplayInstance = buttonDisplay.root;
-  [bigBtn, smallLeftBtn, smallRightBtn] = btnDisplayInstance.findAllByType(
-    Button
-  );
+  buttons = buttonDisplay.find(Button);
+  bigBtn = buttons.at(0);
+  smallLeftBtn = buttons.at(1);
+  smallRightBtn = buttons.at(2);
 
-  expect(bigBtn.props.text).toEqual(at10.bigBtn.text);
-  expect(bigBtn.props.handleClick).toBe(at10.bigBtn.callback);
-  expect(smallLeftBtn.props.text).toEqual(at10.smallLeftBtn.text);
-  expect(smallLeftBtn.props.handleClick).toBe(at10.smallLeftBtn.callback);
-  expect(smallRightBtn.props.text).toEqual(at10.smallRightBtn.text);
-  expect(smallRightBtn.props.handleClick).toBe(at10.smallRightBtn.callback);
+  expect(bigBtn.props().text).toEqual(at10.bigBtn.text);
+  expect(updateSnuzeTimesMock).not.toHaveBeenCalled();
+  bigBtn.find('button').simulate('click');
+  expect(updateSnuzeTimesMock).toHaveBeenCalledTimes(1);
+  updateSnuzeTimesMock.mockClear();
+
+  expect(smallLeftBtn.props().text).toEqual(at10.smallLeftBtn.text);
+  expect(updateSnuzeTimesMock).not.toHaveBeenCalled();
+  smallLeftBtn.find('button').simulate('click');
+  expect(updateSnuzeTimesMock).toHaveBeenCalledTimes(1);
+  updateSnuzeTimesMock.mockClear();
+
+  expect(smallRightBtn.props().text).toEqual(at10.smallRightBtn.text);
+  expect(updateSnuzeTimesMock).not.toHaveBeenCalled();
+  smallRightBtn.find('button').simulate('click');
+  expect(updateSnuzeTimesMock).toHaveBeenCalledTimes(1);
+  updateSnuzeTimesMock.mockClear();
 
   // test for 6pm to 2am
-  buttonDisplay.update(
+  buttonDisplay = mount(
     <ButtonDisplay
       hour={18}
-      saveSleepTime={callbacks.sleep}
-      saveWakeTime={callbacks.wake}
-      saveGetUpTime={callbacks.getUp}
+      updateSnuzeTimes={updateSnuzeTimesMock}
+      currentTime="test"
+      snuzeTimes={{ sleepTime: '', wakeTime: '', getUpTime: '' }}
+      date="9999 9 9"
     />
   );
 
-  btnDisplayInstance = buttonDisplay.root;
-  [bigBtn, smallLeftBtn, smallRightBtn] = btnDisplayInstance.findAllByType(
-    Button
-  );
+  buttons = buttonDisplay.find(Button);
+  bigBtn = buttons.at(0);
+  smallLeftBtn = buttons.at(1);
+  smallRightBtn = buttons.at(2);
 
-  expect(bigBtn.props.text).toEqual(at18.bigBtn.text);
-  expect(bigBtn.props.handleClick).toBe(at18.bigBtn.callback);
-  expect(smallLeftBtn.props.text).toEqual(at18.smallLeftBtn.text);
-  expect(smallLeftBtn.props.handleClick).toBe(at18.smallLeftBtn.callback);
-  expect(smallRightBtn.props.text).toEqual(at18.smallRightBtn.text);
-  expect(smallRightBtn.props.handleClick).toBe(at18.smallRightBtn.callback);
+  expect(bigBtn.props().text).toEqual(at18.bigBtn.text);
+  expect(updateSnuzeTimesMock).not.toHaveBeenCalled();
+  bigBtn.find('button').simulate('click');
+  expect(updateSnuzeTimesMock).toHaveBeenCalledTimes(1);
+  updateSnuzeTimesMock.mockClear();
+
+  expect(smallLeftBtn.props().text).toEqual(at18.smallLeftBtn.text);
+  expect(updateSnuzeTimesMock).not.toHaveBeenCalled();
+  smallLeftBtn.find('button').simulate('click');
+  expect(updateSnuzeTimesMock).toHaveBeenCalledTimes(1);
+  updateSnuzeTimesMock.mockClear();
+
+  expect(smallRightBtn.props().text).toEqual(at18.smallRightBtn.text);
+  expect(updateSnuzeTimesMock).not.toHaveBeenCalled();
+  smallRightBtn.find('button').simulate('click');
+  expect(updateSnuzeTimesMock).toHaveBeenCalledTimes(1);
+  updateSnuzeTimesMock.mockClear();
+});
+
+describe('To localStorage, ButtonDisplay saves', () => {
+  const mockDay = {
+    sleepTime: '10:30 PM',
+    wakeTime: '06:00 AM',
+    getUpTime: '06:30 AM'
+  };
+  const dateWithData = '2018 10 6';
+
+  afterEach(() => {
+    if (localStorage.getItem('dates') !== null)
+      localStorage.removeItem('dates');
+  });
+
+  test('supplied times for a supplied date', () => {
+    // ensure that there are no initial values for the date
+    const {
+      sleepTime,
+      wakeTime,
+      getUpTime
+    } = dateStore.getTimesFromLocalStorage(dateWithData);
+    expect(sleepTime).toEqual('');
+    expect(wakeTime).toEqual('');
+    expect(getUpTime).toEqual('');
+
+    ButtonDisplay.prototype.saveTimesToLocalStorage(dateWithData, mockDay);
+
+    const timesObj = dateStore.getTimesFromLocalStorage(dateWithData);
+    expect(timesObj).toEqual(mockDay);
+  });
 });
