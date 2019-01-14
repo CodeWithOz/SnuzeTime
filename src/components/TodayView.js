@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Box, Paragraph, Text } from 'grommet';
+import { RotateSpinLoader } from 'react-css-loaders';
 import { connect } from 'react-redux';
 import dateStore from '../helpers/dateStore';
 import actionCreators from '../actions';
@@ -43,18 +44,25 @@ export class TodayView extends Component {
 
     return (
       <Box flex align="center" justify="center">
-        <Box fill flex align="center" justify="center">
-          <Box>
-            <Text weight="bold" size="large">
-              Today, you...
-            </Text>
+        {!this.props.shown ? (
+          <RotateSpinLoader
+            size={2}
+            color={this.getSpinnerColor(this.props.hour)}
+          />
+        ) : (
+          <Box fill flex align="center" justify="center">
+            <Box>
+              <Text weight="bold" size="large">
+                Today, you...
+              </Text>
+            </Box>
+            <Box>
+              <Paragraph>{wakeTime}</Paragraph>
+              <Paragraph>{getUpTime}</Paragraph>
+              <Paragraph>{sleepTime}</Paragraph>
+            </Box>
           </Box>
-          <Box>
-            <Paragraph>{wakeTime}</Paragraph>
-            <Paragraph>{getUpTime}</Paragraph>
-            <Paragraph>{sleepTime}</Paragraph>
-          </Box>
-        </Box>
+        )}
       </Box>
     );
   }
@@ -62,9 +70,10 @@ export class TodayView extends Component {
 
 const mapStateToProps = ({
   snuzeTimes: { sleepTime, wakeTime, getUpTime },
-  currentTimes: { date }
+  currentTimes: { date, hour },
+  todayViewShown
 }) => {
-  return { sleepTime, wakeTime, getUpTime, date };
+  return { sleepTime, wakeTime, getUpTime, date, hour, shown: todayViewShown };
 };
 
 export default connect(

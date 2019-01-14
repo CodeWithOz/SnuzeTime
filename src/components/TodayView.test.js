@@ -1,9 +1,10 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
+import { RotateSpinLoader } from 'react-css-loaders';
 import { TodayView } from './TodayView';
 import dateStore from '../helpers/dateStore';
 
-describe('TodayView displays', () => {
+describe('When shown, TodayView displays', () => {
   const defaultTexts = {
     sleep: `...haven't gone to bed.`,
     wake: `...haven't woken up.`,
@@ -14,7 +15,7 @@ describe('TodayView displays', () => {
     // componentDidMount depends on the date prop, which is not tested here
     // disabling lifecycle methods prevents errors due to the missing prop
     const wrapper = shallow(
-      <TodayView sleepTime="" wakeTime="" getUpTime="" />,
+      <TodayView sleepTime="" wakeTime="" getUpTime="" shown={true} />,
       { disableLifecycleMethods: true }
     );
 
@@ -40,6 +41,7 @@ describe('TodayView displays', () => {
         sleepTime={suppliedTexts.sleep}
         wakeTime={suppliedTexts.wake}
         getUpTime={suppliedTexts.getUp}
+        shown={true}
       />,
       { disableLifecycleMethods: true }
     );
@@ -104,4 +106,34 @@ test('TodayView gets the correct spinner color', () => {
   const dayColor = '#333333';
   expect(TodayView.prototype.getSpinnerColor(10)).toEqual(dayColor);
   expect(TodayView.prototype.getSpinnerColor(22)).toEqual(nightColor);
+});
+
+describe('When not shown, TodayView displays', () => {
+  test('a loading spinner', () => {
+    const wrapper = mount(
+      <TodayView
+        date="9999 9 9"
+        updateSnuzeTimes={jest.fn()}
+        shown={false}
+        hour={10}
+      />
+    );
+    expect(wrapper.find(RotateSpinLoader).length).toEqual(1);
+  });
+
+  test('a loading spinner with the correct color', () => {
+    const hour = 10;
+    const expectedColor = TodayView.prototype.getSpinnerColor(hour);
+    const loader = mount(
+      <TodayView
+        date="9999 9 9"
+        updateSnuzeTimes={jest.fn()}
+        shown={false}
+        hour={hour}
+      />
+    )
+      .find(RotateSpinLoader)
+      .at(0);
+    expect(loader.props().color).toEqual(expectedColor);
+  });
 });
