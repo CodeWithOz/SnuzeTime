@@ -43,15 +43,17 @@ export class App extends Component {
     };
     this.props.updateCurrentTimes(newTimes);
 
-    // show the main app if all currentTimes have been set
-    const { currentTimes: initialTimes } = constants.INITIAL_STATE;
-    if (
-      withSeconds !== initialTimes.withSeconds &&
-      withoutSeconds !== initialTimes.withoutSeconds &&
-      hour !== initialTimes.hour &&
-      date !== initialTimes.date
-    ) {
-      this.props.showMainApp(true);
+    if (!this.props.mainAppShown) {
+      // show the main app if all currentTimes have been set
+      const { currentTimes: initialTimes } = constants.INITIAL_STATE;
+      if (
+        withSeconds !== initialTimes.withSeconds &&
+        withoutSeconds !== initialTimes.withoutSeconds &&
+        hour !== initialTimes.hour &&
+        date !== initialTimes.date
+      ) {
+        this.props.showMainApp(true);
+      }
     }
   }
 
