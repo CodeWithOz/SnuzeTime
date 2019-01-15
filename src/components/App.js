@@ -29,11 +29,7 @@ export class App extends Component {
   setCurrentTimeAndDate() {
     const { withSeconds, withoutSeconds, hour, date } = this.props.currentTimes;
     const newDate = this.getCurrentDate();
-    if (newDate !== date) {
-      // it's a new day
-      // trigger a refresh in TodayView component
-      this.props.showTodayView(false);
-    }
+    const isNewDay = newDate !== date;
 
     const newTimes = {
       withSeconds: this.getCurrentTime(),
@@ -42,6 +38,11 @@ export class App extends Component {
       date: newDate
     };
     this.props.updateCurrentTimes(newTimes);
+
+    if (isNewDay) {
+      // trigger a refresh of TodayView for the new date
+      this.props.showTodayView(false);
+    }
 
     if (!this.props.mainAppShown) {
       // show the main app if all currentTimes have been set
