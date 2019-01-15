@@ -108,20 +108,21 @@ test('TodayView gets the correct spinner color', () => {
   expect(TodayView.prototype.getSpinnerColor(22)).toEqual(nightColor);
 });
 
-describe('When not shown, TodayView displays', () => {
-  test('a loading spinner', () => {
+describe('When not shown, TodayView', () => {
+  test('displays a loading spinner', () => {
     const wrapper = mount(
       <TodayView
         date="9999 9 9"
         updateSnuzeTimes={jest.fn()}
         shown={false}
         hour={10}
+        showTodayView={jest.fn()}
       />
     );
     expect(wrapper.find(RotateSpinLoader).length).toEqual(1);
   });
 
-  test('a loading spinner with the correct color', () => {
+  test('displays a loading spinner with the correct color', () => {
     const hour = 10;
     const expectedColor = TodayView.prototype.getSpinnerColor(hour);
     const loader = mount(
@@ -130,10 +131,25 @@ describe('When not shown, TodayView displays', () => {
         updateSnuzeTimes={jest.fn()}
         shown={false}
         hour={hour}
+        showTodayView={jest.fn()}
       />
     )
       .find(RotateSpinLoader)
       .at(0);
     expect(loader.props().color).toEqual(expectedColor);
+  });
+
+  test('updates itself to be shown', () => {
+    const showTodayViewMock = jest.fn();
+    shallow(
+      <TodayView
+        date="9999 9 9"
+        updateSnuzeTimes={jest.fn()}
+        shown={false}
+        hour={10}
+        showTodayView={showTodayViewMock}
+      />
+    );
+    expect(showTodayViewMock).toHaveBeenCalledTimes(1);
   });
 });

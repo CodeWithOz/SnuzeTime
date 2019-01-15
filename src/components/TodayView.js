@@ -14,16 +14,27 @@ const todayViewConfig = {
 };
 
 export class TodayView extends Component {
+  componentDidMount() {
+    this.fillStateFromLocalStorage();
+  }
+
+  fillStateFromLocalStorage() {
+    if (!this.props.shown) {
+      // fill redux state with values from localStorage
+      const { sleepTime, wakeTime, getUpTime } = this.getTimesFromLocalStorage(
+        this.props.date
+      );
+      this.props.updateSnuzeTimes(sleepTime, wakeTime, getUpTime);
+      this.props.showTodayView(true);
+    }
+  }
+
   getTimesFromLocalStorage(date) {
     return dateStore.getTimesFromLocalStorage(date);
   }
 
-  componentDidMount() {
-    // fill redux state with values from localStorage
-    const { sleepTime, wakeTime, getUpTime } = this.getTimesFromLocalStorage(
-      this.props.date
-    );
-    this.props.updateSnuzeTimes(sleepTime, wakeTime, getUpTime);
+  componentDidUpdate() {
+    this.fillStateFromLocalStorage();
   }
 
   getSpinnerColor(currentHour) {
@@ -78,5 +89,8 @@ const mapStateToProps = ({
 
 export default connect(
   mapStateToProps,
-  { updateSnuzeTimes: actionCreators.updateSnuzeTimes }
+  {
+    updateSnuzeTimes: actionCreators.updateSnuzeTimes,
+    showTodayView: actionCreators.showTodayView
+  }
 )(TodayView);
