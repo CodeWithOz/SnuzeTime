@@ -6,29 +6,20 @@ import actionCreators from '../actions';
 import dateStore from '../helpers/dateStore';
 
 const btnDisplayConfig = {
-  sleep: {
-    text: '...going to bed',
-    snuzeTimeName: 'sleepTime',
-    getArgs(timesObj) {
-      // order of arguments for updateSnuzeTimes action creator
-      const { sleepTime, wakeTime, getUpTime } = timesObj;
-      return [sleepTime, wakeTime, getUpTime];
-    }
-  },
   wake: {
     text: '...waking up',
     snuzeTimeName: 'wakeTime',
     getArgs(timesObj) {
-      const { sleepTime, wakeTime, getUpTime } = timesObj;
-      return [sleepTime, wakeTime, getUpTime];
+      const { wakeTime, getUpTime } = timesObj;
+      return [undefined, wakeTime, getUpTime];
     }
   },
   getUp: {
     text: '...getting up',
     snuzeTimeName: 'getUpTime',
     getArgs(timesObj) {
-      const { sleepTime, wakeTime, getUpTime } = timesObj;
-      return [sleepTime, wakeTime, getUpTime];
+      const { wakeTime, getUpTime } = timesObj;
+      return [undefined, wakeTime, getUpTime];
     }
   }
 };
@@ -40,23 +31,20 @@ export class ButtonDisplay extends Component {
     if (hour >= 18 || hour < 2) {
       // going to bed
       return {
-        bigBtn: 'sleep',
-        smallLeftBtn: 'wake',
-        smallRightBtn: 'getUp'
+        bigBtn: 'wake',
+        smallBtn: 'getUp'
       };
     } else if (hour >= 10 && hour < 18) {
       // getting up
       return {
-        bigBtn: 'getUp',
-        smallLeftBtn: 'wake',
-        smallRightBtn: 'sleep'
+        bigBtn: 'wake',
+        smallBtn: 'getUp'
       };
     } else {
       // waking up
       return {
         bigBtn: 'wake',
-        smallLeftBtn: 'getUp',
-        smallRightBtn: 'sleep'
+        smallBtn: 'getUp'
       };
     }
   }
@@ -66,7 +54,7 @@ export class ButtonDisplay extends Component {
   }
 
   render() {
-    const { bigBtn, smallLeftBtn, smallRightBtn } = this.getButtons();
+    const { bigBtn, smallBtn } = this.getButtons();
 
     return (
       <Box flex align="center" justify="center">
@@ -91,36 +79,17 @@ export class ButtonDisplay extends Component {
           />
           <Box direction="row">
             <Button
-              text={btnDisplayConfig[smallLeftBtn].text}
+              text={btnDisplayConfig[smallBtn].text}
               handleClick={() => {
                 // need to update values in both localStorage and redux
-                const { snuzeTimeName } = btnDisplayConfig[smallLeftBtn];
+                const { snuzeTimeName } = btnDisplayConfig[smallBtn];
                 const { currentTime, snuzeTimes, date } = this.props;
                 const newSnuzeTimes = {
                   ...snuzeTimes,
                   [snuzeTimeName]: currentTime
                 };
                 this.saveTimesToLocalStorage(date, newSnuzeTimes);
-                const args = btnDisplayConfig[smallLeftBtn].getArgs(
-                  newSnuzeTimes
-                );
-                this.props.updateSnuzeTimes(...args);
-              }}
-            />
-            <Button
-              text={btnDisplayConfig[smallRightBtn].text}
-              handleClick={() => {
-                // need to update values in both localStorage and redux
-                const { snuzeTimeName } = btnDisplayConfig[smallRightBtn];
-                const { currentTime, snuzeTimes, date } = this.props;
-                const newSnuzeTimes = {
-                  ...snuzeTimes,
-                  [snuzeTimeName]: currentTime
-                };
-                this.saveTimesToLocalStorage(date, newSnuzeTimes);
-                const args = btnDisplayConfig[smallRightBtn].getArgs(
-                  newSnuzeTimes
-                );
+                const args = btnDisplayConfig[smallBtn].getArgs(newSnuzeTimes);
                 this.props.updateSnuzeTimes(...args);
               }}
             />
