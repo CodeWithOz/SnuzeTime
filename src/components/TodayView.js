@@ -23,7 +23,7 @@ export class TodayView extends Component {
       const { wakeTime, getUpTime } = this.getTimesFromLocalStorage(
         this.props.date
       );
-      this.props.updateSnuzeTimes(undefined, wakeTime, getUpTime);
+      this.props.updateSnuzeTimes(wakeTime, getUpTime);
       this.props.showTodayView(true);
     }
   }

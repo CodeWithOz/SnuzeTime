@@ -11,7 +11,7 @@ const btnDisplayConfig = {
     snuzeTimeName: 'wakeTime',
     getArgs(timesObj) {
       const { wakeTime, getUpTime } = timesObj;
-      return [undefined, wakeTime, getUpTime];
+      return [wakeTime, getUpTime];
     }
   },
   getUp: {
@@ -19,7 +19,7 @@ const btnDisplayConfig = {
     snuzeTimeName: 'getUpTime',
     getArgs(timesObj) {
       const { wakeTime, getUpTime } = timesObj;
-      return [undefined, wakeTime, getUpTime];
+      return [wakeTime, getUpTime];
     }
   }
 };

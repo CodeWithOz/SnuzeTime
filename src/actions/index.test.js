@@ -12,7 +12,6 @@ describe('updateSnuzeTimes action creator returns', () => {
   describe('the correct payload when', () => {
     test('no values are supplied', () => {
       const expectedPayload = {
-        sleepTime: '',
         wakeTime: '',
         getUpTime: ''
       };
@@ -23,41 +22,28 @@ describe('updateSnuzeTimes action creator returns', () => {
     test('some or all values are supplied', () => {
       // some values
       const firstArg = 'first';
-      let args = [firstArg, null, null];
+      let args = [firstArg, null];
       let expectedPayload = {
-        sleepTime: firstArg,
-        wakeTime: '',
+        wakeTime: firstArg,
         getUpTime: ''
       };
       let { payload } = actionCreators.updateSnuzeTimes(...args);
       expect(payload).toEqual(expectedPayload);
 
       const secondArg = 'second';
-      args = [null, secondArg, null];
+      args = [null, secondArg];
       expectedPayload = {
-        sleepTime: '',
-        wakeTime: secondArg,
-        getUpTime: ''
-      };
-      ({ payload } = actionCreators.updateSnuzeTimes(...args));
-      expect(payload).toEqual(expectedPayload);
-
-      const thirdArg = 'third';
-      args = [null, null, thirdArg];
-      expectedPayload = {
-        sleepTime: '',
         wakeTime: '',
-        getUpTime: thirdArg
+        getUpTime: secondArg
       };
       ({ payload } = actionCreators.updateSnuzeTimes(...args));
       expect(payload).toEqual(expectedPayload);
 
       // all values
-      args = [firstArg, secondArg, thirdArg];
+      args = [firstArg, secondArg];
       expectedPayload = {
-        sleepTime: firstArg,
-        wakeTime: secondArg,
-        getUpTime: thirdArg
+        wakeTime: firstArg,
+        getUpTime: secondArg
       };
       ({ payload } = actionCreators.updateSnuzeTimes(...args));
       expect(payload).toEqual(expectedPayload);

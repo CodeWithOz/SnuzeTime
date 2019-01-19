@@ -1,10 +1,9 @@
 import constants from '../constants';
 
-function updateSnuzeTimes(sleepTime, wakeTime, getUpTime) {
+function updateSnuzeTimes(wakeTime, getUpTime) {
   return {
     type: constants.UPDATE_SNUZE_TIMES,
     payload: {
-      sleepTime: sleepTime || '',
       wakeTime: wakeTime || '',
       getUpTime: getUpTime || ''
     }
