@@ -42,7 +42,9 @@ export class ButtonDisplay extends Component {
     return (
       <Box flex align="center" justify="center">
         <Box fill flex align="center" justify="center">
-          <Paragraph textAlign="center">I am...</Paragraph>
+          <Paragraph size="xlarge" textAlign="center">
+            I am...
+          </Paragraph>
           <Box direction="row">
             <Button
               active
