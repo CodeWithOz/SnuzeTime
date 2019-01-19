@@ -7,7 +7,6 @@ import actionCreators from '../actions';
 
 const todayViewConfig = {
   messages: {
-    sleepTime: `...haven't gone to bed.`,
     wakeTime: `...haven't woken up.`,
     getUpTime: `...haven't gotten out of bed.`
   }
@@ -21,10 +20,10 @@ export class TodayView extends Component {
   fillStateFromLocalStorage() {
     if (!this.props.shown) {
       // fill redux state with values from localStorage
-      const { sleepTime, wakeTime, getUpTime } = this.getTimesFromLocalStorage(
+      const { wakeTime, getUpTime } = this.getTimesFromLocalStorage(
         this.props.date
       );
-      this.props.updateSnuzeTimes(sleepTime, wakeTime, getUpTime);
+      this.props.updateSnuzeTimes(undefined, wakeTime, getUpTime);
       this.props.showTodayView(true);
     }
   }
@@ -43,9 +42,6 @@ export class TodayView extends Component {
   }
 
   render() {
-    const sleepTime = this.props.sleepTime
-      ? `...slept at ${this.props.sleepTime}.`
-      : todayViewConfig.messages.sleepTime;
     const wakeTime = this.props.wakeTime
       ? `...woke up at ${this.props.wakeTime}.`
       : todayViewConfig.messages.wakeTime;
@@ -70,7 +66,6 @@ export class TodayView extends Component {
             <Box>
               <Paragraph>{wakeTime}</Paragraph>
               <Paragraph>{getUpTime}</Paragraph>
-              <Paragraph>{sleepTime}</Paragraph>
             </Box>
           </Box>
         )}
@@ -80,11 +75,11 @@ export class TodayView extends Component {
 }
 
 const mapStateToProps = ({
-  snuzeTimes: { sleepTime, wakeTime, getUpTime },
+  snuzeTimes: { wakeTime, getUpTime },
   currentTimes: { date, hour },
   todayViewShown
 }) => {
-  return { sleepTime, wakeTime, getUpTime, date, hour, shown: todayViewShown };
+  return { wakeTime, getUpTime, date, hour, shown: todayViewShown };
 };
 
 export default connect(

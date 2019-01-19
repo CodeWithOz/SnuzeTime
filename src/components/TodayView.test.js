@@ -6,7 +6,6 @@ import dateStore from '../helpers/dateStore';
 
 describe('When shown, TodayView displays', () => {
   const defaultTexts = {
-    sleep: `...haven't gone to bed.`,
     wake: `...haven't woken up.`,
     getUp: `...haven't gotten out of bed.`
   };
@@ -15,21 +14,19 @@ describe('When shown, TodayView displays', () => {
     // componentDidMount depends on the date prop, which is not tested here
     // disabling lifecycle methods prevents errors due to the missing prop
     const wrapper = shallow(
-      <TodayView sleepTime="" wakeTime="" getUpTime="" shown={true} />,
+      <TodayView wakeTime="" getUpTime="" shown={true} />,
       { disableLifecycleMethods: true }
     );
 
     // convert object representation to string for easier matching
     const todayViewAsString = wrapper.render().text();
 
-    expect(todayViewAsString).toContain(defaultTexts.sleep);
     expect(todayViewAsString).toContain(defaultTexts.wake);
     expect(todayViewAsString).toContain(defaultTexts.getUp);
   });
 
   test('supplied text instead of default text', () => {
     const suppliedTexts = {
-      sleep: `11:45 PM`,
       wake: `05:45 AM`,
       getUp: `5:50 AM`
     };
@@ -38,7 +35,6 @@ describe('When shown, TodayView displays', () => {
     // disabling lifecycle methods prevents errors due to the missing prop
     const wrapper = shallow(
       <TodayView
-        sleepTime={suppliedTexts.sleep}
         wakeTime={suppliedTexts.wake}
         getUpTime={suppliedTexts.getUp}
         shown={true}
@@ -49,10 +45,8 @@ describe('When shown, TodayView displays', () => {
     // convert object representation to string for easier matching
     const todayViewAsString = wrapper.render().text();
 
-    expect(todayViewAsString).toContain(suppliedTexts.sleep);
     expect(todayViewAsString).toContain(suppliedTexts.wake);
     expect(todayViewAsString).toContain(suppliedTexts.getUp);
-    expect(todayViewAsString).not.toContain(defaultTexts.sleep);
     expect(todayViewAsString).not.toContain(defaultTexts.wake);
     expect(todayViewAsString).not.toContain(defaultTexts.getUp);
   });
@@ -60,7 +54,6 @@ describe('When shown, TodayView displays', () => {
 
 describe('From localStorage, TodayView gets', () => {
   const mockDay = {
-    sleepTime: '10:30 PM',
     wakeTime: '06:00 AM',
     getUpTime: '06:30 AM'
   };
@@ -78,24 +71,20 @@ describe('From localStorage, TodayView gets', () => {
 
   test('correct times for dates with saved records', () => {
     const {
-      sleepTime,
       wakeTime,
       getUpTime
     } = TodayView.prototype.getTimesFromLocalStorage(dateWithData);
 
-    expect(sleepTime).toEqual(mockDay.sleepTime);
     expect(wakeTime).toEqual(mockDay.wakeTime);
     expect(getUpTime).toEqual(mockDay.getUpTime);
   });
 
   test('empty strings for dates with no saved records', () => {
     const {
-      sleepTime,
       wakeTime,
       getUpTime
     } = TodayView.prototype.getTimesFromLocalStorage(dateWithoutData);
 
-    expect(sleepTime).toEqual('');
     expect(wakeTime).toEqual('');
     expect(getUpTime).toEqual('');
   });
