@@ -9,7 +9,7 @@ describe('updateSnuzeTimesReducer', () => {
   });
 
   test('returns the supplied payload when the action matches', () => {
-    const snuzeTimes = { sleepTime: 'test', wakeTime: 'test2', getUpTime: '' };
+    const snuzeTimes = { wakeTime: 'test2', getUpTime: '' };
 
     const state = updateSnuzeTimesReducer(undefined, {
       type: constants.UPDATE_SNUZE_TIMES,
@@ -19,7 +19,7 @@ describe('updateSnuzeTimesReducer', () => {
   });
 
   test(`returns the previous state when the action doesn't match`, () => {
-    const snuzeTimes = { sleepTime: 'test', wakeTime: 'test2', getUpTime: '' };
+    const snuzeTimes = { wakeTime: 'test2', getUpTime: '' };
 
     const state = updateSnuzeTimesReducer(snuzeTimes, {
       type: 'test'
