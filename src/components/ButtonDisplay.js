@@ -26,27 +26,10 @@ const btnDisplayConfig = {
 
 export class ButtonDisplay extends Component {
   getButtons() {
-    const { hour } = this.props;
-
-    if (hour >= 18 || hour < 2) {
-      // going to bed
-      return {
-        bigBtn: 'wake',
-        smallBtn: 'getUp'
-      };
-    } else if (hour >= 10 && hour < 18) {
-      // getting up
-      return {
-        bigBtn: 'wake',
-        smallBtn: 'getUp'
-      };
-    } else {
-      // waking up
-      return {
-        bigBtn: 'wake',
-        smallBtn: 'getUp'
-      };
-    }
+    return {
+      leftBtn: 'wake',
+      rightBtn: 'getUp'
+    };
   }
 
   saveTimesToLocalStorage(date, times) {
@@ -54,42 +37,42 @@ export class ButtonDisplay extends Component {
   }
 
   render() {
-    const { bigBtn, smallBtn } = this.getButtons();
+    const { leftBtn, rightBtn } = this.getButtons();
 
     return (
       <Box flex align="center" justify="center">
         <Box fill flex align="center" justify="center">
           <Paragraph textAlign="center">I am...</Paragraph>
-          <Button
-            primary
-            style={{ height: '50px' }}
-            text={btnDisplayConfig[bigBtn].text}
-            handleClick={() => {
-              // need to update values in both localStorage and redux
-              const { snuzeTimeName } = btnDisplayConfig[bigBtn];
-              const { currentTime, snuzeTimes, date } = this.props;
-              const newSnuzeTimes = {
-                ...snuzeTimes,
-                [snuzeTimeName]: currentTime
-              };
-              this.saveTimesToLocalStorage(date, newSnuzeTimes);
-              const args = btnDisplayConfig[bigBtn].getArgs(newSnuzeTimes);
-              this.props.updateSnuzeTimes(...args);
-            }}
-          />
           <Box direction="row">
             <Button
-              text={btnDisplayConfig[smallBtn].text}
+              active
+              text={btnDisplayConfig[leftBtn].text}
               handleClick={() => {
                 // need to update values in both localStorage and redux
-                const { snuzeTimeName } = btnDisplayConfig[smallBtn];
+                const { snuzeTimeName } = btnDisplayConfig[leftBtn];
                 const { currentTime, snuzeTimes, date } = this.props;
                 const newSnuzeTimes = {
                   ...snuzeTimes,
                   [snuzeTimeName]: currentTime
                 };
                 this.saveTimesToLocalStorage(date, newSnuzeTimes);
-                const args = btnDisplayConfig[smallBtn].getArgs(newSnuzeTimes);
+                const args = btnDisplayConfig[leftBtn].getArgs(newSnuzeTimes);
+                this.props.updateSnuzeTimes(...args);
+              }}
+            />
+            <Button
+              active
+              text={btnDisplayConfig[rightBtn].text}
+              handleClick={() => {
+                // need to update values in both localStorage and redux
+                const { snuzeTimeName } = btnDisplayConfig[rightBtn];
+                const { currentTime, snuzeTimes, date } = this.props;
+                const newSnuzeTimes = {
+                  ...snuzeTimes,
+                  [snuzeTimeName]: currentTime
+                };
+                this.saveTimesToLocalStorage(date, newSnuzeTimes);
+                const args = btnDisplayConfig[rightBtn].getArgs(newSnuzeTimes);
                 this.props.updateSnuzeTimes(...args);
               }}
             />

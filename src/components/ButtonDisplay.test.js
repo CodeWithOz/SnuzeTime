@@ -8,38 +8,17 @@ test('it assigns the correct text and callback', () => {
   const updateSnuzeTimesMock = jest.fn();
 
   // the text for each time period
-  const at2 = {
-    // 2am, waking up
-    bigBtn: {
+  const btnDisplayConfig = {
+    leftBtn: {
       text: '...waking up'
     },
-    smallBtn: {
-      text: '...getting up'
-    }
-  };
-  const at10 = {
-    // 10am, getting up
-    bigBtn: {
-      text: '...waking up'
-    },
-    smallBtn: {
-      text: '...getting up'
-    }
-  };
-  const at18 = {
-    // 6pm, going to bed
-    bigBtn: {
-      text: '...waking up'
-    },
-    smallBtn: {
+    rightBtn: {
       text: '...getting up'
     }
   };
 
-  // test for 2am to 10am
-  let buttonDisplay = mount(
+  const buttonDisplay = mount(
     <ButtonDisplay
-      hour={2}
       updateSnuzeTimes={updateSnuzeTimesMock}
       currentTime="test"
       snuzeTimes={{ wakeTime: '', getUpTime: '' }}
@@ -47,73 +26,19 @@ test('it assigns the correct text and callback', () => {
     />
   );
 
-  let buttons = buttonDisplay.find(Button);
-  let bigBtn = buttons.at(0);
-  let smallBtn = buttons.at(1);
+  const buttons = buttonDisplay.find(Button);
+  const leftBtn = buttons.at(0);
+  const rightBtn = buttons.at(1);
 
-  expect(bigBtn.props().text).toEqual(at2.bigBtn.text);
+  expect(leftBtn.props().text).toEqual(btnDisplayConfig.leftBtn.text);
   expect(updateSnuzeTimesMock).not.toHaveBeenCalled();
-  bigBtn.find('button').simulate('click');
+  leftBtn.find('button').simulate('click');
   expect(updateSnuzeTimesMock).toHaveBeenCalledTimes(1);
   updateSnuzeTimesMock.mockClear();
 
-  expect(smallBtn.props().text).toEqual(at2.smallBtn.text);
+  expect(rightBtn.props().text).toEqual(btnDisplayConfig.rightBtn.text);
   expect(updateSnuzeTimesMock).not.toHaveBeenCalled();
-  smallBtn.find('button').simulate('click');
-  expect(updateSnuzeTimesMock).toHaveBeenCalledTimes(1);
-  updateSnuzeTimesMock.mockClear();
-
-  // test for 10am to 6pm
-  buttonDisplay = mount(
-    <ButtonDisplay
-      hour={10}
-      updateSnuzeTimes={updateSnuzeTimesMock}
-      currentTime="test"
-      snuzeTimes={{ wakeTime: '', getUpTime: '' }}
-      date="9999 9 9"
-    />
-  );
-
-  buttons = buttonDisplay.find(Button);
-  bigBtn = buttons.at(0);
-  smallBtn = buttons.at(1);
-
-  expect(bigBtn.props().text).toEqual(at10.bigBtn.text);
-  expect(updateSnuzeTimesMock).not.toHaveBeenCalled();
-  bigBtn.find('button').simulate('click');
-  expect(updateSnuzeTimesMock).toHaveBeenCalledTimes(1);
-  updateSnuzeTimesMock.mockClear();
-
-  expect(smallBtn.props().text).toEqual(at10.smallBtn.text);
-  expect(updateSnuzeTimesMock).not.toHaveBeenCalled();
-  smallBtn.find('button').simulate('click');
-  expect(updateSnuzeTimesMock).toHaveBeenCalledTimes(1);
-  updateSnuzeTimesMock.mockClear();
-
-  // test for 6pm to 2am
-  buttonDisplay = mount(
-    <ButtonDisplay
-      hour={18}
-      updateSnuzeTimes={updateSnuzeTimesMock}
-      currentTime="test"
-      snuzeTimes={{ wakeTime: '', getUpTime: '' }}
-      date="9999 9 9"
-    />
-  );
-
-  buttons = buttonDisplay.find(Button);
-  bigBtn = buttons.at(0);
-  smallBtn = buttons.at(1);
-
-  expect(bigBtn.props().text).toEqual(at18.bigBtn.text);
-  expect(updateSnuzeTimesMock).not.toHaveBeenCalled();
-  bigBtn.find('button').simulate('click');
-  expect(updateSnuzeTimesMock).toHaveBeenCalledTimes(1);
-  updateSnuzeTimesMock.mockClear();
-
-  expect(smallBtn.props().text).toEqual(at18.smallBtn.text);
-  expect(updateSnuzeTimesMock).not.toHaveBeenCalled();
-  smallBtn.find('button').simulate('click');
+  rightBtn.find('button').simulate('click');
   expect(updateSnuzeTimesMock).toHaveBeenCalledTimes(1);
   updateSnuzeTimesMock.mockClear();
 });
