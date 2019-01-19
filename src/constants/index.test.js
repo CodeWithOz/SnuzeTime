@@ -18,7 +18,6 @@ test('SHOW_TODAY_VIEW has the correct value', () => {
 
 test('INITIAL_STATE has the correct snuzeTimes values', () => {
   const expectedTimes = {
-    sleepTime: '',
     wakeTime: '',
     getUpTime: ''
   };

@@ -5,7 +5,6 @@ const SHOW_TODAY_VIEW = 'SHOW_TODAY_VIEW';
 
 const INITIAL_STATE = {
   snuzeTimes: {
-    sleepTime: '',
     wakeTime: '',
     getUpTime: ''
   },
