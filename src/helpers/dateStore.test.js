@@ -6,7 +6,6 @@ let mockDay, mockOctober, mock2018, mockStore;
 
 beforeEach(() => {
   mockDay = {
-    sleepTime: '10:30 PM',
     wakeTime: '06:00 AM',
     getUpTime: '06:30 AM'
   };
@@ -21,21 +20,13 @@ afterEach(() => {
 
 describe('Finding data in the Map', () => {
   test('returns the correct info', () => {
-    const { sleepTime, wakeTime, getUpTime } = dateStore.find(
-      dateWithData,
-      mockStore
-    );
-    expect(sleepTime).toEqual(mockDay.sleepTime);
+    const { wakeTime, getUpTime } = dateStore.find(dateWithData, mockStore);
     expect(wakeTime).toEqual(mockDay.wakeTime);
     expect(getUpTime).toEqual(mockDay.getUpTime);
   });
 
   test('returns empty strings when no data is present', () => {
-    const { sleepTime, wakeTime, getUpTime } = dateStore.find(
-      dateWithoutData,
-      mockStore
-    );
-    expect(sleepTime).toEqual('');
+    const { wakeTime, getUpTime } = dateStore.find(dateWithoutData, mockStore);
     expect(wakeTime).toEqual('');
     expect(getUpTime).toEqual('');
   });
@@ -48,7 +39,6 @@ describe('Updating the Map', () => {
     beforeEach(() => {
       newDate = '2019 9 18';
       newTimes = {
-        sleepTime: '09:50PM',
         wakeTime: '04:30 AM',
         getUpTime: '05:00 AM'
       };
@@ -56,22 +46,14 @@ describe('Updating the Map', () => {
 
     test('adds the supplied info correctly', () => {
       dateStore.add(newDate, newTimes, mockStore);
-      const { sleepTime, wakeTime, getUpTime } = dateStore.find(
-        newDate,
-        mockStore
-      );
-      expect(sleepTime).toEqual(newTimes.sleepTime);
+      const { wakeTime, getUpTime } = dateStore.find(newDate, mockStore);
       expect(wakeTime).toEqual(newTimes.wakeTime);
       expect(getUpTime).toEqual(newTimes.getUpTime);
     });
 
     test(`doesn't overwrite previous data`, () => {
       dateStore.add(newDate, newTimes, mockStore);
-      const { sleepTime, wakeTime, getUpTime } = dateStore.find(
-        dateWithData,
-        mockStore
-      );
-      expect(sleepTime).toEqual(mockDay.sleepTime);
+      const { wakeTime, getUpTime } = dateStore.find(dateWithData, mockStore);
       expect(wakeTime).toEqual(mockDay.wakeTime);
       expect(getUpTime).toEqual(mockDay.getUpTime);
     });
@@ -83,7 +65,6 @@ describe('Updating the Map', () => {
     beforeEach(() => {
       newDate = '2018 9 18';
       newTimes = {
-        sleepTime: '10:50PM',
         wakeTime: '06:30 AM',
         getUpTime: '07:00 AM'
       };
@@ -91,22 +72,14 @@ describe('Updating the Map', () => {
 
     test('adds the supplied info correctly', () => {
       dateStore.add(newDate, newTimes, mockStore);
-      const { sleepTime, wakeTime, getUpTime } = dateStore.find(
-        newDate,
-        mockStore
-      );
-      expect(sleepTime).toEqual(newTimes.sleepTime);
+      const { wakeTime, getUpTime } = dateStore.find(newDate, mockStore);
       expect(wakeTime).toEqual(newTimes.wakeTime);
       expect(getUpTime).toEqual(newTimes.getUpTime);
     });
 
     test(`doesn't overwrite previous data`, () => {
       dateStore.add(newDate, newTimes, mockStore);
-      const { sleepTime, wakeTime, getUpTime } = dateStore.find(
-        dateWithData,
-        mockStore
-      );
-      expect(sleepTime).toEqual(mockDay.sleepTime);
+      const { wakeTime, getUpTime } = dateStore.find(dateWithData, mockStore);
       expect(wakeTime).toEqual(mockDay.wakeTime);
       expect(getUpTime).toEqual(mockDay.getUpTime);
     });
@@ -118,7 +91,6 @@ describe('Updating the Map', () => {
     beforeEach(() => {
       newDate = '2018 10 7';
       newTimes = {
-        sleepTime: '11:50PM',
         wakeTime: '07:30 AM',
         getUpTime: '08:00 AM'
       };
@@ -126,22 +98,14 @@ describe('Updating the Map', () => {
 
     test('adds the supplied info correctly', () => {
       dateStore.add(newDate, newTimes, mockStore);
-      const { sleepTime, wakeTime, getUpTime } = dateStore.find(
-        newDate,
-        mockStore
-      );
-      expect(sleepTime).toEqual(newTimes.sleepTime);
+      const { wakeTime, getUpTime } = dateStore.find(newDate, mockStore);
       expect(wakeTime).toEqual(newTimes.wakeTime);
       expect(getUpTime).toEqual(newTimes.getUpTime);
     });
 
     test(`doesn't overwrite previous data`, () => {
       dateStore.add(newDate, newTimes, mockStore);
-      const { sleepTime, wakeTime, getUpTime } = dateStore.find(
-        dateWithData,
-        mockStore
-      );
-      expect(sleepTime).toEqual(mockDay.sleepTime);
+      const { wakeTime, getUpTime } = dateStore.find(dateWithData, mockStore);
       expect(wakeTime).toEqual(mockDay.wakeTime);
       expect(getUpTime).toEqual(mockDay.getUpTime);
     });
@@ -152,7 +116,6 @@ describe('Updating the Map', () => {
 
     beforeEach(() => {
       newTimes = {
-        sleepTime: '11:50PM',
         wakeTime: '07:30 AM',
         getUpTime: '08:00 AM'
       };
@@ -160,12 +123,8 @@ describe('Updating the Map', () => {
 
     test('overwrites the previous data', () => {
       dateStore.add(dateWithData, newTimes, mockStore);
-      const { sleepTime, wakeTime, getUpTime } = dateStore.find(
-        dateWithData,
-        mockStore
-      );
+      const { wakeTime, getUpTime } = dateStore.find(dateWithData, mockStore);
 
-      expect(sleepTime).toEqual(newTimes.sleepTime);
       expect(wakeTime).toEqual(newTimes.wakeTime);
       expect(getUpTime).toEqual(newTimes.getUpTime);
     });
@@ -181,7 +140,7 @@ describe('Converting from Map to string and back', () => {
     // ensure that it handles changed data
     dateStore.add(
       '2018 12 3',
-      { sleepTime: '09:00 PM', wakeTime: '05:45 AM', getUpTime: '06:10 AM' },
+      { wakeTime: '05:45 AM', getUpTime: '06:10 AM' },
       mockStore
     );
     storeAsString = dateStore.mapToString(mockStore);
@@ -208,17 +167,12 @@ describe('Adding to localStorage', () => {
     test('adds the times to records for the date', () => {
       const newDate = '2018 12 3';
       const newTimes = {
-        sleepTime: '09:00 PM',
         wakeTime: '05:45 AM',
         getUpTime: '06:10 AM'
       };
       dateStore.addTimesToLocalStorage(newDate, newTimes);
       const revivedMap = dateStore.getStoreFromLocalStorage();
-      const { sleepTime, wakeTime, getUpTime } = dateStore.find(
-        newDate,
-        revivedMap
-      );
-      expect(sleepTime).toEqual(newTimes.sleepTime);
+      const { wakeTime, getUpTime } = dateStore.find(newDate, revivedMap);
       expect(wakeTime).toEqual(newTimes.wakeTime);
       expect(getUpTime).toEqual(newTimes.getUpTime);
     });
@@ -256,18 +210,14 @@ describe('Getting times from localStorage using a date', () => {
       // add times for a date and test the output from that date
       const newDate = '2018 12 4';
       const newTimes = {
-        sleepTime: '09:10 PM',
         wakeTime: '05:47 AM',
         getUpTime: '06:13 AM'
       };
       dateStore.addTimesToLocalStorage(newDate, newTimes);
 
-      const {
-        sleepTime,
-        wakeTime,
-        getUpTime
-      } = dateStore.getTimesFromLocalStorage(newDate);
-      expect(sleepTime).toEqual(newTimes.sleepTime);
+      const { wakeTime, getUpTime } = dateStore.getTimesFromLocalStorage(
+        newDate
+      );
       expect(wakeTime).toEqual(newTimes.wakeTime);
       expect(getUpTime).toEqual(newTimes.getUpTime);
     });
@@ -278,18 +228,14 @@ describe('Getting times from localStorage using a date', () => {
       // add times for a date and test the output from a different date
       const newDate = '2018 12 4';
       const newTimes = {
-        sleepTime: '09:10 PM',
         wakeTime: '05:47 AM',
         getUpTime: '06:13 AM'
       };
       dateStore.addTimesToLocalStorage(newDate, newTimes);
 
-      const {
-        sleepTime,
-        wakeTime,
-        getUpTime
-      } = dateStore.getTimesFromLocalStorage(dateWithoutData);
-      expect(sleepTime).toEqual('');
+      const { wakeTime, getUpTime } = dateStore.getTimesFromLocalStorage(
+        dateWithoutData
+      );
       expect(wakeTime).toEqual('');
       expect(getUpTime).toEqual('');
     });
@@ -301,12 +247,9 @@ describe('Getting times from localStorage using a date', () => {
       expect(localStorage.getItem('dates')).toBeNull();
 
       // then test the output from any date
-      const {
-        sleepTime,
-        wakeTime,
-        getUpTime
-      } = dateStore.getTimesFromLocalStorage(dateWithoutData);
-      expect(sleepTime).toEqual('');
+      const { wakeTime, getUpTime } = dateStore.getTimesFromLocalStorage(
+        dateWithoutData
+      );
       expect(wakeTime).toEqual('');
       expect(getUpTime).toEqual('');
     });

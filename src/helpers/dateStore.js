@@ -32,15 +32,15 @@ function find(date, store) {
       .get(month)
       .has(day)
   ) {
-    const { sleepTime, wakeTime, getUpTime } = store
+    const { wakeTime, getUpTime } = store
       .get(year)
       .get(month)
       .get(day);
-    return { sleepTime, wakeTime, getUpTime };
+    return { wakeTime, getUpTime };
   }
 
   // date is not on record
-  return { sleepTime: '', wakeTime: '', getUpTime: '' };
+  return { wakeTime: '', getUpTime: '' };
 }
 
 function parseDate(date) {
