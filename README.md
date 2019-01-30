@@ -3,7 +3,9 @@
 A web app for recording the elapsed time between waking up and
 getting out of bed (aka the 'snuzetime').
 
-[insert screenshots here]
+|                          Splash Screen                          |                  Waking Up<br>(dark background)                   |                  Getting Up<br>(light background)                  |
+| :-------------------------------------------------------------: | :---------------------------------------------------------------: | :----------------------------------------------------------------: |
+| ![snuzetime app splash screeen](img/SnuzeTime_SplashScreen.jpg) | ![snuzetime app waking up screeen](img/SnuzeTime_WakeUp_Dark.PNG) | ![snuzetime app getting up screeen](img/SnuzeTime_GetUp_Light.PNG) |
 
 ## Live Demo
 
