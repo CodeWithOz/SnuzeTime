@@ -78,4 +78,7 @@ some changes I plan on making so feel free to beat me to the punch 😉:
 - Add ability to manually change saved records
 - Add ability to view snuzetimes of all days between two dates
 
+Don't forget to run `npm test` before submitting a PR to ensure
+that none of your changes broke the app. 😄
+
 Thank you in advance for your efforts! 🙌👏
