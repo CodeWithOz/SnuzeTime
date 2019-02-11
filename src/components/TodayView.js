@@ -48,6 +48,31 @@ export class TodayView extends Component {
     return moment(start).from(end, true);
   }
 
+  showTimeInBed() {
+    let { wakeTime, getUpTime } = this.props;
+
+    if (wakeTime && getUpTime) {
+      // prepend current date to snuze times
+      wakeTime = `${this.props.date} ${wakeTime}`;
+      getUpTime = `${this.props.date} ${getUpTime}`;
+
+      const timeInBed = this.getTimeDiff(wakeTime, getUpTime);
+      const timeIsSmall = isTimeSmall(timeInBed);
+      return (
+        <Paragraph
+          size="large"
+          color={timeIsSmall ? 'green' : 'red'}
+        >{`...spent ${timeInBed} in bed.`}</Paragraph>
+      );
+
+      function isTimeSmall(timeString) {
+        // threshold is 15 minutes
+        const rgx = /(second|(a|1[0-5]|\b\d) minute)/;
+        return rgx.test(timeString);
+      }
+    }
+  }
+
   render() {
     const wakeTime = this.props.wakeTime
       ? `...woke up at ${this.props.wakeTime}.`
@@ -73,6 +98,7 @@ export class TodayView extends Component {
             <Box>
               <Paragraph>{wakeTime}</Paragraph>
               <Paragraph>{getUpTime}</Paragraph>
+              {this.showTimeInBed()}
             </Box>
           </Box>
         )}
