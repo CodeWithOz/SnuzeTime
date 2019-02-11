@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Box, Paragraph, Text } from 'grommet';
 import { RotateSpinLoader } from 'react-css-loaders';
 import { connect } from 'react-redux';
+import moment from 'moment';
 import dateStore from '../helpers/dateStore';
 import actionCreators from '../actions';
 
@@ -39,6 +40,12 @@ export class TodayView extends Component {
   getSpinnerColor(currentHour) {
     // returns the reverse of the main background to ensure contrast
     return currentHour >= 7 && currentHour < 19 ? '#333333' : '#F8F8F8';
+  }
+
+  getTimeDiff(start, end) {
+    start = moment(start, 'YYYY M D hh:mm A');
+    end = moment(end, 'YYYY M D hh:mm A');
+    return moment(start).from(end, true);
   }
 
   render() {

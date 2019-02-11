@@ -1,5 +1,6 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
+import moment from 'moment';
 import { RotateSpinLoader } from 'react-css-loaders';
 import { TodayView } from './TodayView';
 import dateStore from '../helpers/dateStore';
@@ -141,4 +142,14 @@ describe('When not shown, TodayView', () => {
     );
     expect(showTodayViewMock).toHaveBeenCalledTimes(1);
   });
+});
+
+test('TodayView calculates elapsed time between two times', () => {
+  const start = moment('2019 5 13 09:30 AM', 'YYYY M D hh:mm A'),
+    end = moment('2019 5 13 09:55 AM', 'YYYY M D hh:mm A');
+  // diff of 25 minutes
+
+  const diff = moment(start).from(end, true);
+  const todayViewDiff = TodayView.prototype.getTimeDiff(start, end);
+  expect(diff).toEqual(todayViewDiff);
 });
