@@ -1,9 +1,9 @@
-const UPDATE_SNUZE_TIMES = 'UPDATE_SNUZE_TIMES';
-const UPDATE_CURRENT_TIMES = 'UPDATE_CURRENT_TIMES';
-const SHOW_MAIN_APP = 'SHOW_MAIN_APP';
-const SHOW_TODAY_VIEW = 'SHOW_TODAY_VIEW';
+export const UPDATE_SNUZE_TIMES = 'UPDATE_SNUZE_TIMES';
+export const UPDATE_CURRENT_TIMES = 'UPDATE_CURRENT_TIMES';
+export const SHOW_MAIN_APP = 'SHOW_MAIN_APP';
+export const SHOW_TODAY_VIEW = 'SHOW_TODAY_VIEW';
 
-const INITIAL_STATE = {
+export const INITIAL_STATE = {
   snuzeTimes: {
     wakeTime: '',
     getUpTime: ''

@@ -1,19 +1,32 @@
-import constants from './';
+import {
+  UPDATE_SNUZE_TIMES,
+  UPDATE_CURRENT_TIMES,
+  SHOW_MAIN_APP,
+  SHOW_TODAY_VIEW,
+  INITIAL_STATE
+} from './';
+
+const {
+  snuzeTimes,
+  currentTimes,
+  mainAppShown,
+  todayViewShown
+} = INITIAL_STATE;
 
 test('UPDATE_SNUZE_TIMES has the correct value', () => {
-  expect(constants.UPDATE_SNUZE_TIMES).toEqual('UPDATE_SNUZE_TIMES');
+  expect(UPDATE_SNUZE_TIMES).toEqual('UPDATE_SNUZE_TIMES');
 });
 
 test('UPDATE_CURRENT_TIMES has the correct value', () => {
-  expect(constants.UPDATE_CURRENT_TIMES).toEqual('UPDATE_CURRENT_TIMES');
+  expect(UPDATE_CURRENT_TIMES).toEqual('UPDATE_CURRENT_TIMES');
 });
 
 test('SHOW_MAIN_APP has the correct value', () => {
-  expect(constants.SHOW_MAIN_APP).toEqual('SHOW_MAIN_APP');
+  expect(SHOW_MAIN_APP).toEqual('SHOW_MAIN_APP');
 });
 
 test('SHOW_TODAY_VIEW has the correct value', () => {
-  expect(constants.SHOW_TODAY_VIEW).toEqual('SHOW_TODAY_VIEW');
+  expect(SHOW_TODAY_VIEW).toEqual('SHOW_TODAY_VIEW');
 });
 
 test('INITIAL_STATE has the correct snuzeTimes values', () => {
@@ -21,7 +34,7 @@ test('INITIAL_STATE has the correct snuzeTimes values', () => {
     wakeTime: '',
     getUpTime: ''
   };
-  expect(constants.INITIAL_STATE.snuzeTimes).toEqual(expectedTimes);
+  expect(snuzeTimes).toEqual(expectedTimes);
 });
 
 test('INITIAL_STATE has the correct currentTimes values', () => {
@@ -31,15 +44,15 @@ test('INITIAL_STATE has the correct currentTimes values', () => {
     hour: -1,
     date: '0000 00 00'
   };
-  expect(constants.INITIAL_STATE.currentTimes).toEqual(expectedCurrentTimes);
+  expect(currentTimes).toEqual(expectedCurrentTimes);
 });
 
 test('INITIAL_STATE has the correct mainAppShown value', () => {
   // main app is not shown by default
-  expect(constants.INITIAL_STATE.mainAppShown).toEqual(false);
+  expect(mainAppShown).toEqual(false);
 });
 
 test('INITIAL_STATE has the correct todayViewShown value', () => {
   // main app is not shown by default
-  expect(constants.INITIAL_STATE.todayViewShown).toEqual(false);
+  expect(todayViewShown).toEqual(false);
 });
