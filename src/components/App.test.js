@@ -64,4 +64,23 @@ describe('App sets breakpoint for', () => {
     const { value } = appConfig.customTheme.global.breakpoints.small;
     expect(value).toEqual(576);
   });
+
+  test('medium @ 768px', () => {
+    const { value } = appConfig.customTheme.global.breakpoints.medium;
+    expect(value).toEqual(768);
+  });
+
+  test('large @ 992px', () => {
+    const { value } = appConfig.customTheme.global.breakpoints.large;
+    expect(value).toEqual(992);
+  });
+
+  test('xlarge higher than large', () => {
+    const { xlarge } = appConfig.customTheme.global.breakpoints;
+
+    // empty object is used to signal everything higher
+    // as seen in the source code
+    // https://github.com/grommet/grommet/blob/9eed6e5954e2997c4191b079d5ff6d604db178a9/src/js/themes/base.js#L154
+    expect(xlarge).toEqual({});
+  });
 });
