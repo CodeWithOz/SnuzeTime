@@ -2,6 +2,10 @@ import updateSnuzeTimesReducer from './updateSnuzeTimesReducer';
 import constants from '../constants';
 
 describe('updateSnuzeTimesReducer', () => {
+  test('is a function', () => {
+    expect(typeof updateSnuzeTimesReducer).toEqual('function');
+  });
+
   test('returns initial state by default', () => {
     // when action does not match reducer (no type is supplied)
     const state = updateSnuzeTimesReducer(undefined, {});

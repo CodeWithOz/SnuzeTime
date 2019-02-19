@@ -2,6 +2,10 @@ import updateCurrentTimesReducer from './updateCurrentTimesReducer';
 import constants from '../constants';
 
 describe('updateCurrentTimesReducer', () => {
+  test('is a function', () => {
+    expect(typeof updateCurrentTimesReducer).toEqual('function');
+  });
+
   test('returns initial state by default', () => {
     // action does not match reducer (no type is supplied)
     const state = updateCurrentTimesReducer(undefined, {});

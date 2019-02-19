@@ -2,6 +2,10 @@ import showMainAppReducer from './showMainAppReducer';
 import constants from '../constants';
 
 describe('showMainAppReducer', () => {
+  test('is a function', () => {
+    expect(typeof showMainAppReducer).toEqual('function');
+  });
+
   test('returns initial state by default', () => {
     // action does not match reducer (no type is supplied)
     const state = showMainAppReducer(undefined, {});

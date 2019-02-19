@@ -2,6 +2,10 @@ import showTodayViewReducer from './showTodayViewReducer';
 import constants from '../constants';
 
 describe('showTodayViewReducer', () => {
+  test('is a function', () => {
+    expect(typeof showTodayViewReducer).toEqual('function');
+  });
+
   test('returns initial state by default', () => {
     // action does not match reducer (no type is supplied)
     const state = showTodayViewReducer(undefined, {});
