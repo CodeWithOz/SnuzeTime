@@ -93,7 +93,7 @@ export class App extends Component {
 
   render() {
     return (
-      <Grommet full theme={grommet}>
+      <Grommet full theme={appConfig.customTheme}>
         {!this.props.mainAppShown ? (
           <SplashScreen appName={appConfig.appName} />
         ) : (
