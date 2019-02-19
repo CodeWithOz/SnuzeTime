@@ -19,7 +19,14 @@ export const appConfig = {
       breakpoints: {
         small: {
           value: 576
-        }
+        },
+        medium: {
+          value: 768
+        },
+        large: {
+          value: 992
+        },
+        xlarge: {} // anything larger than large
       }
     }
   })
