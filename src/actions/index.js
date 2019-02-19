@@ -1,8 +1,13 @@
-import constants from '../constants';
+import {
+  UPDATE_SNUZE_TIMES,
+  UPDATE_CURRENT_TIMES,
+  SHOW_MAIN_APP,
+  SHOW_TODAY_VIEW
+} from '../constants';
 
 export function updateSnuzeTimes(wakeTime, getUpTime) {
   return {
-    type: constants.UPDATE_SNUZE_TIMES,
+    type: UPDATE_SNUZE_TIMES,
     payload: {
       wakeTime: wakeTime || '',
       getUpTime: getUpTime || ''
@@ -12,21 +17,21 @@ export function updateSnuzeTimes(wakeTime, getUpTime) {
 
 export function updateCurrentTimes(timesObj) {
   return {
-    type: constants.UPDATE_CURRENT_TIMES,
+    type: UPDATE_CURRENT_TIMES,
     payload: timesObj
   };
 }
 
 export function showMainApp(bool) {
   return {
-    type: constants.SHOW_MAIN_APP,
+    type: SHOW_MAIN_APP,
     payload: bool
   };
 }
 
 export function showTodayView(bool) {
   return {
-    type: constants.SHOW_TODAY_VIEW,
+    type: SHOW_TODAY_VIEW,
     payload: bool
   };
 }

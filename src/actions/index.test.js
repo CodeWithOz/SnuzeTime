@@ -4,7 +4,13 @@ import {
   showMainApp,
   showTodayView
 } from './';
-import constants from '../constants';
+
+import {
+  UPDATE_SNUZE_TIMES,
+  UPDATE_CURRENT_TIMES,
+  SHOW_MAIN_APP,
+  SHOW_TODAY_VIEW
+} from '../constants';
 
 describe('updateSnuzeTimes', () => {
   test('is a function', () => {
@@ -16,7 +22,7 @@ describe('updateSnuzeTimes', () => {
       const action = updateSnuzeTimes();
       expect(action.type).toBeDefined();
       expect(action.payload).toBeDefined();
-      expect(action.type).toEqual(constants.UPDATE_SNUZE_TIMES);
+      expect(action.type).toEqual(UPDATE_SNUZE_TIMES);
     });
 
     describe('the correct payload when', () => {
@@ -79,7 +85,7 @@ describe('updateCurrentTimes', () => {
       const action = updateCurrentTimes(timesObj);
       expect(action.type).toBeDefined();
       expect(action.payload).toBeDefined();
-      expect(action.type).toEqual(constants.UPDATE_CURRENT_TIMES);
+      expect(action.type).toEqual(UPDATE_CURRENT_TIMES);
     });
 
     test('the correct payload', () => {
@@ -99,7 +105,7 @@ describe('showMainApp', () => {
       const action = showMainApp(true);
       expect(action.type).toBeDefined();
       expect(action.payload).toBeDefined();
-      expect(action.type).toEqual(constants.SHOW_MAIN_APP);
+      expect(action.type).toEqual(SHOW_MAIN_APP);
     });
 
     test('the correct payload', () => {
@@ -122,7 +128,7 @@ describe('showTodayView', () => {
       const action = showTodayView(true);
       expect(action.type).toBeDefined();
       expect(action.payload).toBeDefined();
-      expect(action.type).toEqual(constants.SHOW_TODAY_VIEW);
+      expect(action.type).toEqual(SHOW_TODAY_VIEW);
     });
 
     test('the correct payload', () => {
