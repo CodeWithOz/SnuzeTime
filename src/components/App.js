@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import moment from 'moment';
 import 'moment-timer';
 import { grommet, Box, Grommet } from 'grommet';
+import { deepMerge } from 'grommet/utils';
 import { connect } from 'react-redux';
 import Navbar from './Navbar';
 import Clock from './Clock';
@@ -11,8 +12,17 @@ import SplashScreen from './SplashScreen';
 import actionCreators from '../actions';
 import constants from '../constants';
 
-const appConfig = {
-  appName: 'SnuzeTime 💤🕙'
+export const appConfig = {
+  appName: 'SnuzeTime 💤🕙',
+  customTheme: deepMerge(grommet, {
+    global: {
+      breakpoints: {
+        small: {
+          value: 576
+        }
+      }
+    }
+  })
 };
 
 export class App extends Component {
