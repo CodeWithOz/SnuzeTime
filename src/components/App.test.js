@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import moment from 'moment';
 import 'moment-timer';
-import { App } from './App';
+import { App, appConfig } from './App';
 
 // mock native timers
 jest.useFakeTimers();
@@ -57,4 +57,11 @@ test('App gets the correct background color', () => {
   const nightBkgrnd = 'dark-1';
   expect(App.prototype.getBackground(10)).toEqual(dayBkrgnd);
   expect(App.prototype.getBackground(22)).toEqual(nightBkgrnd);
+});
+
+describe('App sets breakpoint for', () => {
+  test('small @ 576px', () => {
+    const { value } = appConfig.customTheme.global.breakpoints.small;
+    expect(value).toEqual(576);
+  });
 });
