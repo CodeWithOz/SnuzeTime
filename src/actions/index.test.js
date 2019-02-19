@@ -1,14 +1,19 @@
-import actionCreators from './';
+import {
+  updateSnuzeTimes,
+  updateCurrentTimes,
+  showMainApp,
+  showTodayView
+} from './';
 import constants from '../constants';
 
 describe('updateSnuzeTimes', () => {
   test('is a function', () => {
-    expect(typeof actionCreators.updateSnuzeTimes).toEqual('function');
+    expect(typeof updateSnuzeTimes).toEqual('function');
   });
 
   describe('returns', () => {
     test('the correct action format and type', () => {
-      const action = actionCreators.updateSnuzeTimes();
+      const action = updateSnuzeTimes();
       expect(action.type).toBeDefined();
       expect(action.payload).toBeDefined();
       expect(action.type).toEqual(constants.UPDATE_SNUZE_TIMES);
@@ -20,7 +25,7 @@ describe('updateSnuzeTimes', () => {
           wakeTime: '',
           getUpTime: ''
         };
-        const { payload } = actionCreators.updateSnuzeTimes();
+        const { payload } = updateSnuzeTimes();
         expect(payload).toEqual(expectedPayload);
       });
 
@@ -32,7 +37,7 @@ describe('updateSnuzeTimes', () => {
           wakeTime: firstArg,
           getUpTime: ''
         };
-        let { payload } = actionCreators.updateSnuzeTimes(...args);
+        let { payload } = updateSnuzeTimes(...args);
         expect(payload).toEqual(expectedPayload);
 
         const secondArg = 'second';
@@ -41,7 +46,7 @@ describe('updateSnuzeTimes', () => {
           wakeTime: '',
           getUpTime: secondArg
         };
-        ({ payload } = actionCreators.updateSnuzeTimes(...args));
+        ({ payload } = updateSnuzeTimes(...args));
         expect(payload).toEqual(expectedPayload);
 
         // all values
@@ -50,7 +55,7 @@ describe('updateSnuzeTimes', () => {
           wakeTime: firstArg,
           getUpTime: secondArg
         };
-        ({ payload } = actionCreators.updateSnuzeTimes(...args));
+        ({ payload } = updateSnuzeTimes(...args));
         expect(payload).toEqual(expectedPayload);
       });
     });
@@ -66,19 +71,19 @@ describe('updateCurrentTimes', () => {
   };
 
   test('is a function', () => {
-    expect(typeof actionCreators.updateCurrentTimes).toEqual('function');
+    expect(typeof updateCurrentTimes).toEqual('function');
   });
 
   describe('returns', () => {
     test('the correct action format and type', () => {
-      const action = actionCreators.updateCurrentTimes(timesObj);
+      const action = updateCurrentTimes(timesObj);
       expect(action.type).toBeDefined();
       expect(action.payload).toBeDefined();
       expect(action.type).toEqual(constants.UPDATE_CURRENT_TIMES);
     });
 
     test('the correct payload', () => {
-      const { payload } = actionCreators.updateCurrentTimes(timesObj);
+      const { payload } = updateCurrentTimes(timesObj);
       expect(payload).toEqual(timesObj);
     });
   });
@@ -86,22 +91,22 @@ describe('updateCurrentTimes', () => {
 
 describe('showMainApp', () => {
   test('is a function', () => {
-    expect(typeof actionCreators.showMainApp).toEqual('function');
+    expect(typeof showMainApp).toEqual('function');
   });
 
   describe('returns', () => {
     test('the correct action format and type', () => {
-      const action = actionCreators.showMainApp(true);
+      const action = showMainApp(true);
       expect(action.type).toBeDefined();
       expect(action.payload).toBeDefined();
       expect(action.type).toEqual(constants.SHOW_MAIN_APP);
     });
 
     test('the correct payload', () => {
-      let { payload } = actionCreators.showMainApp(true);
+      let { payload } = showMainApp(true);
       expect(payload).toEqual(true);
 
-      ({ payload } = actionCreators.showMainApp(false));
+      ({ payload } = showMainApp(false));
       expect(payload).toEqual(false);
     });
   });
@@ -109,22 +114,22 @@ describe('showMainApp', () => {
 
 describe('showTodayView', () => {
   test('is a function', () => {
-    expect(typeof actionCreators.showTodayView).toEqual('function');
+    expect(typeof showTodayView).toEqual('function');
   });
 
   describe('returns', () => {
     test('the correct action format and type', () => {
-      const action = actionCreators.showTodayView(true);
+      const action = showTodayView(true);
       expect(action.type).toBeDefined();
       expect(action.payload).toBeDefined();
       expect(action.type).toEqual(constants.SHOW_TODAY_VIEW);
     });
 
     test('the correct payload', () => {
-      let { payload } = actionCreators.showTodayView(true);
+      let { payload } = showTodayView(true);
       expect(payload).toEqual(true);
 
-      ({ payload } = actionCreators.showTodayView(false));
+      ({ payload } = showTodayView(false));
       expect(payload).toEqual(false);
     });
   });

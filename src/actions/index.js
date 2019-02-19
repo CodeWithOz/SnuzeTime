@@ -1,6 +1,6 @@
 import constants from '../constants';
 
-function updateSnuzeTimes(wakeTime, getUpTime) {
+export function updateSnuzeTimes(wakeTime, getUpTime) {
   return {
     type: constants.UPDATE_SNUZE_TIMES,
     payload: {
@@ -10,21 +10,21 @@ function updateSnuzeTimes(wakeTime, getUpTime) {
   };
 }
 
-function updateCurrentTimes(timesObj) {
+export function updateCurrentTimes(timesObj) {
   return {
     type: constants.UPDATE_CURRENT_TIMES,
     payload: timesObj
   };
 }
 
-function showMainApp(bool) {
+export function showMainApp(bool) {
   return {
     type: constants.SHOW_MAIN_APP,
     payload: bool
   };
 }
 
-function showTodayView(bool) {
+export function showTodayView(bool) {
   return {
     type: constants.SHOW_TODAY_VIEW,
     payload: bool
