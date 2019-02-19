@@ -3,14 +3,16 @@ import {
   UPDATE_CURRENT_TIMES,
   SHOW_MAIN_APP,
   SHOW_TODAY_VIEW,
-  INITIAL_STATE
+  INITIAL_STATE,
+  TOGGLE_SIDEBAR
 } from './';
 
 const {
   snuzeTimes,
   currentTimes,
   mainAppShown,
-  todayViewShown
+  todayViewShown,
+  sidebarShown
 } = INITIAL_STATE;
 
 test('UPDATE_SNUZE_TIMES has the correct value', () => {
@@ -55,4 +57,13 @@ test('INITIAL_STATE has the correct mainAppShown value', () => {
 test('INITIAL_STATE has the correct todayViewShown value', () => {
   // main app is not shown by default
   expect(todayViewShown).toEqual(false);
+});
+
+test('INITIAL_STATE has the correct sidebarShown value', () => {
+  // main app is not shown by default
+  expect(sidebarShown).toEqual(false);
+});
+
+test('TOGGLE_SIDEBAR has the correct value', () => {
+  expect(TOGGLE_SIDEBAR).toEqual('TOGGLE_SIDEBAR');
 });
