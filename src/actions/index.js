@@ -2,7 +2,8 @@ import {
   UPDATE_SNUZE_TIMES,
   UPDATE_CURRENT_TIMES,
   SHOW_MAIN_APP,
-  SHOW_TODAY_VIEW
+  SHOW_TODAY_VIEW,
+  TOGGLE_SIDEBAR
 } from '../constants';
 
 export function updateSnuzeTimes(wakeTime, getUpTime) {
@@ -36,7 +37,12 @@ export function showTodayView(bool) {
   };
 }
 
-export function toggleSidebar() {}
+export function toggleSidebar(bool) {
+  return {
+    type: TOGGLE_SIDEBAR,
+    payload: bool
+  };
+}
 
 export default {
   updateSnuzeTimes,
