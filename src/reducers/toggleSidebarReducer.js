@@ -1,7 +1,7 @@
 import { INITIAL_STATE } from '../constants';
 
-const toggleSidebarReducer = () => {
-  return INITIAL_STATE.sidebarShown;
+const toggleSidebarReducer = (sidebarShown = INITIAL_STATE.sidebarShown) => {
+  return sidebarShown;
 };
 
 export default toggleSidebarReducer;
