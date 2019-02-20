@@ -1,5 +1,5 @@
 import toggleSidebarReducer from './toggleSidebarReducer';
-import { INITIAL_STATE } from '../constants';
+import { INITIAL_STATE, TOGGLE_SIDEBAR } from '../constants';
 
 describe('toggleSidebarReducer', () => {
   test('is a function', () => {
@@ -21,6 +21,22 @@ describe('toggleSidebarReducer', () => {
       previousState = false;
       state = toggleSidebarReducer(previousState, {});
       expect(state).toEqual(previousState);
+    });
+
+    test('supplied payload if action matches', () => {
+      let payload = true;
+      let state = toggleSidebarReducer(undefined, {
+        type: TOGGLE_SIDEBAR,
+        payload
+      });
+      expect(state).toEqual(payload);
+
+      payload = false;
+      state = toggleSidebarReducer(undefined, {
+        type: TOGGLE_SIDEBAR,
+        payload
+      });
+      expect(state).toEqual(payload);
     });
   });
 });
