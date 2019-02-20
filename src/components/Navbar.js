@@ -1,5 +1,6 @@
 import React from 'react';
-import { Box, Heading } from 'grommet';
+import { Anchor, Box, Heading } from 'grommet';
+import { Menu } from 'grommet-icons';
 
 const Navbar = props => {
   return (
@@ -7,12 +8,15 @@ const Navbar = props => {
       tag="header"
       direction="row"
       align="center"
-      justify="center"
+      justify="between"
       elevation="medium"
     >
+      <Anchor icon={<Menu />} />
       <Heading level="1" margin="none">
         {props.title}
       </Heading>
+      <Box />
+      {/* this Box is a hack to center the title and justify the menu to the left */}
     </Box>
   );
 };
