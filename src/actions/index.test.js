@@ -2,7 +2,8 @@ import {
   updateSnuzeTimes,
   updateCurrentTimes,
   showMainApp,
-  showTodayView
+  showTodayView,
+  toggleSidebar
 } from './';
 
 import {
@@ -138,5 +139,11 @@ describe('showTodayView', () => {
       ({ payload } = showTodayView(false));
       expect(payload).toEqual(false);
     });
+  });
+});
+
+describe('toggleSidebar', () => {
+  test('is a function', () => {
+    expect(typeof toggleSidebar).toEqual('function');
   });
 });
