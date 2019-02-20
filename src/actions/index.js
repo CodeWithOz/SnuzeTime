@@ -36,9 +36,12 @@ export function showTodayView(bool) {
   };
 }
 
+export function toggleSidebar() {}
+
 export default {
   updateSnuzeTimes,
   updateCurrentTimes,
   showMainApp,
-  showTodayView
+  showTodayView,
+  toggleSidebar
 };
