@@ -10,7 +10,8 @@ import {
   UPDATE_SNUZE_TIMES,
   UPDATE_CURRENT_TIMES,
   SHOW_MAIN_APP,
-  SHOW_TODAY_VIEW
+  SHOW_TODAY_VIEW,
+  TOGGLE_SIDEBAR
 } from '../constants';
 
 describe('updateSnuzeTimes', () => {
@@ -145,5 +146,22 @@ describe('showTodayView', () => {
 describe('toggleSidebar', () => {
   test('is a function', () => {
     expect(typeof toggleSidebar).toEqual('function');
+  });
+
+  describe('returns', () => {
+    test('the correct action format and type', () => {
+      const action = toggleSidebar(true);
+      expect(action.type).toBeDefined();
+      expect(action.payload).toBeDefined();
+      expect(action.type).toEqual(TOGGLE_SIDEBAR);
+    });
+
+    test('the correct payload', () => {
+      let { payload } = toggleSidebar(true);
+      expect(payload).toEqual(true);
+
+      ({ payload } = toggleSidebar(false));
+      expect(payload).toEqual(false);
+    });
   });
 });
