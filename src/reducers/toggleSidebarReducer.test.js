@@ -12,5 +12,15 @@ describe('toggleSidebarReducer', () => {
       const state = toggleSidebarReducer(undefined, {});
       expect(state).toEqual(INITIAL_STATE.sidebarShown);
     });
+
+    test(`previous state when action doesn't match`, () => {
+      let previousState = true;
+      let state = toggleSidebarReducer(previousState, {});
+      expect(state).toEqual(previousState);
+
+      previousState = false;
+      state = toggleSidebarReducer(previousState, {});
+      expect(state).toEqual(previousState);
+    });
   });
 });
