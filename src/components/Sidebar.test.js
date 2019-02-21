@@ -4,8 +4,10 @@ import { Layer } from 'grommet';
 import Sidebar from './Sidebar';
 
 describe('Sidebar', () => {
-  test('renders a grommet Layer', () => {
-    const wrapper = shallow(<Sidebar />);
-    expect(wrapper.find(Layer).length).toEqual(1);
+  describe('renders', () => {
+    test('a grommet Layer when shown', () => {
+      const wrapper = shallow(<Sidebar shown />);
+      expect(wrapper.find(Layer).length).toEqual(1);
+    });
   });
 });
