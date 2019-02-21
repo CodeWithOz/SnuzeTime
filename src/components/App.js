@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import moment from 'moment';
 import 'moment-timer';
 import { grommet, Box, Grommet } from 'grommet';
@@ -115,6 +116,19 @@ export class App extends Component {
     );
   }
 }
+
+App.propTypes = {
+  currentTimes: PropTypes.exact({
+    withSeconds: PropTypes.string,
+    withoutSeconds: PropTypes.string,
+    hour: PropTypes.number,
+    date: PropTypes.string
+  }),
+  updateCurrentTimes: PropTypes.func,
+  showTodayView: PropTypes.func,
+  mainAppShown: PropTypes.bool,
+  showMainApp: PropTypes.func
+};
 
 const mapStateToProps = ({ currentTimes, mainAppShown }) => {
   return { currentTimes, mainAppShown };

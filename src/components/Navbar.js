@@ -1,8 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Anchor, Box, Heading } from 'grommet';
 import { Menu } from 'grommet-icons';
 
-const Navbar = props => {
+const Navbar = ({ title }) => {
   return (
     <Box
       tag="header"
@@ -13,12 +14,16 @@ const Navbar = props => {
     >
       <Anchor icon={<Menu />} />
       <Heading level="1" margin="none">
-        {props.title}
+        {title}
       </Heading>
       <Box />
       {/* this Box is a hack to center the title and justify the menu to the left */}
     </Box>
   );
+};
+
+Navbar.propTypes = {
+  title: PropTypes.string
 };
 
 export default Navbar;

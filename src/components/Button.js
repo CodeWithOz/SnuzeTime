@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Button as GrommetButton } from 'grommet';
 
 const Button = props => {
@@ -10,6 +11,11 @@ const Button = props => {
       {...props}
     />
   );
+};
+
+Button.propTypes = {
+  text: PropTypes.string,
+  handleClick: PropTypes.func
 };
 
 export default Button;

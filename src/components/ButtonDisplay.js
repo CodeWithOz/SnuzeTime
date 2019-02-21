@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Box, Paragraph } from 'grommet';
 import { connect } from 'react-redux';
 import Button from './Button';
@@ -84,6 +85,16 @@ export class ButtonDisplay extends Component {
     );
   }
 }
+
+ButtonDisplay.propTypes = {
+  currentTime: PropTypes.string,
+  date: PropTypes.string.isRequired,
+  snuzeTimes: PropTypes.exact({
+    wakeTime: PropTypes.string.isRequired,
+    getUpTime: PropTypes.string.isRequired
+  }),
+  updateSnuzeTimes: PropTypes.func.isRequired
+};
 
 const mapStateToProps = ({
   currentTimes: { withoutSeconds, date },

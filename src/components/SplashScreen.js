@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Box, Heading } from 'grommet';
 import { RotateSpinLoader } from 'react-css-loaders';
 
@@ -18,6 +19,10 @@ const SplashScreen = ({ appName }) => {
       </Box>
     </Box>
   );
+};
+
+SplashScreen.propTypes = {
+  appName: PropTypes.string
 };
 
 export default SplashScreen;

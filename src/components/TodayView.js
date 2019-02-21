@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Box, Paragraph, Text } from 'grommet';
 import { RotateSpinLoader } from 'react-css-loaders';
 import { connect } from 'react-redux';
@@ -106,6 +107,16 @@ export class TodayView extends Component {
     );
   }
 }
+
+TodayView.propTypes = {
+  shown: PropTypes.bool,
+  date: PropTypes.string.isRequired,
+  updateSnuzeTimes: PropTypes.func.isRequired,
+  showTodayView: PropTypes.func.isRequired,
+  wakeTime: PropTypes.string,
+  getUpTime: PropTypes.string,
+  hour: PropTypes.number
+};
 
 const mapStateToProps = ({
   snuzeTimes: { wakeTime, getUpTime },
