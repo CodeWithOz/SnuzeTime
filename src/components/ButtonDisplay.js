@@ -37,7 +37,18 @@ export class ButtonDisplay extends Component {
     dateStore.addTimesToLocalStorage(date, times);
   }
 
-  getClickHandler = () => {};
+  getClickHandler = btn => () => {
+    // need to update values in both localStorage and redux
+    const { snuzeTimeName } = btnDisplayConfig[btn];
+    const { currentTime, snuzeTimes, date } = this.props;
+    const newSnuzeTimes = {
+      ...snuzeTimes,
+      [snuzeTimeName]: currentTime
+    };
+    this.saveTimesToLocalStorage(date, newSnuzeTimes);
+    const args = btnDisplayConfig[btn].getArgs(newSnuzeTimes);
+    this.props.updateSnuzeTimes(...args);
+  };
 
   render() {
     const { leftBtn, rightBtn } = this.getButtons();
@@ -52,34 +63,12 @@ export class ButtonDisplay extends Component {
             <Button
               active
               text={btnDisplayConfig[leftBtn].text}
-              handleClick={() => {
-                // need to update values in both localStorage and redux
-                const { snuzeTimeName } = btnDisplayConfig[leftBtn];
-                const { currentTime, snuzeTimes, date } = this.props;
-                const newSnuzeTimes = {
-                  ...snuzeTimes,
-                  [snuzeTimeName]: currentTime
-                };
-                this.saveTimesToLocalStorage(date, newSnuzeTimes);
-                const args = btnDisplayConfig[leftBtn].getArgs(newSnuzeTimes);
-                this.props.updateSnuzeTimes(...args);
-              }}
+              handleClick={this.getClickHandler(leftBtn)}
             />
             <Button
               active
               text={btnDisplayConfig[rightBtn].text}
-              handleClick={() => {
-                // need to update values in both localStorage and redux
-                const { snuzeTimeName } = btnDisplayConfig[rightBtn];
-                const { currentTime, snuzeTimes, date } = this.props;
-                const newSnuzeTimes = {
-                  ...snuzeTimes,
-                  [snuzeTimeName]: currentTime
-                };
-                this.saveTimesToLocalStorage(date, newSnuzeTimes);
-                const args = btnDisplayConfig[rightBtn].getArgs(newSnuzeTimes);
-                this.props.updateSnuzeTimes(...args);
-              }}
+              handleClick={this.getClickHandler(rightBtn)}
             />
           </Box>
         </Box>
