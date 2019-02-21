@@ -4,7 +4,7 @@ import { ButtonDisplay } from './ButtonDisplay';
 import Button from './Button';
 import dateStore from '../helpers/dateStore';
 
-test('it assigns the correct text and callback', () => {
+test('ButtonDisplay assigns the correct text and callback', () => {
   const updateSnuzeTimesMock = jest.fn();
 
   // the text for each time period
