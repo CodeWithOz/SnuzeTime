@@ -1,11 +1,13 @@
 import React from 'react';
 import { Layer } from 'grommet';
 
-const Sidebar = () => {
+const Sidebar = ({ shown }) => {
   return (
-    <Layer full="vertical" position="left">
-      Sidebar
-    </Layer>
+    shown && (
+      <Layer full="vertical" position="left">
+        Sidebar
+      </Layer>
+    )
   );
 };
 
