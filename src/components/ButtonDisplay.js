@@ -37,6 +37,8 @@ export class ButtonDisplay extends Component {
     dateStore.addTimesToLocalStorage(date, times);
   }
 
+  getClickHandler = () => {};
+
   render() {
     const { leftBtn, rightBtn } = this.getButtons();
 
