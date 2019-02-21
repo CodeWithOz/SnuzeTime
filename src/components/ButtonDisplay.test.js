@@ -1,46 +1,56 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import { ButtonDisplay } from './ButtonDisplay';
 import Button from './Button';
 import dateStore from '../helpers/dateStore';
 
-test('ButtonDisplay assigns the correct text and callback', () => {
-  const updateSnuzeTimesMock = jest.fn();
+describe('ButtonDisplay', () => {
+  test('assigns the correct text and callback', () => {
+    const updateSnuzeTimesMock = jest.fn();
 
-  // the text for each time period
-  const btnDisplayConfig = {
-    leftBtn: {
-      text: '...waking up'
-    },
-    rightBtn: {
-      text: '...getting up'
-    }
-  };
+    // the text for each time period
+    const btnDisplayConfig = {
+      leftBtn: {
+        text: '...waking up'
+      },
+      rightBtn: {
+        text: '...getting up'
+      }
+    };
 
-  const buttonDisplay = mount(
-    <ButtonDisplay
-      updateSnuzeTimes={updateSnuzeTimesMock}
-      currentTime="test"
-      snuzeTimes={{ wakeTime: '', getUpTime: '' }}
-      date="9999 9 9"
-    />
-  );
+    const buttonDisplay = mount(
+      <ButtonDisplay
+        updateSnuzeTimes={updateSnuzeTimesMock}
+        currentTime="test"
+        snuzeTimes={{ wakeTime: '', getUpTime: '' }}
+        date="9999 9 9"
+      />
+    );
 
-  const buttons = buttonDisplay.find(Button);
-  const leftBtn = buttons.at(0);
-  const rightBtn = buttons.at(1);
+    const buttons = buttonDisplay.find(Button);
+    const leftBtn = buttons.at(0);
+    const rightBtn = buttons.at(1);
 
-  expect(leftBtn.props().text).toEqual(btnDisplayConfig.leftBtn.text);
-  expect(updateSnuzeTimesMock).not.toHaveBeenCalled();
-  leftBtn.find('button').simulate('click');
-  expect(updateSnuzeTimesMock).toHaveBeenCalledTimes(1);
-  updateSnuzeTimesMock.mockClear();
+    expect(leftBtn.props().text).toEqual(btnDisplayConfig.leftBtn.text);
+    expect(updateSnuzeTimesMock).not.toHaveBeenCalled();
+    leftBtn.find('button').simulate('click');
+    expect(updateSnuzeTimesMock).toHaveBeenCalledTimes(1);
+    updateSnuzeTimesMock.mockClear();
 
-  expect(rightBtn.props().text).toEqual(btnDisplayConfig.rightBtn.text);
-  expect(updateSnuzeTimesMock).not.toHaveBeenCalled();
-  rightBtn.find('button').simulate('click');
-  expect(updateSnuzeTimesMock).toHaveBeenCalledTimes(1);
-  updateSnuzeTimesMock.mockClear();
+    expect(rightBtn.props().text).toEqual(btnDisplayConfig.rightBtn.text);
+    expect(updateSnuzeTimesMock).not.toHaveBeenCalled();
+    rightBtn.find('button').simulate('click');
+    expect(updateSnuzeTimesMock).toHaveBeenCalledTimes(1);
+    updateSnuzeTimesMock.mockClear();
+  });
+
+  describe('exposes getClickHandler which', () => {
+    test('is a function', () => {
+      expect(typeof ButtonDisplay.prototype.getClickHandler).toEqual(
+        'function'
+      );
+    });
+  });
 });
 
 describe('To localStorage, ButtonDisplay saves', () => {
