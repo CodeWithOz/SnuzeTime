@@ -11,6 +11,11 @@ const todayViewConfig = {
   messages: {
     wakeTime: `...haven't woken up.`,
     getUpTime: `...haven't gotten out of bed.`
+  },
+  isTimeSmall(timeString) {
+    // threshold is 15 minutes
+    const rgx = /(second|(a|1[0-5]|\b\d) minute)/;
+    return rgx.test(timeString);
   }
 };
 
@@ -58,19 +63,13 @@ export class TodayView extends Component {
       getUpTime = `${this.props.date} ${getUpTime}`;
 
       const timeInBed = this.getTimeDiff(wakeTime, getUpTime);
-      const timeIsSmall = isTimeSmall(timeInBed);
+      const timeIsSmall = todayViewConfig.isTimeSmall(timeInBed);
       return (
         <Paragraph
           size="large"
           color={timeIsSmall ? 'green' : 'red'}
         >{`...spent ${timeInBed} in bed.`}</Paragraph>
       );
-
-      function isTimeSmall(timeString) {
-        // threshold is 15 minutes
-        const rgx = /(second|(a|1[0-5]|\b\d) minute)/;
-        return rgx.test(timeString);
-      }
     }
   }
 
