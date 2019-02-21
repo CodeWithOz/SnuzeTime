@@ -1,8 +1,9 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import moment from 'moment';
 import 'moment-timer';
 import { App, appConfig } from './App';
+import Sidebar from './Sidebar';
 
 // mock native timers
 jest.useFakeTimers();
@@ -83,4 +84,9 @@ describe('App sets breakpoint for', () => {
     // https://github.com/grommet/grommet/blob/9eed6e5954e2997c4191b079d5ff6d604db178a9/src/js/themes/base.js#L154
     expect(xlarge).toEqual({});
   });
+});
+
+test('App renders a Sidebar component', () => {
+  const wrapper = mount(<App />);
+  expect(wrapper.find(Sidebar).length).toEqual(1);
 });
