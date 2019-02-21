@@ -14,4 +14,12 @@ describe('Navbar', () => {
     const wrapper = mount(<Navbar />);
     expect(wrapper.find(Menu).length).toEqual(1);
   });
+
+  test('assign handleClick callback to the menu icon', () => {
+    const mockCallback = jest.fn();
+    const wrapper = mount(<Navbar handleClick={mockCallback} />);
+    expect(mockCallback).not.toHaveBeenCalled();
+    wrapper.find(Menu).simulate('click');
+    expect(mockCallback).toHaveBeenCalledTimes(1);
+  });
 });
