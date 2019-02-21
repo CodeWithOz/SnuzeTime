@@ -5,6 +5,20 @@ import { RotateSpinLoader } from 'react-css-loaders';
 import { TodayView } from './TodayView';
 import dateStore from '../helpers/dateStore';
 
+let props;
+
+beforeEach(() => {
+  props = {
+    wakeTime: '',
+    getUpTime: '',
+    shown: true,
+    date: '9999 9 9',
+    hour: 10,
+    updateSnuzeTimes: jest.fn(),
+    showTodayView: jest.fn()
+  };
+});
+
 describe('When shown, TodayView displays', () => {
   const defaultTexts = {
     wake: `...haven't woken up.`,
@@ -12,12 +26,7 @@ describe('When shown, TodayView displays', () => {
   };
 
   test('default text when empty strings are supplied', () => {
-    // componentDidMount depends on the date prop, which is not tested here
-    // disabling lifecycle methods prevents errors due to the missing prop
-    const wrapper = shallow(
-      <TodayView wakeTime="" getUpTime="" shown={true} />,
-      { disableLifecycleMethods: true }
-    );
+    const wrapper = shallow(<TodayView {...props} />);
 
     // convert object representation to string for easier matching
     const todayViewAsString = wrapper.render().text();
@@ -27,27 +36,19 @@ describe('When shown, TodayView displays', () => {
   });
 
   test('supplied text instead of default text', () => {
-    const suppliedTexts = {
-      wake: `05:45 AM`,
-      getUp: `5:50 AM`
+    const editedProps = {
+      ...props,
+      wakeTime: '05:45 AM',
+      getUpTime: '05:50 AM'
     };
 
-    // componentDidMount depends on the date prop, which is not tested here
-    // disabling lifecycle methods prevents errors due to the missing prop
-    const wrapper = shallow(
-      <TodayView
-        wakeTime={suppliedTexts.wake}
-        getUpTime={suppliedTexts.getUp}
-        shown={true}
-      />,
-      { disableLifecycleMethods: true }
-    );
+    const wrapper = shallow(<TodayView {...editedProps} />);
 
     // convert object representation to string for easier matching
     const todayViewAsString = wrapper.render().text();
 
-    expect(todayViewAsString).toContain(suppliedTexts.wake);
-    expect(todayViewAsString).toContain(suppliedTexts.getUp);
+    expect(todayViewAsString).toContain(editedProps.wakeTime);
+    expect(todayViewAsString).toContain(editedProps.getUpTime);
     expect(todayViewAsString).not.toContain(defaultTexts.wake);
     expect(todayViewAsString).not.toContain(defaultTexts.getUp);
   });
@@ -99,48 +100,28 @@ test('TodayView gets the correct spinner color', () => {
 });
 
 describe('When not shown, TodayView', () => {
+  let editedProps;
+
+  beforeEach(() => {
+    editedProps = { ...props, shown: false };
+  });
+
   test('displays a loading spinner', () => {
-    const wrapper = mount(
-      <TodayView
-        date="9999 9 9"
-        updateSnuzeTimes={jest.fn()}
-        shown={false}
-        hour={10}
-        showTodayView={jest.fn()}
-      />
-    );
+    const wrapper = mount(<TodayView {...editedProps} />);
     expect(wrapper.find(RotateSpinLoader).length).toEqual(1);
   });
 
   test('displays a loading spinner with the correct color', () => {
-    const hour = 10;
-    const expectedColor = TodayView.prototype.getSpinnerColor(hour);
-    const loader = mount(
-      <TodayView
-        date="9999 9 9"
-        updateSnuzeTimes={jest.fn()}
-        shown={false}
-        hour={hour}
-        showTodayView={jest.fn()}
-      />
-    )
+    const expectedColor = TodayView.prototype.getSpinnerColor(editedProps.hour);
+    const loader = mount(<TodayView {...editedProps} />)
       .find(RotateSpinLoader)
       .at(0);
     expect(loader.props().color).toEqual(expectedColor);
   });
 
   test('updates itself to be shown', () => {
-    const showTodayViewMock = jest.fn();
-    shallow(
-      <TodayView
-        date="9999 9 9"
-        updateSnuzeTimes={jest.fn()}
-        shown={false}
-        hour={10}
-        showTodayView={showTodayViewMock}
-      />
-    );
-    expect(showTodayViewMock).toHaveBeenCalledTimes(1);
+    shallow(<TodayView {...editedProps} />);
+    expect(editedProps.showTodayView).toHaveBeenCalledTimes(1);
   });
 });
 
