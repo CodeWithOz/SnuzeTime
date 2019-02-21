@@ -45,22 +45,32 @@ describe('ButtonDisplay', () => {
   });
 
   describe('exposes getClickHandler which', () => {
-    test('is a function', () => {
-      const date = '9999 9 9';
-      const snuzeTimes = { wakeTime: '', getUpTime: '' };
-      const mockCallback = jest.fn();
-      const wrapper = shallow(
+    const date = '9999 9 9';
+    const snuzeTimes = { wakeTime: '', getUpTime: '' };
+    const mockCallback = jest.fn();
+    let wrapper;
+
+    beforeEach(() => {
+      // the method is saved in a property as an arrow function to bind 'this'
+      // it is therefore not on the prototype and must be reached by
+      // shallow rendering the component
+      wrapper = shallow(
         <ButtonDisplay
           date={date}
           snuzeTimes={snuzeTimes}
           updateSnuzeTimes={mockCallback}
         />
       );
+    });
 
-      // the method is saved in a property as an arrow function to bind 'this'
-      // it is therefore not on the prototype and must be reached by
-      // shallow rendering the component
+    test('is a function', () => {
       expect(typeof wrapper.instance().getClickHandler).toEqual('function');
+    });
+
+    test('returns a function', () => {
+      expect(
+        typeof wrapper.instance().getClickHandler('test argument')
+      ).toEqual('function');
     });
   });
 });
