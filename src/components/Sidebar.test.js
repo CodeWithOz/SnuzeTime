@@ -9,5 +9,10 @@ describe('Sidebar', () => {
       const wrapper = shallow(<Sidebar shown />);
       expect(wrapper.find(Layer).length).toEqual(1);
     });
+
+    test('nothing when not shown', () => {
+      const wrapper = shallow(<Sidebar shown={false} />);
+      expect(wrapper.get(0)).toBeFalsy();
+    });
   });
 });
