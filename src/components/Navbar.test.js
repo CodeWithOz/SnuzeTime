@@ -15,9 +15,9 @@ describe('Navbar', () => {
     expect(wrapper.find(Menu).length).toEqual(1);
   });
 
-  test('assign handleClick callback to the menu icon', () => {
+  test('assign toggleSidebar callback to the menu icon', () => {
     const mockCallback = jest.fn();
-    const wrapper = mount(<Navbar handleClick={mockCallback} />);
+    const wrapper = mount(<Navbar toggleSidebar={mockCallback} />);
     expect(mockCallback).not.toHaveBeenCalled();
     wrapper.find(Menu).simulate('click');
     expect(mockCallback).toHaveBeenCalledTimes(1);
