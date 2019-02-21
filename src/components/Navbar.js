@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Anchor, Box, Heading } from 'grommet';
 import { Menu } from 'grommet-icons';
 
-const Navbar = ({ title }) => {
+const Navbar = ({ title, handleClick }) => {
   return (
     <Box
       tag="header"
@@ -12,7 +12,7 @@ const Navbar = ({ title }) => {
       justify="between"
       elevation="medium"
     >
-      <Anchor icon={<Menu />} />
+      <Anchor onClick={handleClick} icon={<Menu />} />
       <Heading level="1" margin="none">
         {title}
       </Heading>
@@ -23,7 +23,8 @@ const Navbar = ({ title }) => {
 };
 
 Navbar.propTypes = {
-  title: PropTypes.string
+  title: PropTypes.string,
+  handleClick: PropTypes.func
 };
 
 export default Navbar;
