@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { Menu } from 'grommet-icons';
-import Navbar from './Navbar';
+import { Navbar } from './Navbar';
 
 describe('Navbar', () => {
   test('displays the supplied title', () => {

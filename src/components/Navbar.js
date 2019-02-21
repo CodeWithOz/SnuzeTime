@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Anchor, Box, Heading } from 'grommet';
 import { Menu } from 'grommet-icons';
 
-const Navbar = ({ title, toggleSidebar }) => {
+export const Navbar = ({ title, toggleSidebar }) => {
   return (
     <Box
       tag="header"
