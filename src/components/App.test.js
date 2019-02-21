@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import moment from 'moment';
 import 'moment-timer';
 import { App, appConfig } from './App';
@@ -87,6 +87,15 @@ describe('App sets breakpoint for', () => {
 });
 
 test('App renders a Sidebar component', () => {
-  const wrapper = mount(<App />);
+  const props = {
+    currentTimes: {
+      withSeconds: '',
+      withoutSeconds: '',
+      hour: 1,
+      date: '9999 9 9'
+    },
+    mainAppShown: true
+  };
+  const wrapper = shallow(<App {...props} />);
   expect(wrapper.find(Sidebar).length).toEqual(1);
 });
