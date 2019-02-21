@@ -120,6 +120,7 @@ describe('When not shown, TodayView', () => {
   });
 
   test('updates itself to be shown', () => {
+    expect(editedProps.showTodayView).toHaveBeenCalledTimes(0);
     shallow(<TodayView {...editedProps} />);
     expect(editedProps.showTodayView).toHaveBeenCalledTimes(1);
   });
