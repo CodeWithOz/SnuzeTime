@@ -86,10 +86,10 @@ export class ButtonDisplay extends Component {
 }
 
 const mapStateToProps = ({
-  currentTimes: { withoutSeconds, hour, date },
+  currentTimes: { withoutSeconds, date },
   snuzeTimes
 }) => {
-  return { currentTime: withoutSeconds, hour, date, snuzeTimes };
+  return { currentTime: withoutSeconds, date, snuzeTimes };
 };
 
 export default connect(
