@@ -20,7 +20,8 @@ export const Sidebar = ({ shown, hide, background }) => {
 
 Sidebar.propTypes = {
   shown: PropTypes.bool,
-  hide: PropTypes.func
+  hide: PropTypes.func,
+  background: PropTypes.string
 };
 
 const mapStateToProps = ({ sidebarShown }) => {
