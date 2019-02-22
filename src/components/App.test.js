@@ -103,7 +103,7 @@ describe('App', () => {
   });
 
   test('renders a Sidebar component when shown', () => {
-    const wrapper = shallow(<App {...props} />);
+    const wrapper = shallow(<App {...props} />, { context: { size: 'small' } });
     expect(wrapper.find(Sidebar).length).toEqual(1);
   });
 
@@ -127,10 +127,5 @@ describe('App', () => {
 
       spy.mockRestore();
     });
-  });
-
-  test(`uses grommet's ResponsiveContext`, () => {
-    const wrapper = shallow(<App {...props} />);
-    expect(wrapper.find(ResponsiveContext.Consumer).length).toEqual(1);
   });
 });
