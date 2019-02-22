@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Layer, Box } from 'grommet';
+import { Layer, Box, Anchor } from 'grommet';
 import { Close } from 'grommet-icons';
 import { toggleSidebar } from '../actions';
 
@@ -14,7 +14,7 @@ export const Sidebar = ({ shown, hide }) => {
         justify="end"
         elevation="small"
       >
-        <Close />
+        <Anchor icon={<Close />} onClick={hide} />
       </Box>
       Sidebar
     </Layer>

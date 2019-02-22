@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import { Layer } from 'grommet';
 import { Close } from 'grommet-icons';
 import { Sidebar } from './Sidebar';
@@ -12,7 +12,7 @@ describe('Sidebar', () => {
     });
 
     test('a grommet Close icon when shown', () => {
-      const wrapper = shallow(<Sidebar shown />);
+      const wrapper = mount(<Sidebar shown />);
       expect(wrapper.find(Close).length).toEqual(1);
     });
 
@@ -27,7 +27,7 @@ describe('Sidebar', () => {
 
     beforeEach(() => {
       mockHide = jest.fn();
-      wrapper = shallow(<Sidebar shown hide={mockHide} />);
+      wrapper = mount(<Sidebar shown hide={mockHide} />);
     });
 
     test('the Layer', () => {
