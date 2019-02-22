@@ -86,16 +86,33 @@ describe('App sets breakpoint for', () => {
   });
 });
 
-test('App renders a Sidebar component', () => {
-  const props = {
-    currentTimes: {
-      withSeconds: '',
-      withoutSeconds: '',
-      hour: 1,
-      date: '9999 9 9'
-    },
-    mainAppShown: true
-  };
-  const wrapper = shallow(<App {...props} />);
-  expect(wrapper.find(Sidebar).length).toEqual(1);
+describe('App', () => {
+  let props, wrapper;
+
+  beforeEach(() => {
+    props = {
+      currentTimes: {
+        withSeconds: '',
+        withoutSeconds: '',
+        hour: 1,
+        date: '9999 9 9'
+      },
+      mainAppShown: true
+    };
+
+    wrapper = shallow(<App {...props} />);
+  });
+
+  test('renders a Sidebar component', () => {
+    expect(wrapper.find(Sidebar).length).toEqual(1);
+  });
+
+  describe('exposes renderMainApp which', () => {
+    // the method is saved in a property as an arrow function to bind 'this'
+    // it is therefore not on the prototype and must be reached from a
+    // shallow render of the component
+    test('is a function', () => {
+      expect(typeof wrapper.instance().renderMainApp).toEqual('function');
+    });
+  });
 });
