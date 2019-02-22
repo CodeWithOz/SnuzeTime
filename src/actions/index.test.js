@@ -149,19 +149,8 @@ describe('toggleSidebar', () => {
   });
 
   describe('returns', () => {
-    test('the correct action format and type', () => {
-      const action = toggleSidebar(true);
-      expect(action.type).toBeDefined();
-      expect(action.payload).toBeDefined();
-      expect(action.type).toEqual(TOGGLE_SIDEBAR);
-    });
-
-    test('the correct payload', () => {
-      let { payload } = toggleSidebar(true);
-      expect(payload).toEqual(true);
-
-      ({ payload } = toggleSidebar(false));
-      expect(payload).toEqual(false);
+    test('a function', () => {
+      expect(typeof toggleSidebar()).toEqual('function');
     });
   });
 });
