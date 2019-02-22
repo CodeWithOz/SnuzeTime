@@ -101,8 +101,7 @@ describe('App', () => {
     };
   });
 
-  test('renders a Sidebar component', () => {
-    // TODO: specify 'when shown' in this test description
+  test('renders a Sidebar component when shown', () => {
     const wrapper = shallow(<App {...props} />);
     expect(wrapper.find(Sidebar).length).toEqual(1);
   });
