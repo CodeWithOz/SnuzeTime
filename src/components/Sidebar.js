@@ -8,12 +8,7 @@ import { toggleSidebar } from '../actions';
 export const Sidebar = ({ shown, hide }) => {
   return shown ? (
     <Layer full="vertical" position="left" onEsc={hide} onClickOutside={hide}>
-      <Box
-        direction="horizontal"
-        align="center"
-        justify="end"
-        elevation="small"
-      >
+      <Box direction="row" align="center" justify="end" elevation="small">
         <Anchor icon={<Close />} onClick={hide} />
       </Box>
       Sidebar
