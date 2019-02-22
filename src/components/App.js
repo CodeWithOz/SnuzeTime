@@ -94,10 +94,12 @@ export class App extends Component {
   }
 
   renderMainApp = () => {
+    const background = this.getBackground(this.props.currentTimes.hour);
+
     return (
-      <Box fill background={this.getBackground(this.props.currentTimes.hour)}>
+      <Box fill background={background}>
         <Navbar title={appConfig.appName} />
-        <Sidebar />
+        <Sidebar background={background} />
         <Box flex>
           <Clock />
           <Box flex align="center" justify="center">
