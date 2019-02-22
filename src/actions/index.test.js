@@ -171,6 +171,13 @@ describe('toggleSidebar', () => {
         expect(dispatchedAction.type).toBeDefined();
         expect(dispatchedAction.payload).toBeDefined();
       });
+
+      test('dispatches an action with the correct type', () => {
+        const thunk = toggleSidebar();
+        thunk(dispatch);
+        const dispatchedAction = dispatch.mock.calls[0][0];
+        expect(dispatchedAction.type).toEqual(TOGGLE_SIDEBAR);
+      });
     });
   });
 });
