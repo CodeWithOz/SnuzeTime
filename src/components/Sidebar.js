@@ -9,7 +9,7 @@ export const Sidebar = ({ shown, hide, background }) => {
   return shown ? (
     <Layer full="vertical" position="left" onEsc={hide} onClickOutside={hide}>
       <Box fill background={background}>
-        <Box direction="row" align="center" justify="end" elevation="small">
+        <Box direction="row" align="center" justify="end" elevation="xsmall">
           <Anchor icon={<Close />} onClick={hide} />
         </Box>
         Sidebar
