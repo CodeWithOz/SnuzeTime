@@ -93,6 +93,8 @@ export class App extends Component {
     return currentHour >= 7 && currentHour < 19 ? 'light-1' : 'dark-1';
   }
 
+  renderMainApp = () => {};
+
   render() {
     return (
       <Grommet full theme={appConfig.customTheme}>
