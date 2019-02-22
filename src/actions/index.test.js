@@ -152,5 +152,26 @@ describe('toggleSidebar', () => {
     test('a function', () => {
       expect(typeof toggleSidebar()).toEqual('function');
     });
+
+    describe('a function that', () => {
+      let dispatch, getState;
+
+      beforeEach(() => {
+        dispatch = jest.fn();
+        getState = jest.fn();
+      });
+
+      test('calls its first argument (dispatch) with the correct action format', () => {
+        const thunk = jest.fn(toggleSidebar());
+        expect(thunk).not.toHaveBeenCalled();
+        expect(dispatch).not.toHaveBeenCalled();
+
+        thunk(dispatch, getState);
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        const dispatchedAction = dispatch.mock.calls[0][0];
+        expect(dispatchedAction.type).toBeDefined();
+        expect(dispatchedAction.payload).toBeDefined();
+      });
+    });
   });
 });
