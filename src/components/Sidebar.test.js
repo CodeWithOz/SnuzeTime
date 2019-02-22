@@ -15,4 +15,11 @@ describe('Sidebar', () => {
       expect(wrapper.get(0)).toBeFalsy();
     });
   });
+
+  test('appropriately passes the dismiss callback to the Layer', () => {
+    const mockHide = jest.fn();
+    const wrapper = shallow(<Sidebar shown hide={mockHide} />);
+    expect(wrapper.find(Layer).props().onEsc).toBe(mockHide);
+    expect(wrapper.find(Layer).props().onClickOutside).toBe(mockHide);
+  });
 });
