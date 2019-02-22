@@ -155,12 +155,12 @@ describe('toggleSidebar', () => {
 
     describe('a function that', () => {
       let dispatch, getState;
-      const shown = true;
+      const sidebarShown = true;
 
       beforeEach(() => {
         dispatch = jest.fn();
         getState = jest.fn(() => {
-          return { shown };
+          return { sidebarShown };
         });
       });
 
@@ -189,7 +189,7 @@ describe('toggleSidebar', () => {
         thunk(dispatch, getState);
         expect(getState).toHaveBeenCalled();
         const dispatchedAction = dispatch.mock.calls[0][0];
-        expect(dispatchedAction.payload).toEqual(!shown);
+        expect(dispatchedAction.payload).toEqual(!sidebarShown);
       });
     });
   });

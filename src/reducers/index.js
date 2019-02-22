@@ -10,5 +10,5 @@ export default combineReducers({
   currentTimes: updateCurrentTimesReducer,
   mainAppShown: showMainAppReducer,
   todayViewShown: showTodayViewReducer,
-  toggleSidebar: toggleSidebarReducer
+  sidebarShown: toggleSidebarReducer
 });

@@ -39,7 +39,7 @@ export function showTodayView(bool) {
 
 export function toggleSidebar() {
   return (dispatch, getState) => {
-    dispatch({ type: TOGGLE_SIDEBAR, payload: !getState().shown });
+    dispatch({ type: TOGGLE_SIDEBAR, payload: !getState().sidebarShown });
   };
 }
 
