@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { Layer } from 'grommet';
-import Sidebar from './Sidebar';
+import { Sidebar } from './Sidebar';
 
 describe('Sidebar', () => {
   describe('renders', () => {
