@@ -154,11 +154,10 @@ describe('toggleSidebar', () => {
     });
 
     describe('a function that', () => {
-      let dispatch, getState;
+      let dispatch;
 
       beforeEach(() => {
         dispatch = jest.fn();
-        getState = jest.fn();
       });
 
       test('calls its first argument (dispatch) with the correct action format', () => {
@@ -166,7 +165,7 @@ describe('toggleSidebar', () => {
         expect(thunk).not.toHaveBeenCalled();
         expect(dispatch).not.toHaveBeenCalled();
 
-        thunk(dispatch, getState);
+        thunk(dispatch);
         expect(dispatch).toHaveBeenCalledTimes(1);
         const dispatchedAction = dispatch.mock.calls[0][0];
         expect(dispatchedAction.type).toBeDefined();
