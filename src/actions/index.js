@@ -37,11 +37,8 @@ export function showTodayView(bool) {
   };
 }
 
-export function toggleSidebar(bool) {
-  return {
-    type: TOGGLE_SIDEBAR,
-    payload: bool
-  };
+export function toggleSidebar() {
+  return () => {};
 }
 
 export default {
