@@ -87,7 +87,7 @@ describe('App sets breakpoint for', () => {
 });
 
 describe('App', () => {
-  let props, wrapper;
+  let props;
 
   beforeEach(() => {
     props = {
@@ -99,11 +99,11 @@ describe('App', () => {
       },
       mainAppShown: true
     };
-
-    wrapper = shallow(<App {...props} />);
   });
 
   test('renders a Sidebar component', () => {
+    // TODO: specify 'when shown' in this test description
+    const wrapper = shallow(<App {...props} />);
     expect(wrapper.find(Sidebar).length).toEqual(1);
   });
 
@@ -112,7 +112,20 @@ describe('App', () => {
     // it is therefore not on the prototype and must be reached from a
     // shallow render of the component
     test('is a function', () => {
+      const wrapper = shallow(<App {...props} />);
       expect(typeof wrapper.instance().renderMainApp).toEqual('function');
+    });
+
+    test('is called when App is shown', () => {
+      const editedProps = { ...props, mainAppShown: false };
+      const wrapper = shallow(<App {...editedProps} />);
+      const spy = jest.spyOn(wrapper.instance(), 'renderMainApp');
+      expect(spy).not.toHaveBeenCalled();
+
+      wrapper.setProps({ mainAppShown: true });
+      expect(spy).toHaveBeenCalledTimes(1);
+
+      spy.mockRestore();
     });
   });
 });
