@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import moment from 'moment';
 import 'moment-timer';
+import { ResponsiveContext } from 'grommet';
 import { App, appConfig } from './App';
 import Sidebar from './Sidebar';
 
@@ -126,5 +127,10 @@ describe('App', () => {
 
       spy.mockRestore();
     });
+  });
+
+  test(`uses grommet's ResponsiveContext`, () => {
+    const wrapper = shallow(<App {...props} />);
+    expect(wrapper.find(ResponsiveContext.Consumer).length).toEqual(1);
   });
 });
