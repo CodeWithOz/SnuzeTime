@@ -38,8 +38,8 @@ export function showTodayView(bool) {
 }
 
 export function toggleSidebar() {
-  return dispatch => {
-    dispatch({ type: TOGGLE_SIDEBAR, payload: true });
+  return (dispatch, getState) => {
+    dispatch({ type: TOGGLE_SIDEBAR, payload: !getState().shown });
   };
 }
 

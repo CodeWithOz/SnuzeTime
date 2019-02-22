@@ -169,7 +169,7 @@ describe('toggleSidebar', () => {
         expect(thunk).not.toHaveBeenCalled();
         expect(dispatch).not.toHaveBeenCalled();
 
-        thunk(dispatch);
+        thunk(dispatch, getState);
         expect(dispatch).toHaveBeenCalledTimes(1);
         const dispatchedAction = dispatch.mock.calls[0][0];
         expect(dispatchedAction.type).toBeDefined();
@@ -178,7 +178,7 @@ describe('toggleSidebar', () => {
 
       test('dispatches an action with the correct type', () => {
         const thunk = toggleSidebar();
-        thunk(dispatch);
+        thunk(dispatch, getState);
         const dispatchedAction = dispatch.mock.calls[0][0];
         expect(dispatchedAction.type).toEqual(TOGGLE_SIDEBAR);
       });
