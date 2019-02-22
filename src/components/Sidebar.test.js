@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { Layer } from 'grommet';
+import { Close } from 'grommet-icons';
 import { Sidebar } from './Sidebar';
 
 describe('Sidebar', () => {
@@ -8,6 +9,11 @@ describe('Sidebar', () => {
     test('a grommet Layer when shown', () => {
       const wrapper = shallow(<Sidebar shown />);
       expect(wrapper.find(Layer).length).toEqual(1);
+    });
+
+    test('a grommet Close icon when shown', () => {
+      const wrapper = shallow(<Sidebar shown />);
+      expect(wrapper.find(Close).length).toEqual(1);
     });
 
     test('nothing when not shown', () => {
