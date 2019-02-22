@@ -36,12 +36,9 @@ describe('Sidebar', () => {
     });
 
     test('the close button', () => {
-      expect(
-        wrapper
-          .find(Close)
-          .parent()
-          .props().onClick
-      ).toBe(mockHide);
+      expect(mockHide).not.toHaveBeenCalled();
+      wrapper.find(Close).simulate('click');
+      expect(mockHide).toHaveBeenCalledTimes(1);
     });
   });
 });
