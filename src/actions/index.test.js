@@ -154,10 +154,14 @@ describe('toggleSidebar', () => {
     });
 
     describe('a function that', () => {
-      let dispatch;
+      let dispatch, getState;
+      const shown = true;
 
       beforeEach(() => {
         dispatch = jest.fn();
+        getState = jest.fn(() => {
+          return { shown };
+        });
       });
 
       test('calls its first argument (dispatch) with the correct action format', () => {
@@ -177,6 +181,15 @@ describe('toggleSidebar', () => {
         thunk(dispatch);
         const dispatchedAction = dispatch.mock.calls[0][0];
         expect(dispatchedAction.type).toEqual(TOGGLE_SIDEBAR);
+      });
+
+      test('dispatches an action with payload reversed from previous state', () => {
+        const thunk = toggleSidebar();
+        expect(getState).not.toHaveBeenCalled();
+        thunk(dispatch, getState);
+        expect(getState).toHaveBeenCalled();
+        const dispatchedAction = dispatch.mock.calls[0][0];
+        expect(dispatchedAction.payload).toEqual(!shown);
       });
     });
   });
