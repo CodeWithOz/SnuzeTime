@@ -22,10 +22,26 @@ describe('Sidebar', () => {
     });
   });
 
-  test('appropriately passes the dismiss callback to the Layer', () => {
-    const mockHide = jest.fn();
-    const wrapper = shallow(<Sidebar shown hide={mockHide} />);
-    expect(wrapper.find(Layer).props().onEsc).toBe(mockHide);
-    expect(wrapper.find(Layer).props().onClickOutside).toBe(mockHide);
+  describe('appropriately passes the dismiss callback to', () => {
+    let mockHide, wrapper;
+
+    beforeEach(() => {
+      mockHide = jest.fn();
+      wrapper = shallow(<Sidebar shown hide={mockHide} />);
+    });
+
+    test('the Layer', () => {
+      expect(wrapper.find(Layer).props().onEsc).toBe(mockHide);
+      expect(wrapper.find(Layer).props().onClickOutside).toBe(mockHide);
+    });
+
+    test('the close button', () => {
+      expect(
+        wrapper
+          .find(Close)
+          .parent()
+          .props().onClick
+      ).toBe(mockHide);
+    });
   });
 });
