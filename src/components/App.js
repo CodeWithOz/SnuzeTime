@@ -93,7 +93,21 @@ export class App extends Component {
     return currentHour >= 7 && currentHour < 19 ? 'light-1' : 'dark-1';
   }
 
-  renderMainApp = () => {};
+  renderMainApp = () => {
+    return (
+      <Box fill background={this.getBackground(this.props.currentTimes.hour)}>
+        <Navbar title={appConfig.appName} />
+        <Sidebar />
+        <Box flex>
+          <Clock />
+          <Box flex align="center" justify="center">
+            <ButtonDisplay />
+            <TodayView />
+          </Box>
+        </Box>
+      </Box>
+    );
+  };
 
   render() {
     return (
@@ -101,20 +115,7 @@ export class App extends Component {
         {!this.props.mainAppShown ? (
           <SplashScreen appName={appConfig.appName} />
         ) : (
-          <Box
-            fill
-            background={this.getBackground(this.props.currentTimes.hour)}
-          >
-            <Navbar title={appConfig.appName} />
-            <Sidebar />
-            <Box flex>
-              <Clock />
-              <Box flex align="center" justify="center">
-                <ButtonDisplay />
-                <TodayView />
-              </Box>
-            </Box>
-          </Box>
+          this.renderMainApp()
         )}
       </Grommet>
     );
