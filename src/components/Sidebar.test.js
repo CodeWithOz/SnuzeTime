@@ -42,3 +42,15 @@ describe('Sidebar', () => {
     });
   });
 });
+
+describe(`Sidebar's main content`, () => {
+  test('has medium width above the small breakpoint', () => {
+    const expectedWidth = 'medium';
+    const context = { size: expectedWidth };
+    const wrapper = shallow(<Sidebar shown />, { context });
+    expect(wrapper.find('.main-content').props().width).toEqual(expectedWidth);
+
+    wrapper.setContext({ size: 'large' });
+    expect(wrapper.find('.main-content').props().width).toEqual(expectedWidth);
+  });
+});
