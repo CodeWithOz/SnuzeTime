@@ -50,15 +50,6 @@ describe('Today gets the current', () => {
   });
 });
 
-test('Today gets the correct background color', () => {
-  expect(Today.prototype.getBackground).toBeDefined();
-
-  const dayBkrgnd = 'light-1';
-  const nightBkgrnd = 'dark-1';
-  expect(Today.prototype.getBackground(10)).toEqual(dayBkrgnd);
-  expect(Today.prototype.getBackground(22)).toEqual(nightBkgrnd);
-});
-
 describe('Today sets breakpoint for', () => {
   test('small @ 576px', () => {
     const { value } = todayConfig.customTheme.global.breakpoints.small;
