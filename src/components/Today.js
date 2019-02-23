@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import 'moment-timer';
-import { Box, Grommet } from 'grommet';
+import { Box } from 'grommet';
 import { connect } from 'react-redux';
+import { RotateSpinLoader } from 'react-css-loaders';
 import Navbar from './Navbar';
 import Clock from './Clock';
 import ButtonDisplay from './ButtonDisplay';
 import TodayView from './TodayView';
-import SplashScreen from './SplashScreen';
 import actionCreators from '../actions';
 import constants from '../constants';
 
@@ -92,14 +92,13 @@ export class Today extends Component {
   };
 
   render() {
-    return (
-      <Grommet full theme={todayConfig.customTheme}>
-        {!this.props.mainAppShown ? (
-          <SplashScreen appName={todayConfig.appName} />
-        ) : (
-          this.renderToday()
-        )}
-      </Grommet>
+    return !this.props.mainAppShown ? (
+      <RotateSpinLoader
+        size={2}
+        color={this.getSpinnerColor(this.props.hour)}
+      />
+    ) : (
+      this.renderToday()
     );
   }
 }
