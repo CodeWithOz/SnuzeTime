@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import moment from 'moment';
 import 'moment-timer';
-import { Today, todayConfig } from './Today';
+import { Today } from './Today';
 
 // mock native timers
 jest.useFakeTimers();
@@ -47,32 +47,6 @@ describe('Today gets the current', () => {
 
     const timeFromMoment = moment().format(`YYYY M D`);
     expect(date).toEqual(timeFromMoment);
-  });
-});
-
-describe('Today sets breakpoint for', () => {
-  test('small @ 576px', () => {
-    const { value } = todayConfig.customTheme.global.breakpoints.small;
-    expect(value).toEqual(576);
-  });
-
-  test('medium @ 768px', () => {
-    const { value } = todayConfig.customTheme.global.breakpoints.medium;
-    expect(value).toEqual(768);
-  });
-
-  test('large @ 992px', () => {
-    const { value } = todayConfig.customTheme.global.breakpoints.large;
-    expect(value).toEqual(992);
-  });
-
-  test('xlarge higher than large', () => {
-    const { xlarge } = todayConfig.customTheme.global.breakpoints;
-
-    // empty object is used to signal everything higher
-    // as seen in the source code
-    // https://github.com/grommet/grommet/blob/9eed6e5954e2997c4191b079d5ff6d604db178a9/src/js/themes/base.js#L154
-    expect(xlarge).toEqual({});
   });
 });
 
