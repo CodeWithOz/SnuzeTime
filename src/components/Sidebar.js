@@ -5,14 +5,14 @@ import { Layer, Box, Anchor } from 'grommet';
 import { Close } from 'grommet-icons';
 import { toggleSidebar } from '../actions';
 
-export const Sidebar = ({ shown, hide, background }) => {
+export const Sidebar = ({ shown, hide, background }, { size }) => {
   return shown ? (
     <Layer full="vertical" position="left" onEsc={hide} onClickOutside={hide}>
       <Box fill background={background}>
         <Box direction="row" align="center" justify="end" elevation="xsmall">
           <Anchor icon={<Close />} onClick={hide} />
         </Box>
-        Sidebar
+        <Box width={size !== 'small' && 'medium'}>Sidebar</Box>
       </Box>
     </Layer>
   ) : null;
