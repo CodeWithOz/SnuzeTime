@@ -86,4 +86,10 @@ describe('Today', () => {
       spy.mockRestore();
     });
   });
+
+  describe('exposes getSpinnerColor which', () => {
+    test('is a function', () => {
+      expect(typeof Today.prototype.getSpinnerColor).toEqual('function');
+    });
+  });
 });
