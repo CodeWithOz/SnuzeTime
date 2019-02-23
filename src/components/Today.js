@@ -6,7 +6,6 @@ import { grommet, Box, Grommet } from 'grommet';
 import { deepMerge } from 'grommet/utils';
 import { connect } from 'react-redux';
 import Navbar from './Navbar';
-import Sidebar from './Sidebar';
 import Clock from './Clock';
 import ButtonDisplay from './ButtonDisplay';
 import TodayView from './TodayView';
@@ -99,7 +98,6 @@ export class Today extends Component {
     return (
       <Box fill background={background}>
         <Navbar title={todayConfig.appName} />
-        <Sidebar background={background} />
         <Box flex>
           <Clock />
           <Box flex align="center" justify="center">
