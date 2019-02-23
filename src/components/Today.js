@@ -5,7 +5,6 @@ import 'moment-timer';
 import { Box } from 'grommet';
 import { connect } from 'react-redux';
 import { RotateSpinLoader } from 'react-css-loaders';
-import Navbar from './Navbar';
 import Clock from './Clock';
 import ButtonDisplay from './ButtonDisplay';
 import TodayView from './TodayView';
@@ -79,7 +78,6 @@ export class Today extends Component {
   renderToday = () => {
     return (
       <Box fill>
-        <Navbar title={todayConfig.appName} />
         <Box flex>
           <Clock />
           <Box flex align="center" justify="center">
