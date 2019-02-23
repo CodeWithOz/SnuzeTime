@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import 'moment-timer';
-import { grommet, Box, Grommet } from 'grommet';
-import { deepMerge } from 'grommet/utils';
+import { Box, Grommet } from 'grommet';
 import { connect } from 'react-redux';
 import Navbar from './Navbar';
 import Clock from './Clock';
@@ -14,23 +13,7 @@ import actionCreators from '../actions';
 import constants from '../constants';
 
 export const todayConfig = {
-  appName: 'SnuzeTime 💤🕙',
-  customTheme: deepMerge(grommet, {
-    global: {
-      breakpoints: {
-        small: {
-          value: 576
-        },
-        medium: {
-          value: 768
-        },
-        large: {
-          value: 992
-        },
-        xlarge: {} // anything larger than large
-      }
-    }
-  })
+  appName: 'SnuzeTime 💤🕙'
 };
 
 export class Today extends Component {
