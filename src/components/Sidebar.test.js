@@ -20,6 +20,11 @@ describe('Sidebar', () => {
       const wrapper = shallow(<Sidebar shown={false} />);
       expect(wrapper.get(0)).toBeFalsy();
     });
+
+    test(`a component named 'Main Content' when shown`, () => {
+      const wrapper = shallow(<Sidebar shown />);
+      expect(wrapper.find('Main Content').length).toEqual(1);
+    });
   });
 
   describe('appropriately passes the dismiss callback to', () => {
@@ -40,17 +45,5 @@ describe('Sidebar', () => {
       wrapper.find(Close).simulate('click');
       expect(mockHide).toHaveBeenCalledTimes(1);
     });
-  });
-});
-
-describe(`Sidebar's main content`, () => {
-  test('has medium width above the small breakpoint', () => {
-    const expectedWidth = 'medium';
-    const context = { size: expectedWidth };
-    const wrapper = shallow(<Sidebar shown />, { context });
-    expect(wrapper.find('.main-content').props().width).toEqual(expectedWidth);
-
-    wrapper.setContext({ size: 'large' });
-    expect(wrapper.find('.main-content').props().width).toEqual(expectedWidth);
   });
 });
