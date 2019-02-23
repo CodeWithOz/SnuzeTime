@@ -71,6 +71,8 @@ export class Today extends Component {
     return Number(moment().format('HH'));
   }
 
+  getSpinnerColor(currentHour) {}
+
   renderToday = () => {
     return (
       <Box fill>
