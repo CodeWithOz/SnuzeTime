@@ -3,7 +3,6 @@ import { shallow } from 'enzyme';
 import moment from 'moment';
 import 'moment-timer';
 import { Today, todayConfig } from './Today';
-import Sidebar from './Sidebar';
 
 // mock native timers
 jest.useFakeTimers();
@@ -99,13 +98,6 @@ describe('Today', () => {
       },
       mainAppShown: true
     };
-  });
-
-  test('renders a Sidebar component when shown', () => {
-    const wrapper = shallow(<Today {...props} />, {
-      context: { size: 'small' }
-    });
-    expect(wrapper.find(Sidebar).length).toEqual(1);
   });
 
   describe('exposes renderToday which', () => {
