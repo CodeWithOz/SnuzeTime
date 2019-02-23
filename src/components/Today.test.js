@@ -91,5 +91,12 @@ describe('Today', () => {
     test('is a function', () => {
       expect(typeof Today.prototype.getSpinnerColor).toEqual('function');
     });
+
+    test('gets the correct spinner color', () => {
+      const nightColor = '#F8F8F8';
+      const dayColor = '#333333';
+      expect(Today.prototype.getSpinnerColor(10)).toEqual(dayColor);
+      expect(Today.prototype.getSpinnerColor(22)).toEqual(nightColor);
+    });
   });
 });
