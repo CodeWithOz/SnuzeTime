@@ -5,41 +5,45 @@ import { Close } from 'grommet-icons';
 import { Sidebar } from './Sidebar';
 
 describe('Sidebar', () => {
-  describe('renders', () => {
-    test('a grommet Layer when shown', () => {
-      const wrapper = shallow(<Sidebar shown />);
-      expect(wrapper.find(Layer).length).toEqual(1);
-    });
+  describe('when shown', () => {
+    describe('renders', () => {
+      test('a grommet Layer', () => {
+        const wrapper = shallow(<Sidebar shown />);
+        expect(wrapper.find(Layer).length).toEqual(1);
+      });
 
-    test('a grommet Close icon when shown', () => {
-      const wrapper = mount(<Sidebar shown />);
-      expect(wrapper.find(Close).length).toEqual(1);
-    });
+      test('a grommet Close icon', () => {
+        const wrapper = mount(<Sidebar shown />);
+        expect(wrapper.find(Close).length).toEqual(1);
+      });
 
-    test('nothing when not shown', () => {
+      describe(`a grommet Box component with a width prop`, () => {
+        // this Box determines the width of the sidebar
+        const getOptions = size => {
+          return { context: { size } };
+        };
+
+        test(`set to 'medium' on larger viewports`, () => {
+          // by default the component fills up its container on small viewports
+          const expectedWidth = 'medium';
+          const wrapper = shallow(<Sidebar shown />, getOptions('medium'));
+          expect(wrapper.find({ width: expectedWidth }).length).toEqual(1);
+          expect(wrapper.find({ width: expectedWidth }).is(Box)).toEqual(true);
+
+          wrapper.setContext(getOptions('large'));
+          expect(wrapper.find({ width: expectedWidth }).length).toEqual(1);
+
+          wrapper.setContext(getOptions('xlarge'));
+          expect(wrapper.find({ width: expectedWidth }).length).toEqual(1);
+        });
+      });
+    });
+  });
+
+  describe('when not shown', () => {
+    test('renders nothing', () => {
       const wrapper = shallow(<Sidebar shown={false} />);
       expect(wrapper.get(0)).toBeFalsy();
-    });
-
-    describe(`a grommet Box component with a width prop`, () => {
-      // this Box determines the width of the sidebar
-      const getOptions = size => {
-        return { context: { size } };
-      };
-
-      test(`set to 'medium' on larger viewports`, () => {
-        // by default the component fills up its container on small viewports
-        const expectedWidth = 'medium';
-        const wrapper = shallow(<Sidebar shown />, getOptions('medium'));
-        expect(wrapper.find({ width: expectedWidth }).length).toEqual(1);
-        expect(wrapper.find({ width: expectedWidth }).is(Box)).toEqual(true);
-
-        wrapper.setContext(getOptions('large'));
-        expect(wrapper.find({ width: expectedWidth }).length).toEqual(1);
-
-        wrapper.setContext(getOptions('xlarge'));
-        expect(wrapper.find({ width: expectedWidth }).length).toEqual(1);
-      });
     });
   });
 
