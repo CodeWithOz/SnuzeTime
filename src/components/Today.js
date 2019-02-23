@@ -88,15 +88,9 @@ export class Today extends Component {
     return Number(moment().format('HH'));
   }
 
-  getBackground(currentHour) {
-    return currentHour >= 7 && currentHour < 19 ? 'light-1' : 'dark-1';
-  }
-
   renderToday = () => {
-    const background = this.getBackground(this.props.currentTimes.hour);
-
     return (
-      <Box fill background={background}>
+      <Box fill>
         <Navbar title={todayConfig.appName} />
         <Box flex>
           <Clock />
