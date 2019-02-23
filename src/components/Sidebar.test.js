@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import { Layer } from 'grommet';
+import { Box, Layer } from 'grommet';
 import { Close } from 'grommet-icons';
 import { Sidebar } from './Sidebar';
 
@@ -21,9 +21,24 @@ describe('Sidebar', () => {
       expect(wrapper.get(0)).toBeFalsy();
     });
 
-    test(`a component named 'Main Content' when shown`, () => {
-      const wrapper = shallow(<Sidebar shown />);
-      expect(wrapper.find('Main Content').length).toEqual(1);
+    describe(`a grommet Box component with a width prop`, () => {
+      // this Box determines the width of the sidebar
+      const getOptions = size => {
+        return { context: { size } };
+      };
+
+      test(`set to 'medium' on larger viewports`, () => {
+        const expectedWidth = 'medium';
+        const wrapper = shallow(<Sidebar shown />, getOptions('medium'));
+        expect(wrapper.find({ width: expectedWidth }).length).toEqual(1);
+        expect(wrapper.find({ width: expectedWidth }).is(Box)).toEqual(true);
+
+        wrapper.setContext(getOptions('large'));
+        expect(wrapper.find({ width: expectedWidth }).length).toEqual(1);
+
+        wrapper.setContext(getOptions('xlarge'));
+        expect(wrapper.find({ width: expectedWidth }).length).toEqual(1);
+      });
     });
   });
 
