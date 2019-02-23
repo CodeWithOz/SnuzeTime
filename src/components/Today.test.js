@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import moment from 'moment';
 import 'moment-timer';
+import { RotateSpinLoader } from 'react-css-loaders';
 import { Today } from './Today';
 
 // mock native timers
@@ -97,6 +98,27 @@ describe('Today', () => {
       const dayColor = '#333333';
       expect(Today.prototype.getSpinnerColor(10)).toEqual(dayColor);
       expect(Today.prototype.getSpinnerColor(22)).toEqual(nightColor);
+    });
+  });
+
+  describe('when loading', () => {
+    let editedProps;
+
+    beforeEach(() => {
+      editedProps = { ...props, mainAppShown: false };
+    });
+
+    test('displays a loading spinner', () => {
+      const wrapper = shallow(<Today {...editedProps} />);
+      expect(wrapper.find(RotateSpinLoader).length).toEqual(1);
+    });
+
+    test('displays a loading spinner with the correct color', () => {
+      const expectedColor = Today.prototype.getSpinnerColor(editedProps.hour);
+      const loader = shallow(<Today {...editedProps} />)
+        .find(RotateSpinLoader)
+        .at(0);
+      expect(loader.props().color).toEqual(expectedColor);
     });
   });
 });
