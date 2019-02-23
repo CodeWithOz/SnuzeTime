@@ -28,6 +28,7 @@ describe('Sidebar', () => {
       };
 
       test(`set to 'medium' on larger viewports`, () => {
+        // by default the component fills up its container on small viewports
         const expectedWidth = 'medium';
         const wrapper = shallow(<Sidebar shown />, getOptions('medium'));
         expect(wrapper.find({ width: expectedWidth }).length).toEqual(1);
