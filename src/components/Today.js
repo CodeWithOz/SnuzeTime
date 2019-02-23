@@ -14,7 +14,7 @@ import SplashScreen from './SplashScreen';
 import actionCreators from '../actions';
 import constants from '../constants';
 
-export const appConfig = {
+export const todayConfig = {
   appName: 'SnuzeTime 💤🕙',
   customTheme: deepMerge(grommet, {
     global: {
@@ -34,7 +34,7 @@ export const appConfig = {
   })
 };
 
-export class App extends Component {
+export class Today extends Component {
   componentDidMount() {
     this.startTimer();
   }
@@ -93,12 +93,12 @@ export class App extends Component {
     return currentHour >= 7 && currentHour < 19 ? 'light-1' : 'dark-1';
   }
 
-  renderMainApp = () => {
+  renderToday = () => {
     const background = this.getBackground(this.props.currentTimes.hour);
 
     return (
       <Box fill background={background}>
-        <Navbar title={appConfig.appName} />
+        <Navbar title={todayConfig.appName} />
         <Sidebar background={background} />
         <Box flex>
           <Clock />
@@ -113,18 +113,18 @@ export class App extends Component {
 
   render() {
     return (
-      <Grommet full theme={appConfig.customTheme}>
+      <Grommet full theme={todayConfig.customTheme}>
         {!this.props.mainAppShown ? (
-          <SplashScreen appName={appConfig.appName} />
+          <SplashScreen appName={todayConfig.appName} />
         ) : (
-          this.renderMainApp()
+          this.renderToday()
         )}
       </Grommet>
     );
   }
 }
 
-App.propTypes = {
+Today.propTypes = {
   currentTimes: PropTypes.exact({
     withSeconds: PropTypes.string,
     withoutSeconds: PropTypes.string,
@@ -148,4 +148,4 @@ export default connect(
     showMainApp: actionCreators.showMainApp,
     updateCurrentTimes: actionCreators.updateCurrentTimes
   }
-)(App);
+)(Today);
