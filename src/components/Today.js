@@ -11,10 +11,6 @@ import TodayView from './TodayView';
 import actionCreators from '../actions';
 import constants from '../constants';
 
-export const todayConfig = {
-  appName: 'SnuzeTime 💤🕙'
-};
-
 export class Today extends Component {
   componentDidMount() {
     this.startTimer();
