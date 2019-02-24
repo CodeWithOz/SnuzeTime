@@ -1,23 +1,46 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Layer, Box, Anchor } from 'grommet';
+import { Anchor, Box, Button, Layer } from 'grommet';
 import { Close } from 'grommet-icons';
 import { NavLink } from 'react-router-dom';
 import { toggleSidebar } from '../actions';
 
 export const Sidebar = ({ shown, hide, background }, { size }) => {
   return shown ? (
-    <Layer full="vertical" position="left" onEsc={hide} onClickOutside={hide}>
+    <Layer
+      responsive={false}
+      full="vertical"
+      position="left"
+      onEsc={hide}
+      onClickOutside={hide}
+    >
       <Box fill background={background}>
-        <Box direction="row" align="center" justify="end" elevation="xsmall">
+        <Box
+          width="medium"
+          direction="row"
+          align="center"
+          justify="end"
+          elevation="xsmall"
+        >
           <Anchor icon={<Close />} onClick={hide} />
         </Box>
-        <Box justify="center" width={size !== 'small' && 'medium'}>
-          <NavLink to="/">
-            <Anchor>Today</Anchor>
-          </NavLink>
-        </Box>
+        <Button hoverIndicator>
+          <Box elevation="small">
+            <NavLink
+              exact
+              to="/"
+              style={{
+                textDecoration: 'none',
+                color: 'inherit',
+                textAlign: 'center',
+                padding: '1.5em'
+              }}
+            >
+              Today
+            </NavLink>
+          </Box>
+        </Button>
       </Box>
     </Layer>
   ) : null;
