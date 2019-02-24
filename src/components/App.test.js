@@ -96,14 +96,21 @@ describe('App', () => {
         withoutSeconds: '',
         hour: 1,
         date: '9999 9 9'
-      },
-      mainAppShown: true
+      }
     };
   });
 
-  test('renders a Sidebar component when shown', () => {
-    const wrapper = shallow(<App {...props} />, { context: { size: 'small' } });
-    expect(wrapper.find(Sidebar).length).toEqual(1);
+  describe('when shown', () => {
+    beforeEach(() => {
+      props = { ...props, mainAppShown: true };
+    });
+
+    test('renders a Sidebar component', () => {
+      const wrapper = shallow(<App {...props} />, {
+        context: { size: 'small' }
+      });
+      expect(wrapper.find(Sidebar).length).toEqual(1);
+    });
   });
 
   describe('exposes renderMainApp which', () => {
