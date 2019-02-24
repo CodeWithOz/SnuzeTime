@@ -6,6 +6,7 @@ import { HashRouter } from 'react-router-dom';
 import { App, appConfig } from './App';
 import Sidebar from './Sidebar';
 import Navbar from './Navbar';
+import Main from './Main';
 import SplashScreen from './SplashScreen';
 
 describe('App gets the current', () => {
@@ -88,6 +89,13 @@ describe('App', () => {
         context: { size: 'small' }
       });
       expect(wrapper.find(Navbar).length).toEqual(1);
+    });
+
+    test('renders a Main component', () => {
+      const wrapper = shallow(<App {...props} />, {
+        context: { size: 'small' }
+      });
+      expect(wrapper.find(Main).length).toEqual(1);
     });
   });
 
