@@ -12,7 +12,6 @@ import ButtonDisplay from './ButtonDisplay';
 import TodayView from './TodayView';
 import SplashScreen from './SplashScreen';
 import actionCreators from '../actions';
-import constants from '../constants';
 
 export const appConfig = {
   appName: 'SnuzeTime 💤🕙',
@@ -54,46 +53,6 @@ export class App extends Component {
 
   getCurrentHour() {
     return Number(moment().format('HH'));
-  }
-
-  setCurrentTimeAndDate() {
-    const { withSeconds, withoutSeconds, hour, date } = this.props.currentTimes;
-    const newDate = this.getCurrentDate();
-    const isNewDay = newDate !== date;
-
-    const newTimes = {
-      withSeconds: this.getCurrentTime(),
-      withoutSeconds: this.getCurrentTime(false),
-      hour: this.getCurrentHour(),
-      date: newDate
-    };
-    this.props.updateCurrentTimes(newTimes);
-
-    if (isNewDay) {
-      // trigger a refresh of TodayView for the new date
-      this.props.showTodayView(false);
-    }
-
-    if (!this.props.mainAppShown) {
-      // show the main app if all currentTimes have been set
-      const { currentTimes: initialTimes } = constants.INITIAL_STATE;
-      if (
-        withSeconds !== initialTimes.withSeconds &&
-        withoutSeconds !== initialTimes.withoutSeconds &&
-        hour !== initialTimes.hour &&
-        date !== initialTimes.date
-      ) {
-        this.props.showMainApp(true);
-      }
-    }
-  }
-
-  getCurrentDate() {
-    return moment().format('YYYY M D');
-  }
-
-  getCurrentTime(withSeconds = true) {
-    return moment().format(`hh:mm${withSeconds ? ':ss' : ''} A`);
   }
 
   getBackground(currentHour) {
