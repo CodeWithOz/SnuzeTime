@@ -8,18 +8,6 @@ import { Today } from './Today';
 // mock native timers
 jest.useFakeTimers();
 
-test('Today sets a 1-second recurring timer', () => {
-  // clear previous calls to the mocked timers
-  setInterval.mockClear();
-  expect(setInterval).not.toHaveBeenCalled();
-
-  // initiate the component
-  shallow(<Today />);
-
-  expect(setInterval).toHaveBeenCalledTimes(1);
-  expect(setInterval).toHaveBeenCalledWith(expect.any(Function), 1000);
-});
-
 describe('Today gets the current', () => {
   test('time as HH:MM AM/PM', () => {
     const timeWithoutSeconds = Today.prototype.getCurrentTime(false);
@@ -63,6 +51,18 @@ describe('Today', () => {
         date: '9999 9 9'
       }
     };
+  });
+
+  test('sets a 1-second recurring timer', () => {
+    // clear previous calls to the mocked timers
+    setInterval.mockClear();
+    expect(setInterval).not.toHaveBeenCalled();
+
+    // initiate the component
+    shallow(<Today {...props} />);
+
+    expect(setInterval).toHaveBeenCalledTimes(1);
+    expect(setInterval).toHaveBeenCalledWith(expect.any(Function), 1000);
   });
 
   describe('exposes renderToday which', () => {
