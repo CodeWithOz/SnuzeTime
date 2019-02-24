@@ -19,25 +19,12 @@ describe('Sidebar', () => {
         expect(wrapper.find({ icon: <Close /> }).is(Anchor)).toEqual(true);
       });
 
-      describe(`a grommet Box component with a width prop`, () => {
+      test('a grommet Box component with medium width', () => {
         // this Box determines the width of the sidebar
-        const getOptions = size => {
-          return { context: { size } };
-        };
-
-        test(`set to 'medium' on larger viewports`, () => {
-          // by default the component fills up its container on small viewports
-          const expectedWidth = 'medium';
-          const wrapper = shallow(<Sidebar shown />, getOptions('medium'));
-          expect(wrapper.find({ width: expectedWidth }).length).toEqual(1);
-          expect(wrapper.find({ width: expectedWidth }).is(Box)).toEqual(true);
-
-          wrapper.setContext(getOptions('large'));
-          expect(wrapper.find({ width: expectedWidth }).length).toEqual(1);
-
-          wrapper.setContext(getOptions('xlarge'));
-          expect(wrapper.find({ width: expectedWidth }).length).toEqual(1);
-        });
+        const expectedWidth = 'medium';
+        const wrapper = shallow(<Sidebar shown />);
+        expect(wrapper.find({ width: expectedWidth }).length).toEqual(1);
+        expect(wrapper.find({ width: expectedWidth }).is(Box)).toEqual(true);
       });
 
       test('a NavLink to the homepage', () => {
