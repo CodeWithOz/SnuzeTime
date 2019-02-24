@@ -12,6 +12,8 @@ import actionCreators from '../actions';
 import constants from '../constants';
 
 export class Today extends Component {
+  state = { shown: false };
+
   componentDidMount() {
     this.startTimer();
   }
@@ -40,16 +42,17 @@ export class Today extends Component {
       this.props.showTodayView(false);
     }
 
-    if (!this.props.mainAppShown) {
-      // show the main app if all currentTimes have been set
+    if (!this.state.shown) {
       const { currentTimes: initialTimes } = constants.INITIAL_STATE;
+      // check if all currentTimes have been set
       if (
         withSeconds !== initialTimes.withSeconds &&
         withoutSeconds !== initialTimes.withoutSeconds &&
         hour !== initialTimes.hour &&
         date !== initialTimes.date
       ) {
-        this.props.showMainApp(true);
+        // show the main app
+        this.setState({ shown: true });
       }
     }
   }
@@ -84,7 +87,7 @@ export class Today extends Component {
   };
 
   render() {
-    return !this.props.mainAppShown ? (
+    return !this.state.shown ? (
       <RotateSpinLoader
         size={2}
         color={this.getSpinnerColor(this.props.hour)}
@@ -103,20 +106,17 @@ Today.propTypes = {
     date: PropTypes.string
   }),
   updateCurrentTimes: PropTypes.func,
-  showTodayView: PropTypes.func,
-  mainAppShown: PropTypes.bool,
-  showMainApp: PropTypes.func
+  showTodayView: PropTypes.func
 };
 
-const mapStateToProps = ({ currentTimes, mainAppShown }) => {
-  return { currentTimes, mainAppShown };
+const mapStateToProps = ({ currentTimes }) => {
+  return { currentTimes };
 };
 
 export default connect(
   mapStateToProps,
   {
     showTodayView: actionCreators.showTodayView,
-    showMainApp: actionCreators.showMainApp,
     updateCurrentTimes: actionCreators.updateCurrentTimes
   }
 )(Today);
