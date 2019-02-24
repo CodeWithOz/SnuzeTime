@@ -6,21 +6,6 @@ import { App, appConfig } from './App';
 import Sidebar from './Sidebar';
 import SplashScreen from './SplashScreen';
 
-// mock native timers
-jest.useFakeTimers();
-
-test('App sets a 1-second recurring timer', () => {
-  // clear previous calls to the mocked timers
-  setInterval.mockClear();
-  expect(setInterval).not.toHaveBeenCalled();
-
-  // initiate the component
-  shallow(<App />);
-
-  expect(setInterval).toHaveBeenCalledTimes(1);
-  expect(setInterval).toHaveBeenCalledWith(expect.any(Function), 1000);
-});
-
 describe('App gets the current', () => {
   test('time as HH:MM AM/PM', () => {
     const timeWithoutSeconds = App.prototype.getCurrentTime(false);
