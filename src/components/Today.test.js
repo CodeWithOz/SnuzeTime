@@ -93,8 +93,8 @@ describe('Today', () => {
     });
 
     test('gets the correct spinner color', () => {
-      const nightColor = '#F8F8F8';
-      const dayColor = '#333333';
+      const dayColor = '#F8F8F8';
+      const nightColor = '#333333';
       expect(Today.prototype.getSpinnerColor(10)).toEqual(dayColor);
       expect(Today.prototype.getSpinnerColor(22)).toEqual(nightColor);
     });
