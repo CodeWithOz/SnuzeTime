@@ -61,8 +61,7 @@ describe('Today', () => {
         withoutSeconds: '',
         hour: 1,
         date: '9999 9 9'
-      },
-      mainAppShown: true
+      }
     };
   });
 
@@ -76,12 +75,12 @@ describe('Today', () => {
     });
 
     test('is called when Today is shown', () => {
-      const editedProps = { ...props, mainAppShown: false };
-      const wrapper = shallow(<Today {...editedProps} />);
+      const wrapper = shallow(<Today {...props} />);
       const spy = jest.spyOn(wrapper.instance(), 'renderToday');
+      wrapper.setState({ shown: false });
       expect(spy).not.toHaveBeenCalled();
 
-      wrapper.setProps({ mainAppShown: true });
+      wrapper.setState({ shown: true });
       expect(spy).toHaveBeenCalledTimes(1);
 
       spy.mockRestore();
