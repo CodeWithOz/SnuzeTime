@@ -139,8 +139,7 @@ describe('App', () => {
     // it is therefore not on the prototype and must be reached from a
     // shallow render of the component
     test('is a function', () => {
-      const wrapper = shallow(<App {...props} />);
-      expect(typeof wrapper.instance().setHour).toEqual('function');
+      expect(typeof App.prototype.setHour).toEqual('function');
     });
   });
 });
