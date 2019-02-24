@@ -37,7 +37,7 @@ export const Sidebar = ({ shown, hide, background }, { size }) => {
                 padding: '1.5em'
               }}
             >
-              Today
+              <Anchor as="span">Today</Anchor>
             </NavLink>
           </Box>
         </Button>
