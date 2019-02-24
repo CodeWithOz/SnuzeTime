@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 import { Box, Layer } from 'grommet';
 import { Close } from 'grommet-icons';
+import { NavLink } from 'react-router-dom';
 import { Sidebar } from './Sidebar';
 
 describe('Sidebar', () => {
@@ -36,6 +37,12 @@ describe('Sidebar', () => {
           wrapper.setContext(getOptions('xlarge'));
           expect(wrapper.find({ width: expectedWidth }).length).toEqual(1);
         });
+      });
+
+      test('a NavLink to the homepage', () => {
+        const wrapper = shallow(<Sidebar shown />);
+        expect(wrapper.find({ to: '/' }).length).toEqual(1);
+        expect(wrapper.find({ to: '/' }).is(NavLink)).toEqual(true);
       });
     });
   });
