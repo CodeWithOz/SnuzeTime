@@ -7,33 +7,11 @@ import Sidebar from './Sidebar';
 import SplashScreen from './SplashScreen';
 
 describe('App gets the current', () => {
-  test('time as HH:MM AM/PM', () => {
-    const timeWithoutSeconds = App.prototype.getCurrentTime(false);
-
-    // moment returns nicely formatted time strings
-    const timeFromMoment = moment().format(`hh:mm A`);
-    expect(timeWithoutSeconds).toEqual(timeFromMoment);
-  });
-
-  test('time as HH:MM:SS AM/PM', () => {
-    const timeWithSeconds = App.prototype.getCurrentTime();
-
-    const timeFromMoment = moment().format(`hh:mm:ss A`);
-    expect(timeWithSeconds).toEqual(timeFromMoment);
-  });
-
   test('hour in 24-hour format', () => {
     const hour = App.prototype.getCurrentHour();
 
     const timeFromMoment = Number(moment().format(`HH`));
     expect(hour).toEqual(timeFromMoment);
-  });
-
-  test('date as YYYY M D', () => {
-    const date = App.prototype.getCurrentDate();
-
-    const timeFromMoment = moment().format(`YYYY M D`);
-    expect(date).toEqual(timeFromMoment);
   });
 });
 
