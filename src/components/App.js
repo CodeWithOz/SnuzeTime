@@ -98,7 +98,6 @@ App.propTypes = {
     date: PropTypes.string
   }),
   updateCurrentTimes: PropTypes.func,
-  showTodayView: PropTypes.func,
   mainAppShown: PropTypes.bool,
   showMainApp: PropTypes.func
 };
@@ -110,7 +109,6 @@ const mapStateToProps = ({ currentTimes, mainAppShown }) => {
 export default connect(
   mapStateToProps,
   {
-    showTodayView: actionCreators.showTodayView,
     showMainApp: actionCreators.showMainApp,
     updateCurrentTimes: actionCreators.updateCurrentTimes
   }
