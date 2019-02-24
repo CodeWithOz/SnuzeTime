@@ -8,9 +8,7 @@ import { connect } from 'react-redux';
 import { HashRouter } from 'react-router-dom';
 import Navbar from './Navbar';
 import Sidebar from './Sidebar';
-import Clock from './Clock';
-import ButtonDisplay from './ButtonDisplay';
-import TodayView from './TodayView';
+import Main from './Main';
 import SplashScreen from './SplashScreen';
 import actionCreators from '../actions';
 
@@ -67,13 +65,7 @@ export class App extends Component {
       <Box fill background={background}>
         <Navbar title={appConfig.appName} />
         <Sidebar background={background} />
-        <Box flex>
-          <Clock />
-          <Box flex align="center" justify="center">
-            <ButtonDisplay />
-            <TodayView />
-          </Box>
-        </Box>
+        <Main />
       </Box>
     );
   };
