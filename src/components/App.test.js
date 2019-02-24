@@ -141,5 +141,27 @@ describe('App', () => {
     test('is a function', () => {
       expect(typeof App.prototype.setHour).toEqual('function');
     });
+
+    test('updates the currentTimes state with the current hour', () => {
+      const updateCurrentTimesMock = jest.fn();
+      expect(updateCurrentTimesMock).not.toHaveBeenCalled();
+
+      const setHourSpy = jest.spyOn(App.prototype, 'setHour');
+      expect(setHourSpy).not.toHaveBeenCalled();
+      const getCurrentHourSpy = jest.spyOn(App.prototype, 'getCurrentHour');
+      expect(getCurrentHourSpy).not.toHaveBeenCalled();
+
+      const editedProps = {
+        ...props,
+        updateCurrentTimes: updateCurrentTimesMock
+      };
+      shallow(<App {...editedProps} />);
+      expect(setHourSpy).toHaveBeenCalled();
+      expect(updateCurrentTimesMock).toHaveBeenCalled();
+      expect(getCurrentHourSpy).toHaveBeenCalled();
+
+      setHourSpy.mockRestore();
+      getCurrentHourSpy.mockRestore();
+    });
   });
 });
