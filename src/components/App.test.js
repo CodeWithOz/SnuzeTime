@@ -4,6 +4,7 @@ import moment from 'moment';
 import 'moment-timer';
 import { App, appConfig } from './App';
 import Sidebar from './Sidebar';
+import SplashScreen from './SplashScreen';
 
 // mock native timers
 jest.useFakeTimers();
@@ -110,6 +111,19 @@ describe('App', () => {
         context: { size: 'small' }
       });
       expect(wrapper.find(Sidebar).length).toEqual(1);
+    });
+  });
+
+  describe('when not shown', () => {
+    beforeEach(() => {
+      props = { ...props, mainAppShown: false };
+    });
+
+    test('renders a SplashScreen component', () => {
+      const wrapper = shallow(<App {...props} />, {
+        context: { size: 'small' }
+      });
+      expect(wrapper.find(SplashScreen).length).toEqual(1);
     });
   });
 
