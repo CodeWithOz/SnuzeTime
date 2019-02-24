@@ -71,7 +71,7 @@ export class Today extends Component {
 
   getSpinnerColor(currentHour) {
     // returns the reverse of the main background to ensure contrast
-    return currentHour >= 7 && currentHour < 19 ? '#333333' : '#F8F8F8';
+    return currentHour >= 7 && currentHour < 19 ? '#F8F8F8' : '#333333';
   }
 
   renderToday = () => {
