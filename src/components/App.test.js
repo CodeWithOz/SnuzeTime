@@ -4,6 +4,7 @@ import moment from 'moment';
 import 'moment-timer';
 import { App, appConfig } from './App';
 import Sidebar from './Sidebar';
+import Navbar from './Navbar';
 import SplashScreen from './SplashScreen';
 
 describe('App gets the current', () => {
@@ -79,6 +80,13 @@ describe('App', () => {
         context: { size: 'small' }
       });
       expect(wrapper.find(Sidebar).length).toEqual(1);
+    });
+
+    test('renders a Navbar component', () => {
+      const wrapper = shallow(<App {...props} />, {
+        context: { size: 'small' }
+      });
+      expect(wrapper.find(Navbar).length).toEqual(1);
     });
   });
 
