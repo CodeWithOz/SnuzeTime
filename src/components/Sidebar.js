@@ -11,7 +11,9 @@ export const Sidebar = ({ shown, hide, background }, { size }) => {
     <Layer full="vertical" position="left" onEsc={hide} onClickOutside={hide}>
       <Box fill background={background}>
         <Box direction="row" align="center" justify="end" elevation="xsmall">
-          <Anchor icon={<Close />} onClick={hide} />
+          <Anchor onClick={hide}>
+            <Close />
+          </Anchor>
         </Box>
         <Box justify="center" width={size !== 'small' && 'medium'}>
           <NavLink to="/">
