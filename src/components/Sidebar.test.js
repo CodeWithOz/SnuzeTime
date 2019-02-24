@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import { Box, Layer } from 'grommet';
 import { Close } from 'grommet-icons';
 import { NavLink } from 'react-router-dom';
@@ -14,7 +14,7 @@ describe('Sidebar', () => {
       });
 
       test('a grommet Close icon', () => {
-        const wrapper = mount(<Sidebar shown />);
+        const wrapper = shallow(<Sidebar shown />);
         expect(wrapper.find(Close).length).toEqual(1);
       });
 
@@ -59,7 +59,7 @@ describe('Sidebar', () => {
 
     beforeEach(() => {
       mockHide = jest.fn();
-      wrapper = mount(<Sidebar shown hide={mockHide} />);
+      wrapper = shallow(<Sidebar shown hide={mockHide} />);
     });
 
     test('the Layer', () => {
