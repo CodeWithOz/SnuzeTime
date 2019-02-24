@@ -101,22 +101,20 @@ describe('Today', () => {
   });
 
   describe('when loading', () => {
-    let editedProps;
+    let wrapper;
 
     beforeEach(() => {
-      editedProps = { ...props, mainAppShown: false };
+      wrapper = shallow(<Today {...props} />);
+      wrapper.setState({ shown: false });
     });
 
     test('displays a loading spinner', () => {
-      const wrapper = shallow(<Today {...editedProps} />);
       expect(wrapper.find(RotateSpinLoader).length).toEqual(1);
     });
 
     test('displays a loading spinner with the correct color', () => {
-      const expectedColor = Today.prototype.getSpinnerColor(editedProps.hour);
-      const loader = shallow(<Today {...editedProps} />)
-        .find(RotateSpinLoader)
-        .at(0);
+      const expectedColor = Today.prototype.getSpinnerColor(props.hour);
+      const loader = wrapper.find(RotateSpinLoader).at(0);
       expect(loader.props().color).toEqual(expectedColor);
     });
   });
