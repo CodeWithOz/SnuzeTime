@@ -35,16 +35,6 @@ export const appConfig = {
 };
 
 export class App extends Component {
-  componentDidMount() {
-    this.startTimer();
-  }
-
-  startTimer() {
-    new moment.duration(1000).timer({ start: true, loop: true }, () => {
-      this.setCurrentTimeAndDate();
-    });
-  }
-
   setCurrentTimeAndDate() {
     const { withSeconds, withoutSeconds, hour, date } = this.props.currentTimes;
     const newDate = this.getCurrentDate();
