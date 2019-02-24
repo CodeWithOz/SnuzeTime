@@ -5,6 +5,7 @@ import 'moment-timer';
 import { grommet, Box, Grommet } from 'grommet';
 import { deepMerge } from 'grommet/utils';
 import { connect } from 'react-redux';
+import { HashRouter } from 'react-router-dom';
 import Navbar from './Navbar';
 import Sidebar from './Sidebar';
 import Clock from './Clock';
@@ -79,13 +80,15 @@ export class App extends Component {
 
   render() {
     return (
-      <Grommet full theme={appConfig.customTheme}>
-        {!this.props.mainAppShown ? (
-          <SplashScreen appName={appConfig.appName} />
-        ) : (
-          this.renderMainApp()
-        )}
-      </Grommet>
+      <HashRouter>
+        <Grommet full theme={appConfig.customTheme}>
+          {!this.props.mainAppShown ? (
+            <SplashScreen appName={appConfig.appName} />
+          ) : (
+            this.renderMainApp()
+          )}
+        </Grommet>
+      </HashRouter>
     );
   }
 }
