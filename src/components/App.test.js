@@ -73,16 +73,21 @@ describe('App sets breakpoint for', () => {
 });
 
 describe('App', () => {
-  let props;
+  let props, updateCurrentTimesMock, showMainAppMock;
 
   beforeEach(() => {
+    showMainAppMock = jest.fn();
+    updateCurrentTimesMock = jest.fn();
+
     props = {
       currentTimes: {
         withSeconds: '',
         withoutSeconds: '',
         hour: 1,
         date: '9999 9 9'
-      }
+      },
+      updateCurrentTimes: updateCurrentTimesMock,
+      showMainApp: showMainAppMock
     };
   });
 
@@ -143,7 +148,6 @@ describe('App', () => {
     });
 
     test('updates the currentTimes state with the current hour', () => {
-      const updateCurrentTimesMock = jest.fn();
       expect(updateCurrentTimesMock).not.toHaveBeenCalled();
 
       const setHourSpy = jest.spyOn(App.prototype, 'setHour');
@@ -151,11 +155,7 @@ describe('App', () => {
       const getCurrentHourSpy = jest.spyOn(App.prototype, 'getCurrentHour');
       expect(getCurrentHourSpy).not.toHaveBeenCalled();
 
-      const editedProps = {
-        ...props,
-        updateCurrentTimes: updateCurrentTimesMock
-      };
-      shallow(<App {...editedProps} />);
+      shallow(<App {...props} />);
       expect(setHourSpy).toHaveBeenCalled();
       expect(updateCurrentTimesMock).toHaveBeenCalled();
       expect(getCurrentHourSpy).toHaveBeenCalled();

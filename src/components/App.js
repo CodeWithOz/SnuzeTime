@@ -35,7 +35,26 @@ export const appConfig = {
 };
 
 export class App extends Component {
-  setHour() {}
+  constructor(props) {
+    super(props);
+
+    this.setHour = this.setHour.bind(this);
+  }
+
+  componentDidMount() {
+    this.setHour();
+  }
+
+  setHour() {
+    const currentHour = this.getCurrentHour();
+    const { currentTimes, updateCurrentTimes, showMainApp } = this.props;
+    updateCurrentTimes({ ...currentTimes, hour: currentHour });
+    showMainApp(true);
+  }
+
+  getCurrentHour() {
+    return Number(moment().format('HH'));
+  }
 
   setCurrentTimeAndDate() {
     const { withSeconds, withoutSeconds, hour, date } = this.props.currentTimes;
@@ -75,10 +94,6 @@ export class App extends Component {
 
   getCurrentTime(withSeconds = true) {
     return moment().format(`hh:mm${withSeconds ? ':ss' : ''} A`);
-  }
-
-  getCurrentHour() {
-    return Number(moment().format('HH'));
   }
 
   getBackground(currentHour) {
