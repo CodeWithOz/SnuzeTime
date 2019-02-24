@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { Box, Layer } from 'grommet';
+import { Anchor, Box, Layer } from 'grommet';
 import { Close } from 'grommet-icons';
 import { NavLink } from 'react-router-dom';
 import { Sidebar } from './Sidebar';
@@ -13,9 +13,10 @@ describe('Sidebar', () => {
         expect(wrapper.find(Layer).length).toEqual(1);
       });
 
-      test('a grommet Close icon', () => {
+      test('a grommet Close icon inside an Anchor', () => {
         const wrapper = shallow(<Sidebar shown />);
-        expect(wrapper.find(Close).length).toEqual(1);
+        expect(wrapper.find({ icon: <Close /> }).length).toEqual(1);
+        expect(wrapper.find({ icon: <Close /> }).is(Anchor)).toEqual(true);
       });
 
       describe(`a grommet Box component with a width prop`, () => {
@@ -67,12 +68,9 @@ describe('Sidebar', () => {
       expect(wrapper.find(Layer).props().onClickOutside).toBe(mockHide);
     });
 
-    test('the parent of the close button', () => {
+    test('the Anchor containing the Close icon', () => {
       expect(mockHide).not.toHaveBeenCalled();
-      wrapper
-        .find(Close)
-        .parent()
-        .simulate('click');
+      wrapper.find({ icon: <Close /> }).simulate('click');
       expect(mockHide).toHaveBeenCalledTimes(1);
     });
   });
