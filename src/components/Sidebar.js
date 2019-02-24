@@ -6,7 +6,7 @@ import { Close } from 'grommet-icons';
 import { NavLink } from 'react-router-dom';
 import { toggleSidebar } from '../actions';
 
-export const Sidebar = ({ shown, hide, background }, { size }) => {
+export const Sidebar = ({ shown, hide, background }) => {
   return shown ? (
     <Layer
       responsive={false}
