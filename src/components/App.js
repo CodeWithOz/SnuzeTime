@@ -35,6 +35,8 @@ export const appConfig = {
 };
 
 export class App extends Component {
+  setHour = () => {};
+
   setCurrentTimeAndDate() {
     const { withSeconds, withoutSeconds, hour, date } = this.props.currentTimes;
     const newDate = this.getCurrentDate();
