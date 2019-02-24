@@ -90,7 +90,7 @@ export class Today extends Component {
     return !this.state.shown ? (
       <RotateSpinLoader
         size={7}
-        color={this.getSpinnerColor(this.props.hour)}
+        color={this.getSpinnerColor(this.props.currentTimes.hour)}
       />
     ) : (
       this.renderToday()
