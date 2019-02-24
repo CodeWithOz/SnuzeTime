@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import moment from 'moment';
 import 'moment-timer';
+import { HashRouter } from 'react-router-dom';
 import { App, appConfig } from './App';
 import Sidebar from './Sidebar';
 import Navbar from './Navbar';
@@ -149,5 +150,10 @@ describe('App', () => {
       setHourSpy.mockRestore();
       getCurrentHourSpy.mockRestore();
     });
+  });
+
+  test('renders a HashRouter from react-router', () => {
+    const wrapper = shallow(<App {...props} />);
+    expect(wrapper.find(HashRouter).length).toEqual(1);
   });
 });
