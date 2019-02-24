@@ -133,4 +133,14 @@ describe('App', () => {
       spy.mockRestore();
     });
   });
+
+  describe('exposes setHour which', () => {
+    // the method is saved in a property as an arrow function to bind 'this'
+    // it is therefore not on the prototype and must be reached from a
+    // shallow render of the component
+    test('is a function', () => {
+      const wrapper = shallow(<App {...props} />);
+      expect(typeof wrapper.instance().setHour).toEqual('function');
+    });
+  });
 });
