@@ -73,13 +73,11 @@ export class Today extends Component {
 
   renderToday = () => {
     return (
-      <Box fill>
-        <Box flex>
-          <Clock />
-          <Box flex align="center" justify="center">
-            <ButtonDisplay />
-            <TodayView />
-          </Box>
+      <Box flex>
+        <Clock />
+        <Box flex align="center" justify="center">
+          <ButtonDisplay />
+          <TodayView />
         </Box>
       </Box>
     );
