@@ -67,9 +67,12 @@ describe('Sidebar', () => {
       expect(wrapper.find(Layer).props().onClickOutside).toBe(mockHide);
     });
 
-    test('the close button', () => {
+    test('the parent of the close button', () => {
       expect(mockHide).not.toHaveBeenCalled();
-      wrapper.find(Close).simulate('click');
+      wrapper
+        .find(Close)
+        .parent()
+        .simulate('click');
       expect(mockHide).toHaveBeenCalledTimes(1);
     });
   });
