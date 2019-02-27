@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import { Anchor, Box, Button } from 'grommet';
 
-const SidebarItem = ({ children, dest }) => {
+const SidebarItem = ({ children, dest, handleClick }) => {
   return (
-    <Button hoverIndicator>
+    <Button hoverIndicator onClick={handleClick}>
       <Box elevation="small">
         <NavLink
           exact
@@ -25,7 +25,8 @@ const SidebarItem = ({ children, dest }) => {
 };
 
 SidebarItem.propTypes = {
-  dest: PropTypes.string.isRequired
+  dest: PropTypes.string.isRequired,
+  handleClick: PropTypes.func
 };
 
 export default SidebarItem;
