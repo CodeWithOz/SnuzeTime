@@ -14,7 +14,7 @@ export class Sidebar extends Component {
   renderItems() {
     return sidebarConfig.items.map((item, index) => {
       return (
-        <SidebarItem key={index} path={item.dest}>
+        <SidebarItem key={index} dest={item.dest}>
           {item.text}
         </SidebarItem>
       );

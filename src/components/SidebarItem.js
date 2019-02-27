@@ -2,13 +2,13 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Anchor, Box, Button } from 'grommet';
 
-const SidebarItem = ({ path }) => {
+const SidebarItem = ({ dest }) => {
   return (
     <Button hoverIndicator>
       <Box elevation="small">
         <NavLink
           exact
-          to={path}
+          to={dest}
           style={{
             textDecoration: 'none',
             color: 'inherit',
