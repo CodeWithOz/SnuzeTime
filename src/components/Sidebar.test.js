@@ -30,8 +30,8 @@ describe('Sidebar', () => {
       test('a SidebarItem for each item in its config', () => {
         const wrapper = shallow(<Sidebar shown />);
         sidebarConfig.items.forEach(item => {
-          expect(wrapper.find({ path: item.path }).length).toEqual(1);
-          expect(wrapper.find({ path: item.path }).is(SidebarItem)).toEqual(
+          expect(wrapper.find({ path: item.dest }).length).toEqual(1);
+          expect(wrapper.find({ path: item.dest }).is(SidebarItem)).toEqual(
             true
           );
         });
