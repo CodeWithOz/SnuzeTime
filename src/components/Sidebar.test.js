@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { Anchor, Box, Button, Layer } from 'grommet';
+import { Anchor, Box, Layer } from 'grommet';
 import { Close } from 'grommet-icons';
 import { Sidebar, sidebarConfig } from './Sidebar';
 import SidebarItem from './SidebarItem';
