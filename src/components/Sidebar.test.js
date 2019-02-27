@@ -46,7 +46,7 @@ describe('Sidebar', () => {
     });
   });
 
-  describe('appropriately passes the dismiss callback to', () => {
+  describe('appropriately passes the hide callback to', () => {
     let mockHide, wrapper;
 
     beforeEach(() => {
@@ -63,6 +63,16 @@ describe('Sidebar', () => {
       expect(mockHide).not.toHaveBeenCalled();
       wrapper.find({ icon: <Close /> }).simulate('click');
       expect(mockHide).toHaveBeenCalledTimes(1);
+    });
+
+    test('each sidebar item', () => {
+      const sidebarItems = wrapper.find(SidebarItem).getElements();
+      sidebarItems.forEach(item => {
+        expect(mockHide).not.toHaveBeenCalled();
+        item.simulate('click');
+        expect(mockHide).toHaveBeenCalledTimes(1);
+        mockHide.mockClear();
+      });
     });
   });
 });
