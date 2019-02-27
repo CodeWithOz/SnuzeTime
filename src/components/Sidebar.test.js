@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { Anchor, Box, Layer } from 'grommet';
+import { Anchor, Box, Button, Layer } from 'grommet';
 import { Close } from 'grommet-icons';
 import { Sidebar, sidebarConfig } from './Sidebar';
 import SidebarItem from './SidebarItem';
@@ -66,13 +66,11 @@ describe('Sidebar', () => {
     });
 
     test('each sidebar item', () => {
-      const sidebarItems = wrapper.find(SidebarItem).getElements();
-      sidebarItems.forEach(item => {
-        expect(mockHide).not.toHaveBeenCalled();
-        item.props.onClick();
-        expect(mockHide).toHaveBeenCalledTimes(1);
-        mockHide.mockClear();
-      });
+      const sidebarItems = wrapper.find(SidebarItem);
+
+      for (let i = 0; i < sidebarItems.length; i++) {
+        expect(sidebarItems.at(i).props().handleClick).toBe(mockHide);
+      }
     });
   });
 });
