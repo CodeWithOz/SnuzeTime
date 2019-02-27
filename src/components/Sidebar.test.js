@@ -69,7 +69,7 @@ describe('Sidebar', () => {
       const sidebarItems = wrapper.find(SidebarItem).getElements();
       sidebarItems.forEach(item => {
         expect(mockHide).not.toHaveBeenCalled();
-        item.simulate('click');
+        item.props.onClick();
         expect(mockHide).toHaveBeenCalledTimes(1);
         mockHide.mockClear();
       });

@@ -14,7 +14,7 @@ export class Sidebar extends Component {
   renderItems() {
     return sidebarConfig.items.map((item, index) => {
       return (
-        <SidebarItem key={index} dest={item.dest}>
+        <SidebarItem key={index} onClick={this.props.hide} dest={item.dest}>
           {item.text}
         </SidebarItem>
       );
