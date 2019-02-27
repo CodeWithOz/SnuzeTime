@@ -2,8 +2,8 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { Anchor, Box, Layer } from 'grommet';
 import { Close } from 'grommet-icons';
-import { NavLink } from 'react-router-dom';
-import { Sidebar } from './Sidebar';
+import { Sidebar, sidebarConfig } from './Sidebar';
+import SidebarItem from './SidebarItem';
 
 describe('Sidebar', () => {
   describe('when shown', () => {
@@ -27,10 +27,14 @@ describe('Sidebar', () => {
         expect(wrapper.find({ width: expectedWidth }).is(Box)).toEqual(true);
       });
 
-      test('a NavLink to the homepage', () => {
+      test('a SidebarItem for each item in its config', () => {
         const wrapper = shallow(<Sidebar shown />);
-        expect(wrapper.find({ to: '/' }).length).toEqual(1);
-        expect(wrapper.find({ to: '/' }).is(NavLink)).toEqual(true);
+        sidebarConfig.items.forEach(item => {
+          expect(wrapper.find({ path: item.path }).length).toEqual(1);
+          expect(wrapper.find({ path: item.path }).is(SidebarItem)).toEqual(
+            true
+          );
+        });
       });
     });
   });
