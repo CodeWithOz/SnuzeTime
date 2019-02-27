@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import { Anchor, Box, Button } from 'grommet';
 
@@ -21,6 +22,10 @@ const SidebarItem = ({ children, dest }) => {
       </Box>
     </Button>
   );
+};
+
+SidebarItem.propTypes = {
+  dest: PropTypes.string.isRequired
 };
 
 export default SidebarItem;
