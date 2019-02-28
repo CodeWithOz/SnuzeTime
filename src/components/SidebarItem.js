@@ -16,6 +16,9 @@ const SidebarItem = ({ children, dest, handleClick }) => {
             textAlign: 'center',
             padding: '1.5em'
           }}
+          activeStyle={{
+            backgroundColor: 'rgba(184, 184, 184, 0.5)'
+          }}
         >
           <Anchor as="span">{children}</Anchor>
         </NavLink>
