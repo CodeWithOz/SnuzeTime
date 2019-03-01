@@ -7,7 +7,10 @@ import { toggleSidebar } from '../actions';
 import SidebarItem from './SidebarItem';
 
 export const sidebarConfig = {
-  items: [{ dest: '/', text: 'Today' }]
+  items: [
+    { dest: '/', text: 'Today' },
+    { dest: '/selectday', text: 'Select a day' }
+  ]
 };
 
 export class Sidebar extends Component {
