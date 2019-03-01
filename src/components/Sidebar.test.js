@@ -73,4 +73,13 @@ describe('Sidebar', () => {
       }
     });
   });
+
+  describe('has a config object with a sidebar item for', () => {
+    test('the home page', () => {
+      const homepageDest = '/';
+      expect(
+        sidebarConfig.items.filter(item => item.dest === homepageDest).length
+      ).toEqual(1);
+    });
+  });
 });
