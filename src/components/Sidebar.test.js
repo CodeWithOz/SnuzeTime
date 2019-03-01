@@ -81,5 +81,12 @@ describe('Sidebar', () => {
         sidebarConfig.items.filter(item => item.dest === homepageDest).length
       ).toEqual(1);
     });
+
+    test('the selectday page', () => {
+      const selectDayDest = '/selectday';
+      expect(
+        sidebarConfig.items.filter(item => item.dest === selectDayDest).length
+      ).toEqual(1);
+    });
   });
 });
