@@ -1,4 +1,5 @@
-import { mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
+import { Anchor } from 'grommet';
 import SelectDay from './SelectDay';
 
 describe('SelectDay', () => {
@@ -22,6 +23,12 @@ describe('SelectDay', () => {
         );
         expect(wrapper.text()).not.toContain(defaultText);
         expect(wrapper.text()).toContain(suppliedDate);
+      });
+
+      test('a link to the date picker', () => {
+        const wrapper = shallow(SelectDay.prototype.renderDateHeading(''));
+        expect(wrapper.find(Anchor).length).toEqual(1);
+        // this test will be made more specific in due time
       });
     });
   });
