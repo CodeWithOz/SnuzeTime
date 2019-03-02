@@ -1,4 +1,4 @@
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import SelectDay from './SelectDay';
 
 describe('SelectDay', () => {
@@ -9,9 +9,19 @@ describe('SelectDay', () => {
 
     describe('renders', () => {
       const defaultText = 'No date selected';
+      const suppliedDate = '02 Mar 2019';
       test('default text when no date is supplied', () => {
-        const wrapper = shallow(SelectDay.prototype.renderDateHeading(''));
+        const wrapper = mount(SelectDay.prototype.renderDateHeading(''));
         expect(wrapper.text()).toContain(defaultText);
+        expect(wrapper.text()).not.toContain(suppliedDate);
+      });
+
+      test('the supplied date', () => {
+        const wrapper = mount(
+          SelectDay.prototype.renderDateHeading(suppliedDate)
+        );
+        expect(wrapper.text()).not.toContain(defaultText);
+        expect(wrapper.text()).toContain(suppliedDate);
       });
     });
   });
