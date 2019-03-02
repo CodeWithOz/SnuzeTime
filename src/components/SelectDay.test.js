@@ -35,9 +35,16 @@ describe('SelectDay', () => {
   });
 
   describe('exposes toggleDatePicker which', () => {
+    const wrapper = shallow(<SelectDay />);
+
     test('is a function', () => {
-      const wrapper = shallow(<SelectDay />);
       expect(typeof wrapper.instance().toggleDatePicker).toEqual('function');
+    });
+
+    test(`reverses 'showDatePicker' piece of state`, () => {
+      const curVal = wrapper.state('showDatePicker');
+      wrapper.instance().toggleDatePicker();
+      expect(wrapper.state('showDatePicker')).toEqual(!curVal);
     });
   });
 });
