@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-const SelectDay = () => {
-  return <div>Select a day</div>;
-};
+class SelectDay extends Component {
+  renderDateHeading() {}
+
+  render() {
+    return <div>Select a day</div>;
+  }
+}
 
 export default SelectDay;
