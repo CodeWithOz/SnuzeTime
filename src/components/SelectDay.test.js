@@ -46,5 +46,14 @@ describe('SelectDay', () => {
       wrapper.instance().toggleDatePicker();
       expect(wrapper.state('showDatePicker')).toEqual(!curVal);
     });
+
+    test('is called when link to date picker is clicked', () => {
+      const spy = jest.spyOn(wrapper.instance(), 'toggleDatePicker');
+      expect(spy).not.toHaveBeenCalled();
+      wrapper.find(Anchor).simulate('click');
+      expect(spy).toHaveBeenCalledTimes(1);
+
+      spy.mockRestore();
+    });
   });
 });
