@@ -6,6 +6,8 @@ const selectDayConfig = {
 };
 
 class SelectDay extends Component {
+  toggleDatePicker = () => {};
+
   renderDateHeading(date) {
     const renderedDate = date || selectDayConfig.defaultDateHeading;
     return (
