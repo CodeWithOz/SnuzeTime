@@ -1,3 +1,4 @@
+import React from 'react';
 import { mount, shallow } from 'enzyme';
 import { Anchor } from 'grommet';
 import SelectDay from './SelectDay';
@@ -30,6 +31,13 @@ describe('SelectDay', () => {
         expect(wrapper.find(Anchor).length).toEqual(1);
         // this test will be made more specific in due time
       });
+    });
+  });
+
+  describe('exposes toggleDatePicker which', () => {
+    test('is a function', () => {
+      const wrapper = shallow(<SelectDay />);
+      expect(typeof wrapper.instance().toggleDatePicker).toEqual('function');
     });
   });
 });
