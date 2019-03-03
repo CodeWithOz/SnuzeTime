@@ -2,6 +2,7 @@ import React from 'react';
 import { mount, shallow } from 'enzyme';
 import { Anchor } from 'grommet';
 import SelectDay from './SelectDay';
+import DateSelecterModal from './DateSelecterModal';
 
 describe('SelectDay', () => {
   describe('exposes renderDateHeading which', () => {
@@ -63,6 +64,17 @@ describe('SelectDay', () => {
       expect(spy).toHaveBeenCalledTimes(1);
 
       spy.mockRestore();
+    });
+  });
+
+  describe('renders', () => {
+    test(`date selecter modal according to 'showDatePicker' state`, () => {
+      const wrapper = shallow(<SelectDay />);
+      wrapper.setState({ showDatePicker: false });
+      expect(wrapper.find(DateSelecterModal).length).toEqual(0);
+
+      wrapper.setState({ showDatePicker: true });
+      expect(wrapper.find(DateSelecterModal).length).toEqual(1);
     });
   });
 });
