@@ -5,9 +5,9 @@ import { Close } from 'grommet-icons';
 import DateSelecterModal from './DateSelecterModal';
 
 describe('DateSelecterModal', () => {
-  const wrapper = shallow(<DateSelecterModal />);
-
   describe('renders', () => {
+    const wrapper = shallow(<DateSelecterModal />);
+
     test('a grommet Layer', () => {
       expect(wrapper.find(Layer).length).toEqual(1);
     });
@@ -26,11 +26,24 @@ describe('DateSelecterModal', () => {
   });
 
   describe(`correctly passes 'hide' callback to`, () => {
+    let mockHide, wrapper;
+
+    beforeEach(() => {
+      mockHide = jest.fn();
+      wrapper = shallow(<DateSelecterModal hide={mockHide} />);
+    });
+
     test('onEsc and onClickOutside props of Layer', () => {
       const mockHide = jest.fn();
       wrapper.setProps({ hide: mockHide });
       expect(wrapper.find(Layer).prop('onEsc')).toBe(mockHide);
       expect(wrapper.find(Layer).prop('onClickOutside')).toBe(mockHide);
+    });
+
+    test(`the Close icon's parent Anchor`, () => {
+      expect(mockHide).not.toHaveBeenCalled();
+      wrapper.find({ icon: <Close /> }).simulate('click');
+      expect(mockHide).toHaveBeenCalledTimes(1);
     });
   });
 });
