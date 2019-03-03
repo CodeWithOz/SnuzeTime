@@ -39,7 +39,7 @@ export class Sidebar extends Component {
             width="medium"
             direction="row"
             align="center"
-            justify="end"
+            justify="start"
             elevation="xsmall"
           >
             <Anchor icon={<Close />} onClick={hide} />
