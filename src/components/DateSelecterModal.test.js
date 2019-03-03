@@ -23,6 +23,27 @@ describe('DateSelecterModal', () => {
       expect(wrapper.find({ width: expectedWidth }).length).toEqual(1);
       expect(wrapper.find({ width: expectedWidth }).is(Box)).toEqual(true);
     });
+
+    test('the correct background color', () => {
+      const day = 10;
+      const night = 22;
+
+      // this test uses its own wrapper
+      const wrapper = shallow(<DateSelecterModal currentHour={day} />);
+
+      expect(
+        wrapper.find({
+          background: DateSelecterModal.prototype.getBackground(day)
+        }).length
+      ).toEqual(1);
+
+      wrapper.setProps({ currentHour: night });
+      expect(
+        wrapper.find({
+          background: DateSelecterModal.prototype.getBackground(night)
+        }).length
+      ).toEqual(1);
+    });
   });
 
   describe(`correctly passes 'hide' callback to`, () => {
