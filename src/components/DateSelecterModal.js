@@ -1,25 +1,31 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Anchor, Box, Layer } from 'grommet';
 import { Close } from 'grommet-icons';
 
-const DateSelecterModal = ({ hide }) => {
-  return (
-    <Layer responsive={false} onEsc={hide} onClickOutside={hide}>
-      <Box fill>
-        <Box
-          width="medium"
-          direction="row"
-          align="center"
-          justify="end"
-          elevation="xsmall"
-        >
-          <Anchor icon={<Close />} onClick={hide} />
+class DateSelecterModal extends Component {
+  getBackground() {}
+
+  render() {
+    const { hide } = this.props;
+
+    return (
+      <Layer responsive={false} onEsc={hide} onClickOutside={hide}>
+        <Box fill>
+          <Box
+            width="medium"
+            direction="row"
+            align="center"
+            justify="end"
+            elevation="xsmall"
+          >
+            <Anchor icon={<Close />} onClick={hide} />
+          </Box>
         </Box>
-      </Box>
-    </Layer>
-  );
-};
+      </Layer>
+    );
+  }
+}
 
 DateSelecterModal.propTypes = {
   hide: PropTypes.func
