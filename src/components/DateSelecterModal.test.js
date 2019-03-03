@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { Anchor, Box, Layer } from 'grommet';
 import { Close } from 'grommet-icons';
-import DateSelecterModal from './DateSelecterModal';
+import { DateSelecterModal } from './DateSelecterModal';
 
 describe('DateSelecterModal', () => {
   describe('renders', () => {
