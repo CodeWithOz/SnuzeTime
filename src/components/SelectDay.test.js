@@ -48,9 +48,18 @@ describe('SelectDay', () => {
     });
 
     test('is called when link to date picker is clicked', () => {
-      const spy = jest.spyOn(wrapper.instance(), 'toggleDatePicker');
+      const spy = jest.spyOn(SelectDay.prototype, 'toggleDatePicker');
+
+      // this wrapper is necessary to allow the function to be spied
+      // before shallow-rendering the component
+      // see https://github.com/airbnb/enzyme/issues/1081#issuecomment-324485036
+      const wrapper = shallow(<SelectDay />);
+
+      const dateHeadingWrapper = shallow(
+        wrapper.instance().renderDateHeading()
+      );
       expect(spy).not.toHaveBeenCalled();
-      wrapper.find(Anchor).simulate('click');
+      dateHeadingWrapper.find(Anchor).simulate('click');
       expect(spy).toHaveBeenCalledTimes(1);
 
       spy.mockRestore();

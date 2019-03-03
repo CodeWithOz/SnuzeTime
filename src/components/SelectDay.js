@@ -6,12 +6,18 @@ const selectDayConfig = {
 };
 
 class SelectDay extends Component {
-  state = { showDatePicker: false };
+  constructor(props) {
+    super(props);
 
-  toggleDatePicker = () => {
+    this.state = { showDatePicker: false };
+
+    this.toggleDatePicker = this.toggleDatePicker.bind(this);
+  }
+
+  toggleDatePicker() {
     const { showDatePicker } = this.state;
     this.setState({ showDatePicker: !showDatePicker });
-  };
+  }
 
   renderDateHeading(date) {
     const renderedDate = date || selectDayConfig.defaultDateHeading;
@@ -27,7 +33,7 @@ class SelectDay extends Component {
           {renderedDate}
         </Heading>
         <Text size="small" textAlign="center">
-          <Anchor>Pick a date</Anchor>
+          <Anchor onClick={this.toggleDatePicker}>Pick a date</Anchor>
         </Text>
       </Box>
     );
