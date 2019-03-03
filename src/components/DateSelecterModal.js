@@ -2,9 +2,9 @@ import React from 'react';
 import { Anchor, Box, Layer } from 'grommet';
 import { Close } from 'grommet-icons';
 
-const DateSelecterModal = () => {
+const DateSelecterModal = ({ hide }) => {
   return (
-    <Layer responsive={false}>
+    <Layer responsive={false} onEsc={hide} onClickOutside={hide}>
       <Box fill>
         <Box
           width="medium"
