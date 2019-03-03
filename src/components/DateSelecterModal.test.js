@@ -5,9 +5,9 @@ import { Close } from 'grommet-icons';
 import DateSelecterModal from './DateSelecterModal';
 
 describe('DateSelecterModal', () => {
-  describe('renders', () => {
-    const wrapper = shallow(<DateSelecterModal />);
+  const wrapper = shallow(<DateSelecterModal />);
 
+  describe('renders', () => {
     test('a grommet Layer', () => {
       expect(wrapper.find(Layer).length).toEqual(1);
     });
@@ -22,6 +22,15 @@ describe('DateSelecterModal', () => {
       const expectedWidth = 'medium';
       expect(wrapper.find({ width: expectedWidth }).length).toEqual(1);
       expect(wrapper.find({ width: expectedWidth }).is(Box)).toEqual(true);
+    });
+  });
+
+  describe(`correctly passes 'hide' callback to`, () => {
+    test('onEsc and onClickOutside props of Layer', () => {
+      const mockHide = jest.fn();
+      wrapper.setProps({ hide: mockHide });
+      expect(wrapper.find(Layer).prop('onEsc')).toBe(mockHide);
+      expect(wrapper.find(Layer).prop('onClickOutside')).toBe(mockHide);
     });
   });
 });
