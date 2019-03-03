@@ -5,7 +5,7 @@ import { Close } from 'grommet-icons';
 const DateSelecterModal = () => {
   return (
     <Layer responsive={false}>
-      <Box fill background="dark-1">
+      <Box fill>
         <Box
           width="medium"
           direction="row"
