@@ -43,7 +43,9 @@ class SelectDay extends Component {
   render() {
     return (
       <Box fill>
-        {this.state.showDatePicker && <DateSelecterModal />}
+        {this.state.showDatePicker && (
+          <DateSelecterModal hide={this.toggleDatePicker} />
+        )}
         {this.renderDateHeading()}
       </Box>
     );

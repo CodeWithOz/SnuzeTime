@@ -69,7 +69,7 @@ describe('SelectDay', () => {
     test(`is passed to date selecter as 'hide' prop`, () => {
       wrapper.setState({ showDatePicker: true });
       expect(wrapper.find(DateSelecterModal).prop('hide')).toBe(
-        SelectDay.prototype.toggleDatePicker
+        wrapper.instance().toggleDatePicker
       );
     });
   });
