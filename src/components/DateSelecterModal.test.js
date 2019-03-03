@@ -53,5 +53,12 @@ describe('DateSelecterModal', () => {
         'function'
       );
     });
+
+    test('gets the correct background color', () => {
+      const nightColor = 'dark-1';
+      const dayColor = 'light-1';
+      expect(DateSelecterModal.prototype.getBackground(10)).toEqual(dayColor);
+      expect(DateSelecterModal.prototype.getBackground(22)).toEqual(nightColor);
+    });
   });
 });
