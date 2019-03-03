@@ -46,4 +46,12 @@ describe('DateSelecterModal', () => {
       expect(mockHide).toHaveBeenCalledTimes(1);
     });
   });
+
+  describe('exposes getBackground which', () => {
+    test('is a function', () => {
+      expect(typeof DateSelecterModal.prototype.getBackground).toEqual(
+        'function'
+      );
+    });
+  });
 });
