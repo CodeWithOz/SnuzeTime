@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Anchor, Box, Heading, Text } from 'grommet';
+import DateSelecterModal from './DateSelecterModal';
 
 const selectDayConfig = {
   defaultDateHeading: 'No date selected'
@@ -40,7 +41,12 @@ class SelectDay extends Component {
   }
 
   render() {
-    return this.renderDateHeading();
+    return (
+      <Box fill>
+        {this.state.showDatePicker && <DateSelecterModal />}
+        {this.renderDateHeading()}
+      </Box>
+    );
   }
 }
 
