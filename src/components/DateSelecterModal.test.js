@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { Anchor, Box, Calendar, Layer } from 'grommet';
+import { Anchor, Box, Button, Calendar, Layer } from 'grommet';
 import { Close } from 'grommet-icons';
 import { DateSelecterModal } from './DateSelecterModal';
 
@@ -47,6 +47,14 @@ describe('DateSelecterModal', () => {
 
     test('a grommet Calendar', () => {
       expect(wrapper.find(Calendar).length).toEqual(1);
+    });
+
+    test('Submit and Cancel buttons', () => {
+      expect(wrapper.find({ children: 'Submit' }).length).toEqual(1);
+      expect(wrapper.find({ children: 'Submit' }).is(Button)).toEqual(true);
+
+      expect(wrapper.find({ children: 'Cancel' }).length).toEqual(1);
+      expect(wrapper.find({ children: 'Cancel' }).is(Button)).toEqual(true);
     });
   });
 
