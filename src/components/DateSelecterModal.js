@@ -27,7 +27,7 @@ export class DateSelecterModal extends Component {
           <Calendar />
           <Box direction="row" align="center" justify="center" border="top">
             <Button label="Submit" margin="small" />
-            <Button label="Cancel" margin="small" />
+            <Button label="Cancel" margin="small" onClick={hide} />
           </Box>
         </Box>
       </Layer>
