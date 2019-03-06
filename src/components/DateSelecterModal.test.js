@@ -84,6 +84,12 @@ describe('DateSelecterModal', () => {
       wrapper.find({ label: 'Cancel' }).simulate('click');
       expect(mockHide).toHaveBeenCalledTimes(1);
     });
+
+    test('the Submit button', () => {
+      expect(mockHide).not.toHaveBeenCalled();
+      wrapper.find({ label: 'Submit' }).simulate('click');
+      expect(mockHide).toHaveBeenCalledTimes(1);
+    });
   });
 
   describe('exposes getBackground which', () => {
