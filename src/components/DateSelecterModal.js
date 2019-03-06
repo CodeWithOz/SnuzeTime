@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Anchor, Box, Calendar, Layer } from 'grommet';
+import { Anchor, Box, Button, Calendar, Layer } from 'grommet';
 import { Close } from 'grommet-icons';
 
 export class DateSelecterModal extends Component {
@@ -20,11 +20,15 @@ export class DateSelecterModal extends Component {
             direction="row"
             align="center"
             justify="end"
-            elevation="xsmall"
+            border="bottom"
           >
             <Anchor icon={<Close />} onClick={hide} />
           </Box>
           <Calendar />
+          <Box direction="row" align="center" justify="center" border="top">
+            <Button label="Submit" margin="small" />
+            <Button label="Cancel" margin="small" />
+          </Box>
         </Box>
       </Layer>
     );

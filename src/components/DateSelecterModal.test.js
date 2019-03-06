@@ -50,11 +50,11 @@ describe('DateSelecterModal', () => {
     });
 
     test('Submit and Cancel buttons', () => {
-      expect(wrapper.find({ children: 'Submit' }).length).toEqual(1);
-      expect(wrapper.find({ children: 'Submit' }).is(Button)).toEqual(true);
+      expect(wrapper.find({ label: 'Submit' }).length).toEqual(1);
+      expect(wrapper.find({ label: 'Submit' }).is(Button)).toEqual(true);
 
-      expect(wrapper.find({ children: 'Cancel' }).length).toEqual(1);
-      expect(wrapper.find({ children: 'Cancel' }).is(Button)).toEqual(true);
+      expect(wrapper.find({ label: 'Cancel' }).length).toEqual(1);
+      expect(wrapper.find({ label: 'Cancel' }).is(Button)).toEqual(true);
     });
   });
 
