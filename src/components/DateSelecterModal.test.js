@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { Anchor, Box, Layer } from 'grommet';
+import { Anchor, Box, Calendar, Layer } from 'grommet';
 import { Close } from 'grommet-icons';
 import { DateSelecterModal } from './DateSelecterModal';
 
@@ -43,6 +43,10 @@ describe('DateSelecterModal', () => {
           background: DateSelecterModal.prototype.getBackground(night)
         }).length
       ).toEqual(1);
+    });
+
+    test('a grommet Calendar', () => {
+      expect(wrapper.find(Calendar).length).toEqual(1);
     });
   });
 
