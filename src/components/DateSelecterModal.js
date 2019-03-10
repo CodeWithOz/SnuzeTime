@@ -9,6 +9,8 @@ export class DateSelecterModal extends Component {
     return currentHour >= 7 && currentHour < 19 ? 'light-1' : 'dark-1';
   }
 
+  replaceSpaces() {}
+
   render() {
     const { currentHour, hide } = this.props;
 
@@ -26,7 +28,7 @@ export class DateSelecterModal extends Component {
           </Box>
           <Calendar />
           <Box direction="row" align="center" justify="center" border="top">
-            <Button label="Submit" margin="small" onClick={hide} />
+            <Button label="Submit" margin="small" onClick={hide} test="ha" />
             <Button label="Cancel" margin="small" onClick={hide} />
           </Box>
         </Box>
