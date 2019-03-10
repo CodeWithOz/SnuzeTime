@@ -132,6 +132,27 @@ describe('DateSelecterModal', () => {
           'function'
         );
       });
+
+      test('returns the date of the day after the provided date', () => {
+        let date = '2019 02 02';
+        let nextDay = '2019-02-03';
+        expect(DateSelecterModal.prototype.getUpperBounds(date)).toEqual(
+          nextDay
+        );
+
+        date = '2019-02-28';
+        nextDay = '2019-03-01';
+        expect(DateSelecterModal.prototype.getUpperBounds(date)).toEqual(
+          nextDay
+        );
+
+        // handles leap years
+        date = '2020-02-28';
+        nextDay = '2020-02-29';
+        expect(DateSelecterModal.prototype.getUpperBounds(date)).toEqual(
+          nextDay
+        );
+      });
     });
   });
 });
