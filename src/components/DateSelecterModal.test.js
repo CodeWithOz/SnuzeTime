@@ -106,4 +106,12 @@ describe('DateSelecterModal', () => {
       expect(DateSelecterModal.prototype.getBackground(22)).toEqual(nightColor);
     });
   });
+
+  describe('exposes replaceSpaces which', () => {
+    test('is a function', () => {
+      expect(typeof DateSelecterModal.prototype.replaceSpaces).toEqual(
+        'function'
+      );
+    });
+  });
 });
