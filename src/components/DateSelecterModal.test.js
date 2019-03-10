@@ -140,14 +140,14 @@ describe('DateSelecterModal', () => {
           nextDay
         );
 
-        date = '2019-02-28';
+        date = '2019 02 28';
         nextDay = '2019-03-01';
         expect(DateSelecterModal.prototype.getUpperBounds(date)).toEqual(
           nextDay
         );
 
         // handles leap years
-        date = '2020-02-28';
+        date = '2020 02 28';
         nextDay = '2020-02-29';
         expect(DateSelecterModal.prototype.getUpperBounds(date)).toEqual(
           nextDay
