@@ -1,6 +1,5 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import moment from 'moment';
 import 'moment-timer';
 import { HashRouter } from 'react-router-dom';
 import { App, appConfig } from './App';
@@ -8,15 +7,7 @@ import Sidebar from './Sidebar';
 import Navbar from './Navbar';
 import Main from './Main';
 import SplashScreen from './SplashScreen';
-
-describe('App gets the current', () => {
-  test('hour in 24-hour format', () => {
-    const hour = App.prototype.getCurrentHour();
-
-    const timeFromMoment = Number(moment().format(`HH`));
-    expect(hour).toEqual(timeFromMoment);
-  });
-});
+import timeFuncs from '../helpers/timeFuncs';
 
 test('App gets the correct background color', () => {
   expect(App.prototype.getBackground).toBeDefined();
@@ -147,7 +138,7 @@ describe('App', () => {
 
       const setHourSpy = jest.spyOn(App.prototype, 'setHour');
       expect(setHourSpy).not.toHaveBeenCalled();
-      const getCurrentHourSpy = jest.spyOn(App.prototype, 'getCurrentHour');
+      const getCurrentHourSpy = jest.spyOn(timeFuncs, 'getCurrentHour');
       expect(getCurrentHourSpy).not.toHaveBeenCalled();
 
       shallow(<App {...props} />);

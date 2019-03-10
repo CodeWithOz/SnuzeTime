@@ -24,13 +24,6 @@ describe('Today gets the current', () => {
     expect(timeWithSeconds).toEqual(timeFromMoment);
   });
 
-  test('hour in 24-hour format', () => {
-    const hour = Today.prototype.getCurrentHour();
-
-    const timeFromMoment = Number(moment().format(`HH`));
-    expect(hour).toEqual(timeFromMoment);
-  });
-
   test('date as YYYY M D', () => {
     const date = Today.prototype.getCurrentDate();
 
