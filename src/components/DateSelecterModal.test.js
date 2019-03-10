@@ -56,11 +56,11 @@ describe('DateSelecterModal', () => {
 
     test('a grommet Calendar with the correct bounds', () => {
       const lowerBound = '2018-01-01';
-      const nextDay = '2019-02-02';
+      const isoDate = DateSelecterModal.prototype.replaceSpaces(date);
 
       expect(wrapper.find(Calendar).prop('bounds')).toEqual([
         lowerBound,
-        nextDay
+        isoDate
       ]);
     });
 
