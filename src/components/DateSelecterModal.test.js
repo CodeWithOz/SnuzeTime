@@ -92,34 +92,46 @@ describe('DateSelecterModal', () => {
     });
   });
 
-  describe('exposes getBackground which', () => {
-    test('is a function', () => {
-      expect(typeof DateSelecterModal.prototype.getBackground).toEqual(
-        'function'
-      );
+  describe('exposes', () => {
+    describe('getBackground which', () => {
+      test('is a function', () => {
+        expect(typeof DateSelecterModal.prototype.getBackground).toEqual(
+          'function'
+        );
+      });
+
+      test('gets the correct background color', () => {
+        const nightColor = 'dark-1';
+        const dayColor = 'light-1';
+        expect(DateSelecterModal.prototype.getBackground(10)).toEqual(dayColor);
+        expect(DateSelecterModal.prototype.getBackground(22)).toEqual(
+          nightColor
+        );
+      });
     });
 
-    test('gets the correct background color', () => {
-      const nightColor = 'dark-1';
-      const dayColor = 'light-1';
-      expect(DateSelecterModal.prototype.getBackground(10)).toEqual(dayColor);
-      expect(DateSelecterModal.prototype.getBackground(22)).toEqual(nightColor);
-    });
-  });
+    describe('replaceSpaces which', () => {
+      test('is a function', () => {
+        expect(typeof DateSelecterModal.prototype.replaceSpaces).toEqual(
+          'function'
+        );
+      });
 
-  describe('exposes replaceSpaces which', () => {
-    test('is a function', () => {
-      expect(typeof DateSelecterModal.prototype.replaceSpaces).toEqual(
-        'function'
-      );
+      test('converts spaces in a string to dashes', () => {
+        const toReplace = '2019 03 03';
+        const expected = '2019-03-03';
+        expect(DateSelecterModal.prototype.replaceSpaces(toReplace)).toEqual(
+          expected
+        );
+      });
     });
 
-    test('converts spaces in a string to dashes', () => {
-      const toReplace = '2019 03 03';
-      const expected = '2019-03-03';
-      expect(DateSelecterModal.prototype.replaceSpaces(toReplace)).toEqual(
-        expected
-      );
+    describe('getUpperBounds which', () => {
+      test('is a function', () => {
+        expect(typeof DateSelecterModal.prototype.getUpperBounds).toEqual(
+          'function'
+        );
+      });
     });
   });
 });
