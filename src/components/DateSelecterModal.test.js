@@ -6,7 +6,11 @@ import { DateSelecterModal } from './DateSelecterModal';
 
 describe('DateSelecterModal', () => {
   describe('renders', () => {
-    const wrapper = shallow(<DateSelecterModal />);
+    let wrapper;
+
+    beforeEach(() => {
+      wrapper = shallow(<DateSelecterModal />);
+    });
 
     test('a grommet Layer', () => {
       expect(wrapper.find(Layer).length).toEqual(1);
@@ -28,8 +32,7 @@ describe('DateSelecterModal', () => {
       const day = 10;
       const night = 22;
 
-      // this test uses its own wrapper
-      const wrapper = shallow(<DateSelecterModal currentHour={day} />);
+      wrapper.setProps({ currentHour: day });
 
       expect(
         wrapper.find({
@@ -47,6 +50,18 @@ describe('DateSelecterModal', () => {
 
     test('a grommet Calendar', () => {
       expect(wrapper.find(Calendar).length).toEqual(1);
+    });
+
+    test('a grommet Calendar with the correct bounds', () => {
+      const lowerBound = '2018-01-01';
+      const date = '2019 02 01';
+      const nextDay = '2019-02-02';
+      wrapper.setProps({ date });
+
+      expect(wrapper.find(Calendar).prop('bounds')).toEqual([
+        lowerBound,
+        nextDay
+      ]);
     });
 
     test('Submit and Cancel buttons', () => {
