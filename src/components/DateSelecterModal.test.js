@@ -5,11 +5,13 @@ import { Close } from 'grommet-icons';
 import { DateSelecterModal } from './DateSelecterModal';
 
 describe('DateSelecterModal', () => {
+  const date = '2019 02 01';
+
   describe('renders', () => {
     let wrapper;
 
     beforeEach(() => {
-      wrapper = shallow(<DateSelecterModal />);
+      wrapper = shallow(<DateSelecterModal date={date} />);
     });
 
     test('a grommet Layer', () => {
@@ -54,9 +56,7 @@ describe('DateSelecterModal', () => {
 
     test('a grommet Calendar with the correct bounds', () => {
       const lowerBound = '2018-01-01';
-      const date = '2019 02 01';
       const nextDay = '2019-02-02';
-      wrapper.setProps({ date });
 
       expect(wrapper.find(Calendar).prop('bounds')).toEqual([
         lowerBound,
@@ -78,7 +78,7 @@ describe('DateSelecterModal', () => {
 
     beforeEach(() => {
       mockHide = jest.fn();
-      wrapper = shallow(<DateSelecterModal hide={mockHide} />);
+      wrapper = shallow(<DateSelecterModal hide={mockHide} date={date} />);
     });
 
     test('onEsc and onClickOutside props of Layer', () => {

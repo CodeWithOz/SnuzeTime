@@ -5,6 +5,10 @@ import { Anchor, Box, Button, Calendar, Layer } from 'grommet';
 import { Close } from 'grommet-icons';
 import moment from 'moment';
 
+const selecterConfig = {
+  lowerBound: '2018-01-01'
+};
+
 export class DateSelecterModal extends Component {
   getBackground(currentHour) {
     return currentHour >= 7 && currentHour < 19 ? 'light-1' : 'dark-1';
@@ -23,7 +27,7 @@ export class DateSelecterModal extends Component {
   }
 
   render() {
-    const { currentHour, hide } = this.props;
+    const { currentHour, date, hide } = this.props;
 
     return (
       <Layer responsive={false} onEsc={hide} onClickOutside={hide}>
@@ -37,9 +41,11 @@ export class DateSelecterModal extends Component {
           >
             <Anchor icon={<Close />} onClick={hide} />
           </Box>
-          <Calendar />
+          <Calendar
+            bounds={[selecterConfig.lowerBound, this.getUpperBounds(date)]}
+          />
           <Box direction="row" align="center" justify="center" border="top">
-            <Button label="Submit" margin="small" onClick={hide} test="ha" />
+            <Button label="Submit" margin="small" onClick={hide} />
             <Button label="Cancel" margin="small" onClick={hide} />
           </Box>
         </Box>
@@ -52,8 +58,8 @@ DateSelecterModal.propTypes = {
   hide: PropTypes.func
 };
 
-const mapStateToProps = ({ currentTimes: { hour } }) => {
-  return { currentHour: hour };
+const mapStateToProps = ({ currentTimes: { date, hour } }) => {
+  return { currentHour: hour, date };
 };
 
 export default connect(mapStateToProps)(DateSelecterModal);
