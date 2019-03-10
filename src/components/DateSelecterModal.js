@@ -55,7 +55,9 @@ export class DateSelecterModal extends Component {
 }
 
 DateSelecterModal.propTypes = {
-  hide: PropTypes.func
+  hide: PropTypes.func,
+  currentHour: PropTypes.number,
+  date: PropTypes.string.isRequired
 };
 
 const mapStateToProps = ({ currentTimes: { date, hour } }) => {
