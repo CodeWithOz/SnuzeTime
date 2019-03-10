@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Anchor, Box, Button, Calendar, Layer } from 'grommet';
 import { Close } from 'grommet-icons';
-import moment from 'moment';
 
 const selecterConfig = {
   lowerBound: '2018-01-01'
@@ -12,13 +11,6 @@ const selecterConfig = {
 export class DateSelecterModal extends Component {
   getBackground(currentHour) {
     return currentHour >= 7 && currentHour < 19 ? 'light-1' : 'dark-1';
-  }
-
-  getUpperBounds(date) {
-    date = this.replaceSpaces(date);
-    return moment(date)
-      .add(1, 'days')
-      .format('YYYY-MM-DD');
   }
 
   replaceSpaces(date) {
