@@ -113,5 +113,13 @@ describe('DateSelecterModal', () => {
         'function'
       );
     });
+
+    test('converts spaces in a string to dashes', () => {
+      const toReplace = '2019 03 03';
+      const expected = '2019-03-03';
+      expect(DateSelecterModal.prototype.replaceSpaces(toReplace)).toEqual(
+        expected
+      );
+    });
   });
 });
