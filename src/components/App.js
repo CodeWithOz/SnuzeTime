@@ -44,8 +44,13 @@ export class App extends Component {
 
   setHour() {
     const currentHour = timeFuncs.getCurrentHour();
+    const currentDate = timeFuncs.getCurrentDate();
     const { currentTimes, updateCurrentTimes, showMainApp } = this.props;
-    updateCurrentTimes({ ...currentTimes, hour: currentHour });
+    updateCurrentTimes({
+      ...currentTimes,
+      hour: currentHour,
+      date: currentDate
+    });
     showMainApp(true);
   }
 
