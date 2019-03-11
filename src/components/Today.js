@@ -10,7 +10,7 @@ import ButtonDisplay from './ButtonDisplay';
 import TodayView from './TodayView';
 import actionCreators from '../actions';
 import constants from '../constants';
-import { getCurrentHour } from '../helpers/timeFuncs';
+import { getCurrentHour, getCurrentDate } from '../helpers/timeFuncs';
 
 export class Today extends Component {
   state = { shown: false };
@@ -27,7 +27,7 @@ export class Today extends Component {
 
   setCurrentTimeAndDate() {
     const { withSeconds, withoutSeconds, hour, date } = this.props.currentTimes;
-    const newDate = this.getCurrentDate();
+    const newDate = getCurrentDate();
     const isNewDay = newDate !== date;
 
     const newTimes = {
@@ -56,10 +56,6 @@ export class Today extends Component {
         this.setState({ shown: true });
       }
     }
-  }
-
-  getCurrentDate() {
-    return moment().format('YYYY M D');
   }
 
   getCurrentTime(withSeconds = true) {
