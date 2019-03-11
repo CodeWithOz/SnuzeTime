@@ -8,4 +8,4 @@ export function getCurrentDate() {
   return moment().format('YYYY M D');
 }
 
-export default { getCurrentHour };
+export default { getCurrentHour, getCurrentDate };
