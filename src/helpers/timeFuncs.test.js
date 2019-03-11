@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { getCurrentHour } from './timeFuncs';
+import { getCurrentHour, getCurrentDate } from './timeFuncs';
 
 describe('Module exposes', () => {
   describe('getCurrentHour which', () => {
@@ -12,6 +12,12 @@ describe('Module exposes', () => {
 
       const timeFromMoment = Number(moment().format(`HH`));
       expect(hour).toEqual(timeFromMoment);
+    });
+  });
+
+  describe('getCurrentDate which', () => {
+    test('is a function', () => {
+      expect(typeof getCurrentDate).toEqual('function');
     });
   });
 });
