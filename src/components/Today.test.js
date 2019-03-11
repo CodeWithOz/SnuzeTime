@@ -23,13 +23,6 @@ describe('Today gets the current', () => {
     const timeFromMoment = moment().format(`hh:mm:ss A`);
     expect(timeWithSeconds).toEqual(timeFromMoment);
   });
-
-  test('date as YYYY M D', () => {
-    const date = Today.prototype.getCurrentDate();
-
-    const timeFromMoment = moment().format(`YYYY M D`);
-    expect(date).toEqual(timeFromMoment);
-  });
 });
 
 describe('Today', () => {
