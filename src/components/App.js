@@ -35,14 +35,14 @@ export class App extends Component {
   constructor(props) {
     super(props);
 
-    this.setHour = this.setHour.bind(this);
+    this.setTime = this.setTime.bind(this);
   }
 
   componentDidMount() {
-    this.setHour();
+    this.setTime();
   }
 
-  setHour() {
+  setTime() {
     const currentHour = timeFuncs.getCurrentHour();
     const currentDate = timeFuncs.getCurrentDate();
     const { currentTimes, updateCurrentTimes, showMainApp } = this.props;

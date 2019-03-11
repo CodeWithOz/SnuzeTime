@@ -125,31 +125,31 @@ describe('App', () => {
     });
   });
 
-  describe('exposes setHour which', () => {
+  describe('exposes setTime which', () => {
     // the method is saved in a property as an arrow function to bind 'this'
     // it is therefore not on the prototype and must be reached from a
     // shallow render of the component
     test('is a function', () => {
-      expect(typeof App.prototype.setHour).toEqual('function');
+      expect(typeof App.prototype.setTime).toEqual('function');
     });
 
     test('updates the currentTimes state with the current hour and date', () => {
       expect(updateCurrentTimesMock).not.toHaveBeenCalled();
 
-      const setHourSpy = jest.spyOn(App.prototype, 'setHour');
-      expect(setHourSpy).not.toHaveBeenCalled();
+      const setTimeSpy = jest.spyOn(App.prototype, 'setTime');
+      expect(setTimeSpy).not.toHaveBeenCalled();
       const getCurrentHourSpy = jest.spyOn(timeFuncs, 'getCurrentHour');
       expect(getCurrentHourSpy).not.toHaveBeenCalled();
       const getCurrentDateSpy = jest.spyOn(timeFuncs, 'getCurrentDate');
       expect(getCurrentDateSpy).not.toHaveBeenCalled();
 
       shallow(<App {...props} />);
-      expect(setHourSpy).toHaveBeenCalled();
+      expect(setTimeSpy).toHaveBeenCalled();
       expect(updateCurrentTimesMock).toHaveBeenCalled();
       expect(getCurrentHourSpy).toHaveBeenCalled();
       expect(getCurrentDateSpy).toHaveBeenCalled();
 
-      setHourSpy.mockRestore();
+      setTimeSpy.mockRestore();
       getCurrentHourSpy.mockRestore();
       getCurrentDateSpy.mockRestore();
     });
