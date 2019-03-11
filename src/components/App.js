@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import 'moment-timer';
 import { grommet, Box, Grommet } from 'grommet';
 import { deepMerge } from 'grommet/utils';
 import { connect } from 'react-redux';
