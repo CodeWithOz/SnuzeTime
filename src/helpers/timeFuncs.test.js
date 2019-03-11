@@ -19,5 +19,12 @@ describe('Module exposes', () => {
     test('is a function', () => {
       expect(typeof getCurrentDate).toEqual('function');
     });
+
+    test('returns date as YYYY M D', () => {
+      const date = getCurrentDate();
+
+      const dateFromMoment = moment().format(`YYYY M D`);
+      expect(date).toEqual(dateFromMoment);
+    });
   });
 });
