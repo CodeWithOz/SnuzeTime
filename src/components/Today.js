@@ -10,6 +10,7 @@ import ButtonDisplay from './ButtonDisplay';
 import TodayView from './TodayView';
 import actionCreators from '../actions';
 import constants from '../constants';
+import { getCurrentHour } from '../helpers/timeFuncs';
 
 export class Today extends Component {
   state = { shown: false };
@@ -32,7 +33,7 @@ export class Today extends Component {
     const newTimes = {
       withSeconds: this.getCurrentTime(),
       withoutSeconds: this.getCurrentTime(false),
-      hour: this.getCurrentHour(),
+      hour: getCurrentHour(),
       date: newDate
     };
     this.props.updateCurrentTimes(newTimes);
@@ -63,10 +64,6 @@ export class Today extends Component {
 
   getCurrentTime(withSeconds = true) {
     return moment().format(`hh:mm${withSeconds ? ':ss' : ''} A`);
-  }
-
-  getCurrentHour() {
-    return Number(moment().format('HH'));
   }
 
   getSpinnerColor(currentHour) {

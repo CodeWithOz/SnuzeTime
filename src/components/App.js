@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import moment from 'moment';
 import 'moment-timer';
 import { grommet, Box, Grommet } from 'grommet';
 import { deepMerge } from 'grommet/utils';
@@ -11,6 +10,7 @@ import Sidebar from './Sidebar';
 import Main from './Main';
 import SplashScreen from './SplashScreen';
 import actionCreators from '../actions';
+import timeFuncs from '../helpers/timeFuncs';
 
 export const appConfig = {
   appName: 'SnuzeTime 💤🕙',
@@ -44,14 +44,10 @@ export class App extends Component {
   }
 
   setHour() {
-    const currentHour = this.getCurrentHour();
+    const currentHour = timeFuncs.getCurrentHour();
     const { currentTimes, updateCurrentTimes, showMainApp } = this.props;
     updateCurrentTimes({ ...currentTimes, hour: currentHour });
     showMainApp(true);
-  }
-
-  getCurrentHour() {
-    return Number(moment().format('HH'));
   }
 
   getBackground(currentHour) {
