@@ -18,7 +18,9 @@ export class DateSelecterModal extends Component {
     return date.replace(/ /g, '-');
   }
 
-  getDate() {}
+  getDate(date) {
+    return date.slice(0, 10);
+  }
 
   render() {
     const { currentHour, date, hide } = this.props;
