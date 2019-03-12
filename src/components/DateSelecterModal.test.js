@@ -78,6 +78,12 @@ describe('DateSelecterModal', () => {
           wrapper.state('selectedDate')
         );
       });
+
+      test('with the correct onSelect callback', () => {
+        expect(wrapper.find(Calendar).prop('onSelect')).toBe(
+          wrapper.instance().handleSelect
+        );
+      });
     });
 
     test('Submit and Cancel buttons', () => {
