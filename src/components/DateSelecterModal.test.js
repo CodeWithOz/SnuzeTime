@@ -164,6 +164,17 @@ describe('DateSelecterModal', () => {
       test('is a function', () => {
         expect(typeof wrapper.instance().handleSelect).toEqual('function');
       });
+
+      describe('updates state with', () => {
+        test(`the selected date when it's different from the currently selected date`, () => {
+          const selectedDate = '2019-03-05T16:42:08.407Z';
+          expect(wrapper.state('selectedDate')).toEqual(undefined); // no date currently selected
+          wrapper.instance().handleSelect(selectedDate);
+          expect(wrapper.state('selectedDate')).toEqual(
+            selectedDate.slice(0, 10)
+          );
+        });
+      });
     });
   });
 });
