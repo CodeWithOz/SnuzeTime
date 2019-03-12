@@ -25,12 +25,12 @@ export class DateSelecterModal extends Component {
     return date.slice(0, 10);
   }
 
-  handleSelect(selectedDate) {
+  handleSelect = selectedDate => {
     selectedDate = this.getDate(selectedDate);
     selectedDate =
       selectedDate !== this.state.selectedDate ? selectedDate : undefined;
     this.setState({ selectedDate });
-  }
+  };
 
   render() {
     const { currentHour, date, hide } = this.props;
@@ -50,6 +50,7 @@ export class DateSelecterModal extends Component {
           <Calendar
             date={this.state.selectedDate}
             bounds={[selecterConfig.lowerBound, this.replaceSpaces(date)]}
+            onSelect={this.handleSelect}
           />
           <Box direction="row" align="center" justify="center" border="top">
             <Button label="Submit" margin="small" onClick={hide} />
