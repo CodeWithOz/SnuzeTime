@@ -21,16 +21,15 @@ export class DateSelecterModal extends Component {
   }
 
   getDate(date) {
+    // remove the time portion of the date string
     return date.slice(0, 10);
   }
 
   handleSelect(selectedDate) {
     selectedDate = this.getDate(selectedDate);
-    if (this.state.selectedDate !== selectedDate) {
-      this.setState({ selectedDate });
-    } else {
-      this.setState({ selectedDate: undefined });
-    }
+    selectedDate =
+      selectedDate !== this.state.selectedDate ? selectedDate : undefined;
+    this.setState({ selectedDate });
   }
 
   render() {
