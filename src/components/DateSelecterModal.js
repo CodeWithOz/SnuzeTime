@@ -28,6 +28,8 @@ export class DateSelecterModal extends Component {
     selectedDate = this.getDate(selectedDate);
     if (this.state.selectedDate !== selectedDate) {
       this.setState({ selectedDate });
+    } else {
+      this.setState({ selectedDate: undefined });
     }
   }
 
