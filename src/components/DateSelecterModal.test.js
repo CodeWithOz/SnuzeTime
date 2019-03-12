@@ -145,6 +145,13 @@ describe('DateSelecterModal', () => {
       test('is a function', () => {
         expect(typeof DateSelecterModal.prototype.getDate).toEqual('function');
       });
+
+      test('returns only the first 10 characters of the supplied time string', () => {
+        const timeString = '2019-03-05T16:42:08.407Z';
+        expect(DateSelecterModal.prototype.getDate(timeString)).toEqual(
+          timeString.slice(0, 10)
+        );
+      });
     });
   });
 });
