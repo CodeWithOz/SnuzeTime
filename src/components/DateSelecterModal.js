@@ -48,6 +48,7 @@ export class DateSelecterModal extends Component {
             <Anchor icon={<Close />} onClick={hide} />
           </Box>
           <Calendar
+            date={this.state.selectedDate}
             bounds={[selecterConfig.lowerBound, this.replaceSpaces(date)]}
           />
           <Box direction="row" align="center" justify="center" border="top">
