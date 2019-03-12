@@ -22,6 +22,8 @@ export class DateSelecterModal extends Component {
     return date.slice(0, 10);
   }
 
+  handleSelect() {}
+
   render() {
     const { currentHour, date, hide } = this.props;
 
