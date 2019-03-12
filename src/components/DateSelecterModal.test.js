@@ -140,5 +140,11 @@ describe('DateSelecterModal', () => {
         );
       });
     });
+
+    describe('getDate which', () => {
+      test('is a function', () => {
+        expect(typeof DateSelecterModal.prototype.getDate).toEqual('function');
+      });
+    });
   });
 });
