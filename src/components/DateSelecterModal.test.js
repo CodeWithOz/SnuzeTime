@@ -153,5 +153,17 @@ describe('DateSelecterModal', () => {
         );
       });
     });
+
+    describe('handleSelect which', () => {
+      let wrapper;
+
+      beforeEach(() => {
+        wrapper = shallow(<DateSelecterModal date={date} />);
+      });
+
+      test('is a function', () => {
+        expect(typeof wrapper.instance().handleSelect).toEqual('function');
+      });
+    });
   });
 });
