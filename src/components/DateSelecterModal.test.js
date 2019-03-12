@@ -54,14 +54,30 @@ describe('DateSelecterModal', () => {
       expect(wrapper.find(Calendar).length).toEqual(1);
     });
 
-    test('a grommet Calendar with the correct bounds', () => {
-      const lowerBound = '2018-01-01';
-      const isoDate = DateSelecterModal.prototype.replaceSpaces(date);
+    describe('a grommet Calendar', () => {
+      test('with the correct bounds', () => {
+        const lowerBound = '2018-01-01';
+        const isoDate = DateSelecterModal.prototype.replaceSpaces(date);
 
-      expect(wrapper.find(Calendar).prop('bounds')).toEqual([
-        lowerBound,
-        isoDate
-      ]);
+        expect(wrapper.find(Calendar).prop('bounds')).toEqual([
+          lowerBound,
+          isoDate
+        ]);
+      });
+
+      test('with the currently selected date', () => {
+        expect(wrapper.state('selectedDate')).toEqual(undefined); // initial state
+
+        expect(wrapper.find(Calendar).prop('date')).toEqual(
+          wrapper.state('selectedDate')
+        );
+
+        // update the selected date
+        wrapper.setState({ selectedDate: '2018-03-12' });
+        expect(wrapper.find(Calendar).prop('date')).toEqual(
+          wrapper.state('selectedDate')
+        );
+      });
     });
 
     test('Submit and Cancel buttons', () => {
