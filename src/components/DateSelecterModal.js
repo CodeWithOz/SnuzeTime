@@ -9,6 +9,8 @@ const selecterConfig = {
 };
 
 export class DateSelecterModal extends Component {
+  state = { selectedDate: undefined };
+
   getBackground(currentHour) {
     return currentHour >= 7 && currentHour < 19 ? 'light-1' : 'dark-1';
   }
@@ -22,7 +24,12 @@ export class DateSelecterModal extends Component {
     return date.slice(0, 10);
   }
 
-  handleSelect() {}
+  handleSelect(selectedDate) {
+    selectedDate = this.getDate(selectedDate);
+    if (this.state.selectedDate !== selectedDate) {
+      this.setState({ selectedDate });
+    }
+  }
 
   render() {
     const { currentHour, date, hide } = this.props;
