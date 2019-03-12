@@ -18,6 +18,8 @@ export class DateSelecterModal extends Component {
     return date.replace(/ /g, '-');
   }
 
+  getDate() {}
+
   render() {
     const { currentHour, date, hide } = this.props;
 
